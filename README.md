@@ -88,5 +88,4 @@ As a user, I want the ability to...
 ### Back-up 
 Pet Adoption Site
 
-# django-pawsitters
 # react-pawsitters
