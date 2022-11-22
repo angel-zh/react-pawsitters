@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,11 @@ const linkStyle = {
 }
 const authenticatedOptions = (
 	<>
+		<Nav.Item className='m-2'>
+			<Link to='petsitters' style={linkStyle}>
+				Pet Sitters
+			</Link>
+		</Nav.Item>
 		<Nav.Item>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
