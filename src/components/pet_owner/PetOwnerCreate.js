@@ -1,98 +1,65 @@
-import React, { useEffect, useState } from 'react' 
-import { useParams, useNavigate } from 'react-router-dom'
-import { petOwnerDelete, petOwnerShow, petOwnerUpdate } from '../../api/petOwner'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { petOwnerCreate } from '../../api/petOwner'
+import PetOwnerForm from '../shared/PetOwnerForm'
 
 
-const PetOwnerShow = ({ user, msgAlert }) => {
-
-    const [petOwner, setPetOwner] = useState({})
-    const [isUpdateShown, setIsUpdateShown] = useState(false)
-    const [deleted, setDeleted] = useState(false)
-    const { id } = useParams()
+const PetOwnerCreate = ({ user, msgAlert }) => {
     const navigate = useNavigate()
 
-    useEffect(() => {
-        petOwnerShow(user, id)
-        .then((res) => {
-            setPetOwner(res.data.petOwner)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Show Pet Owner Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }, [])
-
-    const toggleShowUpdate = () => {
-        setIsUpdateShown(prevUpdateShown => !prevUpdateShown)
+    const defaultPetOwner = {
+        first_name: '',
+        last_name: '',
+        pet_type: '',
+        pet_name: '',
+        owner: '',
+        images: '',
     }
 
-    const handleChange = (event) => {
-        // to keep the values as users input info 
-        // first spread the current petowner
-        // then comma and modify the key to the value you need
-        setPetOwner({...petOwner, [event.target.name]: event.target.value})
+    const [petOwner, setPetOwner] = useState(defaultPetOwner)
+
+
+    const handleChange = event => {
+        setPetOwner(prevPetOwner => {
+            const updatedName = event.target.name
+            // check input type
+            // if input type = checkbox, assign event.target.checked (boolean)
+            let updatedValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value
+
+            const updatedPetOwner = { [updatedName]: updatedValue }
+            return { ...prevPetOwner, ...updatedPetOwner }
+        })
     }
 
-    const handleUpdatePetOwner = () => {
-        petOwnerUpdate(petOwner, user, id)
-        .then(() => {
-            msgAlert({
-                heading: 'Success',
-                message: 'Updating Pet Owner',
-                variant: 'success'
+    const handleCreatePetOwner = event => {
+        event.preventDefault()
+        petOwnerCreate(petOwner, user)
+            .then(res => { navigate(`/petowners/${res.data.petOwner._id}`) })
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'Created Pet Owner Profile',
+                    variant: 'success'
+                })
             })
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Update Pet Owner Failure' + error,
-                variant: 'danger'
+            .catch(error => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Create Pet Owner Profile Failure' + error,
+                    variant: 'danger'
+                })
             })
-        })
     }
-const handleDeletePetOwner = () => {
-        petOwnerDelete(user, id)
-        .then(() => {
-            setDeleted(true)
-            msgAlert({
-                heading: 'Success',
-                message: 'Updating Pet Owner',
-                variant: 'success'
-            })
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'deleted Pet sitter Failure' + error,
-                variant: 'danger'
-            })
-        })
-}
-    // logical &&
-    // both sides of this check NEED to be truthy values = true
-    // logical ||
-    // only one side of this check needs to be truthy = true
-if (deleted) navigate('/petsitters')
+
     return (
-			<>
-				<h3>Name: {petOwner.first_name} {petOwner.last_name}</h3>
-				<p>Pet: {petOwner.pet_type}{petOwner.pet_name}</p>
-				<button onClick={toggleShowUpdate}> Update</button>
-				{isUpdateShown && (
-					<petOwnerUpdate
-						petOwner={petOwner}
-						handleChange={handleChange}
-						handleUpdatePetOwner={handleUpdatePetOwner}
-					/>
-
-				)}
-                <button onClick={handleDeletePetOwner}>Delete</button>
-
-			</>
-		)
+        <PetOwnerForm
+            petOwner={petOwner}
+            handleChange={handleChange}
+            heading="Sign Up to be a Pet Owner"
+            handleSubmit={handleCreatePetOwner}
+        />
+    )
 }
 
-export default PetOwnerShow
+
+export default PetOwnerCreate

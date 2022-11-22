@@ -93,6 +93,27 @@ const App = () => {
 							<PetSitterCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
+				<Route
+						path='/petowners/'
+						element={
+						<RequireAuth user={user}>
+							<PetOwnerShow msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+				/>
+				<Route
+						path='/petowners/:id'
+						element={
+						<RequireAuth user={user}>
+							<PetOwnerShow msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+				/>
+				<Route
+						path='/petowners/create'
+						element={
+						<RequireAuth user={user}>
+							<PetOwnerCreate msgAlert={msgAlert} user={user} />
+						</RequireAuth>}
+				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
