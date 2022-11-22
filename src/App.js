@@ -14,7 +14,10 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import PetSitterIndex from './components/pet_sitter/PetSitterIndex'
 import PetSitterShow from './components/pet_sitter/PetSitterShow'
+import PetOwnerCreate from './components/pet_owner/PetOwnerCreate'
+import PetOwnerShow from './components/pet_owner/PetOwnerShow'
 import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
+
 
 const App = () => {
 
@@ -72,7 +75,7 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route
+				{/* <Route
 						path='/petsitters'
 						element={
 						<RequireAuth user={user}>
@@ -92,21 +95,21 @@ const App = () => {
 						<RequireAuth user={user}>
 							<PetSitterCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/>
+				/> */}
 				<Route
 						path='/petowners/'
 						element={
-						<RequireAuth user={user}>
+						// <RequireAuth user={user}>
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
+						}
 				/>
-				<Route
+				{/* <Route
 						path='/petowners/:id'
 						element={
 						<RequireAuth user={user}>
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/>
+				/> */}
 				<Route
 						path='/petowners/create'
 						element={
