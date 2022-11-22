@@ -1,98 +1,63 @@
-import React, { useEffect, useState } from 'react' 
-import { useParams, useNavigate } from 'react-router-dom'
-import { petOwnerDelete, petOwnerShow, petOwnerUpdate } from '../../api/petOwner'
+import React from 'react'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
+const PetOwnerForm = (props) => {
+    const { petOwner, handleChange, heading, handleSubmit } = props
 
-const PetOwnerShow = ({ user, msgAlert }) => {
-
-    const [petOwner, setPetOwner] = useState({})
-    const [isUpdateShown, setIsUpdateShown] = useState(false)
-    const [deleted, setDeleted] = useState(false)
-    const { id } = useParams()
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        petOwnerShow(user, id)
-        .then((res) => {
-            setPetOwner(res.data.petOwner)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Show Pet Owner Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }, [])
-
-    const toggleShowUpdate = () => {
-        setIsUpdateShown(prevUpdateShown => !prevUpdateShown)
-    }
-
-    const handleChange = (event) => {
-        // to keep the values as users input info 
-        // first spread the current petowner
-        // then comma and modify the key to the value you need
-        setPetOwner({...petOwner, [event.target.name]: event.target.value})
-    }
-
-    const handleUpdatePetOwner = () => {
-        petOwnerUpdate(petOwner, user, id)
-        .then(() => {
-            msgAlert({
-                heading: 'Success',
-                message: 'Updating Pet Owner',
-                variant: 'success'
-            })
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Update Pet Owner Failure' + error,
-                variant: 'danger'
-            })
-        })
-    }
-const handleDeletePetOwner = () => {
-        petOwnerDelete(user, id)
-        .then(() => {
-            setDeleted(true)
-            msgAlert({
-                heading: 'Success',
-                message: 'Updating Pet Owner',
-                variant: 'success'
-            })
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'deleted Pet sitter Failure' + error,
-                variant: 'danger'
-            })
-        })
-}
-    // logical &&
-    // both sides of this check NEED to be truthy values = true
-    // logical ||
-    // only one side of this check needs to be truthy = true
-if (deleted) navigate('/petsitters')
     return (
-			<>
-				<h3>Name: {petOwner.first_name} {petOwner.last_name}</h3>
-				<p>Pet: {petOwner.pet_type}{petOwner.pet_name}</p>
-				<button onClick={toggleShowUpdate}> Update</button>
-				{isUpdateShown && (
-					<petOwnerUpdate
-						petOwner={petOwner}
-						handleChange={handleChange}
-						handleUpdatePetOwner={handleUpdatePetOwner}
-					/>
+        <Container className="justify-content-center rest-form" style={{ width: '48em', padding: '2rem' }} >
+            <h3 className='mt-3'>{heading}</h3>
+            <Form onSubmit={handleSubmit}>
+                <Form.Label>Pet Owner's First Name:</Form.Label>
+                <Form.Control
+                    placeholder="Owner's First Name"
+                    name="First Name"
+                    id="name"
+                    value={petOwner.first_name}
+                    onChange={handleChange}
+                />
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label className='mt-2'>Pet Owner's Last Name:</Form.Label>
+                        <Form.Control
+                            placeholder="Owner's Last Name;"
+                            name="last name"
+                            id="last name"
+                            value={petOwner.last_name}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label className='mt-2'>Pet Type:</Form.Label>
+                        <Form.Control
+                            placeholder="Type of Pet"
+                            name="Pet type"
+                            id="type"
+                            value={petOwner.pet_type}
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                </Row>
 
-				)}
-                <button onClick={handleDeletePetOwner}>Delete</button>
+                <Form.Group>
+                    <Form.Label className='mt-2'>Pet's Name:</Form.Label>
+                    <Form.Control
+                        placeholder="What is your Pet's Name?"
+                        name="Pet Name"
+                        id="Pet Name"
+                        value={petOwner.pet_name}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
 
-			</>
-		)
+                <Row>
+                
+                </Row>
+                <Button className='btn btn-light text-light mt-3' type="submit" style={{ backgroundColor: '#ba7a5f' }}>Submit</Button>
+
+            </Form>
+        </Container>
+    )
 }
 
-export default PetOwnerShow
+export default PetOwnerForm
