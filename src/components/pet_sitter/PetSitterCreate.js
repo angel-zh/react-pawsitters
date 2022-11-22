@@ -18,7 +18,7 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         small_animal: false,
         reptile: false,
         bird: false,
-        medince: false,
+        medicine: false,
         rate: '',
         from_date: '',
         to_date: '',
