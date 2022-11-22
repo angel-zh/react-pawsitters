@@ -8,21 +8,23 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     const navigate = useNavigate()
 
     const defaultPetSitter = {
-        name: '',
-        type: '',
-        address: '',
-        telephone: '',
-        isUserRestaurantOwner: false,
-        delivery: false,
-        reservations: false,
-        takeout: false,
-        catering: false,
-        acceptsCreditCard: false,
-        parking: false,
-        wifi: false,
-        masksRequired: false,
-        alcohol: false,
-        vegan: false
+        first_name: '',
+        last_name: '',
+        age: '',
+        dog_walking : '',
+        pet_sitting: false,
+        dog: false,
+        cat: false,
+        small_animal: false,
+        reptile: false,
+        bird: false,
+        medince: false,
+        rate: '',
+        from_date: '',
+        to_date: '',
+        from_time: '',
+        to_time: '',
+        image: '',
     }
 
     const [petSitter, setPetSitter] = useState(defaultPetSitter)
@@ -47,14 +49,14 @@ const PetSitterCreate = ({ user, msgAlert }) => {
             .then(() => {
                 msgAlert({
                     heading: 'Success',
-                    message: 'Created Restaurant',
+                    message: 'Created Pet Sitter Profile',
                     variant: 'success'
                 })
             })
             .catch(error => {
                 msgAlert({
                     heading: 'Failure',
-                    message: 'Create Restaurant Failure' + error,
+                    message: 'Create Pet Sitter Profile Failure' + error,
                     variant: 'danger'
                 })
             })
