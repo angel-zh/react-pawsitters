@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import PetSitterIndex from './components/pet_sitter/PetSitterIndex'
 import PetSitterShow from './components/pet_sitter/PetSitterShow'
+import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
 
 const App = () => {
 
