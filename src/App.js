@@ -16,6 +16,8 @@ import PetSitterIndex from './components/pet_sitter/PetSitterIndex'
 import PetSitterShow from './components/pet_sitter/PetSitterShow'
 import PetOwnerCreate from './components/pet_owner/PetOwnerCreate'
 import PetOwnerShow from './components/pet_owner/PetOwnerShow'
+import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
+
 
 const App = () => {
 
