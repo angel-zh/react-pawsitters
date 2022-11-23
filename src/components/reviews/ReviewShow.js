@@ -5,7 +5,8 @@ import EditReview from '../Reviews/EditReview'
 import moment from 'moment'
 import StarRating from '../shared/StarRating'
 
-const ShowReview = (props) => {
+const ReviewShow = (props) => {
+
     const { review, petSitter, user, msgAlert, triggerRefresh } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
@@ -91,5 +92,6 @@ const ShowReview = (props) => {
     )
 }
 
-export default ShowReview
+export default ReviewShow
+
 

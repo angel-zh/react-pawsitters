@@ -1,7 +1,7 @@
 import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
-import { reviewCreate } from '../../api/review'
+import { createReview, reviewCreate } from '../../api/review'
 
 const ReviewCreate = (props) => {
     const {
@@ -53,7 +53,7 @@ const ReviewCreate = (props) => {
         })
 
         
-        reviewCreate(user, petSitter._id, updatedReview)
+        createReview(user, petSitter._id, updatedReview)
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',
