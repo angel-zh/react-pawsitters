@@ -38,13 +38,13 @@ const ReviewForm = (props) => {
                 <hr class="bg-success border-2 border-top border-success" />
                 <>
                     <Form.Label>Upload an Image:</Form.Label>
-                    <CloudinaryUploadWidget
+                    {/* <CloudinaryUploadWidget
                         handleImageChange={handleImageChange}
                         picture={picture}
                         setPicture={setPicture}
                         imageSelected={imageSelected}
                         setImageSelected={setImageSelected}
-                    />
+                    /> */}
                 </>
                 <hr class="bg-success border-2 border-top border-success" />
                 <Button variant='success' type="submit">Submit</Button>

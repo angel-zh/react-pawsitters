@@ -40,20 +40,21 @@ const BookingIndex = ({ user, msgAlert, booking }) => {
             <Card.Body>
                 <Card.Text>
                     
-                    <small>Comments: {booking.booking.comment}</small><br/>
-                    <small>Rating: {booking.booking.rating}</small><br/>
+                    <small>Pet Owner: {booking.pet_owner}</small><br/>
+                    <small>Pet Sitter: {booking.pet_sitter}</small>
+                    <small>Rating: {booking.start_date}</small><br/>
                 </Card.Text>
             </Card.Body>
         </Card>
     ))    
 
     return (
-        <>
+        <div>
             <h2 className='text-center mt-3'>All My Bookings</h2>
             <div className='container-md text-center' style={ cardContainerLayout }>
                 { bookingCards }
             </div>
-        </>
+        </div>
     )
 }
 
