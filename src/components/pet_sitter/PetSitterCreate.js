@@ -24,6 +24,7 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         to_date: '',
         from_time: '',
         to_time: '',
+        bio: '',
         image: '',
     }
 
@@ -63,12 +64,14 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     }
 
     return (
+        
         <PetSitterForm
             petSitter={petSitter}
             handleChange={handleChange}
             heading="Sign Up to be a Pet Sitter"
             handleSubmit={handleCreatePetSitter}
         />
+       
     )
 }
 
