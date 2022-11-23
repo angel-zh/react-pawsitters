@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { petSitterShow, petSitterDelete } from '../../api/petSitter'
-
+import { Container } from 'react-bootstrap'
 
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
@@ -96,6 +96,20 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     null
             }
+            {
+                    user
+                        ?
+                        <Container style={{ width: '40rem' }}>
+                            <ReviewCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container>
+                        :
+                        <h5 className='text-center'><i>Please sign in if you would like to leave a review.</i></h5>
+                }
         </div>
     )
 }

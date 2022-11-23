@@ -131,7 +131,7 @@ const PetSitterForm = (props) => {
                     onChange={handleChange}
                 />
 
-                <Form.Label>Biograpy / Additional Information:</Form.Label>
+                <Form.Label>Biography / Additional Information:</Form.Label>
                 <Form.Control
                     placeholder="Let us know more about you!"
                     name="bio"
