@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
-const PetOwnerForm = (props) => {
+const BookingForm = (props) => {
     const { petOwner, handleChange, heading, handleSubmit } = props
 
     return (
@@ -50,17 +50,6 @@ const PetOwnerForm = (props) => {
                     />
                 </Form.Group>
 
-                <Form.Group>
-                    <Form.Label className='mt-2'>Images:</Form.Label>
-                    <Form.Control
-                        placeholder="Image Link"
-                        name=""
-                        id=""
-                        value={petOwner.images}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-
                 <Row>
                 
                 </Row>
@@ -71,4 +60,4 @@ const PetOwnerForm = (props) => {
     )
 }
 
-export default PetOwnerForm
+export default BookingForm

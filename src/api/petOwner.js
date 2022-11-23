@@ -25,9 +25,13 @@ export const petOwnerCreate = (data, user) => {
 
 // SHOW a pet owner - no token require
 export const petOwnerShow = (user, id) => {
+	
 	return axios({
 		method: 'GET',
-		url: apiUrl + '/petowners/' + id + "/"
+		url: apiUrl + '/petowners/' + user.id + "/",
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
 	})
 }
 
