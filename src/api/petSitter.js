@@ -10,7 +10,7 @@ export const petSitterCreate = (data, user) => {
 			petSitter: data,
 		},
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			Authorization: `Token ${user.token}`,
 		},
 	})
 }
@@ -40,7 +40,7 @@ export const petSitterUpdate = (data, user, id) => {
 			petSitter: data,
 		},
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			Authorization: `Token ${user.token}`,
 		},
 	})
 }
@@ -51,7 +51,7 @@ export const petSitterDelete = (user, id) => {
 		method: 'DELETE',
 		url: apiUrl + '/petsitters/' + id + '/',
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			Authorization: `Token ${user.token}`,
 		},
 	})
 }
