@@ -77,21 +77,12 @@ const BookingCreate = (props) => {
     }
 
     return (
-
-        <Accordion>
-            <Accordion.Item style={{ backgroundColor: '#f2f6ec' }} eventKey="0">
-                <Accordion.Header>Request Booking</Accordion.Header>
-                <Accordion.Body style={{ backgroundColor: '#f2f6ec' }}>
-                    <BookingForm
-                        booking={booking}
-                        handleChange={handleChange}
-                        handleSubmit={handleSubmit}
-                        heading="Pawsitter Booking Request Form"
-                    />
-                </Accordion.Body>
-            </Accordion.Item>
-        </Accordion>
-
+        <BookingForm
+            booking={booking}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            heading="Pawsitter Booking Request Form"
+        />
     )
 }
 

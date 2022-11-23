@@ -17,22 +17,37 @@ const BookingForm = (props) => {
                     value={booking.pet_sitter_name}
                     onChange={handleChange}
                 />
-                {/* <Form.Label className='mt-2'>Rating:</Form.Label>
-                    <Col sm={4}>
-                        <Form.Select
-                            aria-label="rating"
-                            name="rating"
-                            value={booking.rating}
-                            onChange={handleChange}
-                        >
-                            <option>Select an option</option>
-                            <option value="5">5 - Excellent</option>
-                            <option value="4">4 - Great</option>
-                            <option value="3">3 - Average</option>
-                            <option value="2">2 - Bad</option>
-                            <option value="1">1 - Terrible</option>
-                        </Form.Select>
-                    </Col> */}
+                <Form.Label>Start Date:</Form.Label>
+                <Form.Control
+                    type='date'
+                    id="start_date"
+                    value={booking.start_date}
+                    onChange={handleChange}
+                />
+                <Form.Label>End Date:</Form.Label>
+                <Form.Control
+                    type='date'
+                    id="start_date"
+                    value={booking.start_date}
+                    onChange={handleChange}
+                />
+
+                <Form.Label>Start Time:</Form.Label>
+                <Form.Control
+                    type='time'
+                    id="start_time"
+                    value={booking.start_time}
+                    onChange={handleChange}
+                />
+
+                <Form.Label>End Time:</Form.Label>
+                <Form.Control
+                    type='time'
+                    id="end_time"
+                    value={booking.end_time}
+                    onChange={handleChange}
+                />
+
                 {/* <hr class="bg-success border-2 border-top border-success" />
                 <hr class="bg-success border-2 border-top border-success" /> */}
                 <Button variant='success' type="submit">Submit</Button>
