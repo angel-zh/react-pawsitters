@@ -51,7 +51,7 @@ const ReviewIndex = ({ user, msgAlert }) => {
 
     return (
         <>
-            {/* <h1 >Reviews: There are none yet</h1>     */}
+            <h1 > All of my reviews:</h1>    
             <ul>{allReviewsJSX}</ul>
         </>
     )
