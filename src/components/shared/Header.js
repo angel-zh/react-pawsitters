@@ -24,13 +24,8 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
-			<Link to='petsitters/bookings' style={linkStyle}>
-				Pawsitter Bookings
-			</Link>
-		</Nav.Item>
-		<Nav.Item className='m-2'>
-			<Link to='petowners/bookings' style={linkStyle}>
-				Pet Owner Bookings
+			<Link to='bookings' style={linkStyle}>
+				My Bookings
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
