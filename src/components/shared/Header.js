@@ -23,6 +23,11 @@ const authenticatedOptions = (
 				Create pet owner
 			</Link>
 		</Nav.Item>
+		<Nav.Item className='m-2'>
+			<Link to='reviews' style={linkStyle}>
+				My Reviews
+			</Link>
+		</Nav.Item>
 		<Nav.Item>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
