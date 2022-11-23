@@ -38,24 +38,25 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Card.Header><b>{petSitter.first_name} {petSitter.last_name}</b> </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <Link style={{ color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={`/petsitters/${petSitter._id}`}>View details</Link>
+                    <Link to={`/petsitters/${petSitter.id}`}>View details</Link>
                 </Card.Text>
             </Card.Body>
         </Card>
     ))
 
     return (
-        <>
+        <div className='container-md'>
+            <Link to='create'>
+				Register to be a Pet Sitter
+			</Link>
             <h2 className='text-center mt-3'>All Pet Sitters</h2>
             <div className='container-md text-center' style={cardContainerLayout}>
 
                 {petSitterCards}
             </div>
-			<Link to='create'>
-				Create a Pet Sitter Profile
-			</Link>
+			
 
-        </>
+        </div>
     )
 }
 
