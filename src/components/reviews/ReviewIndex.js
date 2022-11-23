@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react' 
 import { reviewIndex } from '../../api/review'
+import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-const ReviewIndex = ({ user, msgAlert, review }) => {
+const cardContainerLayout = {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'center'
+}
+
+const ReviewIndex = ({ user, msgAlert }) => {
 
     const [allReviews, setAllReviews] = useState([])
 
@@ -20,13 +28,26 @@ const ReviewIndex = ({ user, msgAlert, review }) => {
         })
     }, [])
 
-    const allReviewsJSX = allReviews.map(review => {
-        return (
-           
-            <h1 >{review.comment}</h1>            
-            
-        )
-    })
+    const allReviewsJSX = allReviews.map(review => (
+        
+        <Card key={ review.id } style={{ width: '25rem', margin: 5, backgroundColor: '#f2f6ec' }}>      
+            <Card.Img variant="top" src="https://i.imgur.com/hEy5CGF.jpg" />
+            <Card.Header>
+                {/* <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/restaurants/${review.restaurant._id}` }>View { review.restaurant.name } </Link> */}
+            </Card.Header>
+            <Card.Body>
+                <Card.Text>
+                    
+                    <small>Comments: {review.comment}</small><br/>
+                    <small>Rating: {review.rating}</small><br/>
+                    <small>Pet Sitter: {review.pet_sitter}</small><br/>
+                    <small>Pet Owner: {review.pet_owner}</small><br/>
+                    <small>Owner: {review.owner}</small><br/>
+                    <small>Image: {review.image}</small><br/>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+    ))
 
     return (
         <>
