@@ -78,9 +78,25 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
 
     return (
-        <>
-            {petSitter.first_name} {petSitter.last_name}
-        </>
+        <div className='container-md text-center'> 
+        <i>Pet Sitter Show Page <br/> -Under Construction-</i>
+            <h2>{petSitter.first_name} {petSitter.last_name}</h2>
+            <h3>Services Provided: </h3>
+            { 
+                petSitter.dog_walking
+                    ?
+                        <h5>Dog walking</h5>
+                    :
+                    null
+            }
+            { 
+                petSitter.pet_sitting
+                    ?
+                        <h5>Pet Sitting</h5>
+                    :
+                    null
+            }
+        </div>
     )
 }
 
