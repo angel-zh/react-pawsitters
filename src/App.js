@@ -75,7 +75,7 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				{/* <Route
+				<Route
 						path='/petsitters'
 						element={
 						<RequireAuth user={user}>
@@ -95,7 +95,7 @@ const App = () => {
 						<RequireAuth user={user}>
 							<PetSitterCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/> */}
+				/>
 				<Route
 						path='/petowners/'
 						element={
@@ -103,13 +103,13 @@ const App = () => {
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						}
 				/>
-				{/* <Route
+				<Route
 						path='/petowners/:id'
 						element={
 						<RequireAuth user={user}>
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/> */}
+				/>
 				<Route
 						path='/petowners/create'
 						element={
