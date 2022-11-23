@@ -17,7 +17,8 @@ import PetSitterShow from './components/pet_sitter/PetSitterShow'
 import PetOwnerCreate from './components/pet_owner/PetOwnerCreate'
 import PetOwnerShow from './components/pet_owner/PetOwnerShow'
 import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
-
+import BookingCreate from './components/booking/BookingCreate'
+// import ReviewCreate from './components/reviews/ReviewCreate'
 
 const App = () => {
 
@@ -117,6 +118,22 @@ const App = () => {
 							<PetOwnerCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
+				<Route
+						path='/bookings'
+						element={
+						<RequireAuth user={user}>
+							<BookingCreate msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/>
+				{/* <Route
+						path='/reviews'
+						element={
+						<RequireAuth user={user}>
+							<ReviewCreate msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/> */}
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert
