@@ -35,6 +35,7 @@ const PetOwnerCreate = ({ user, msgAlert }) => {
         event.preventDefault()
         petOwnerCreate(petOwner, user)
             .then(res => { navigate(`/petowners/${res.data.petOwner._id}`) })
+           
             .then(() => {
                 msgAlert({
                     heading: 'Success',
