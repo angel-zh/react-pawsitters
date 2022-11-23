@@ -30,8 +30,8 @@ const ReviewIndex = ({ user, msgAlert }) => {
 
     const allReviewsJSX = allReviews.map(review => (
         
-        <Card key={ review.id } style={{ width: '25rem', margin: 5, backgroundColor: '#f2f6ec' }}>      
-            <Card.Img variant="top" src="https://i.imgur.com/hEy5CGF.jpg" />
+        <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
+            <Card.Img variant="top" style={{height: '10rem'}}src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
                 {/* <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/restaurants/${review.restaurant._id}` }>View { review.restaurant.name } </Link> */}
             </Card.Header>
