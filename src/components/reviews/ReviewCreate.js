@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
 import { reviewCreate } from '../../api/review'
 
-const NewReview = (props) => {
+const ReviewCreate = (props) => {
     const {
         user, petSitter, msgAlert, triggerRefresh
     } = props
@@ -100,4 +100,4 @@ const NewReview = (props) => {
     )
 }
 
-export default NewReview
+export default ReviewCreate
