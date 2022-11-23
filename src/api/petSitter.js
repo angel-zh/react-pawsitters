@@ -7,7 +7,7 @@ export const petSitterCreate = (data, user) => {
 		method: 'POST',
 		url: apiUrl + '/petsitters/',
 		data: {
-			petSitter: data,
+			pet_sitter: data,
 		},
 		headers: {
 			Authorization: `Token ${user.token}`,
