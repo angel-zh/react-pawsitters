@@ -2,7 +2,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a review- token required
-export const reviewCreate = (user, petsitterId, newReview) => {
+export const createReview = (user, petsitterId, newReview) => {
 	const ownerId = { owner: user._id }
 	const review = {...newReview, ...ownerId}
 
@@ -15,11 +15,13 @@ export const reviewCreate = (user, petsitterId, newReview) => {
 
 // INDEX reviews - no token
 export const reviewIndex = (user) => {
-
+    console.log(user.token)
 	return axios({
 		url: apiUrl + `/reviews/`,
 		method: 'GET',
-
+        headers: {
+			Authorization: `Token ${user.token}`,
+		},
 	})
 }
 
@@ -32,7 +34,7 @@ export const reviewUpdate = (user, petsitterId, updatedReview) => {
 		url: `${apiUrl}/reviews/${petsitterId}/${review.id}/`,
 		method: 'PATCH',
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			Authorization: `Token ${user.token}`,
 		},
 		data: { review: review }
 	})
@@ -44,7 +46,7 @@ export const reviewDelete = (user, petsitterId, reviewId) => {
 		url: `${apiUrl}/reviews/${petsitterId}/${reviewId}/`,
 		method: 'DELETE',
 		headers: {
-			Authorization: `Token token=${user.token}`,
+			Authorization: `Token ${user.token}`,
 		}
 	})
 }
