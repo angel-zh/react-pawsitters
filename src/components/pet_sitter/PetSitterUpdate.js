@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import { petSitterCreate } from '../../api/petSitter'
+import { petSitterUpdate } from '../../api/petSitter'
 import PetSitterForm from '../shared/PetSitterForm'
 
 const PetSitterUpdate = (props) => {
