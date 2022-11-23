@@ -3,15 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { petOwnerDelete, petOwnerShow, petOwnerUpdate } from '../../api/petOwner'
 import { Container, Button, Image, } from 'react-bootstrap'
 
+
 const PetOwnerShow = ({ user, msgAlert }) => {
 
-    const [petOwner, setPetOwner] = useState(  {
+    const [petOwner, setPetOwner] = useState({
         first_name: '',
         last_name:'',
         pet_name:'',
         pet_type:'',
         images:'',
-
     })
     const [isUpdateShown, setIsUpdateShown] = useState(false)
     const [deleted, setDeleted] = useState(false)
@@ -23,7 +23,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         
         if (user){ petOwnerShow(user, id)
         .then((res) => {
-            console.log("ppetOwner", res.data)
+            console.log("petOwner", res.data)
             setPetOwner(res.data.pet_owner)
         })
         .catch((error) => {
@@ -46,8 +46,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         setPetOwner({...petOwner, [event.target.name]: event.target.value})
     }
 
-    const handleUpdatePetOwner = () => {
-        petOwnerUpdate(petOwner, user, id)
+    const handleUpdatePetOwner = (res) => {
+        if (user) {petOwnerUpdate(res.data.pet_owner)
         .then(() => {
             msgAlert({
                 heading: 'Success',
@@ -61,10 +61,10 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 message: 'Update Pet Owner Failure' + error,
                 variant: 'danger'
             })
-        })
+        })}
     }
-const handleDeletePetOwner = () => {
-        petOwnerDelete(user, id)
+const handleDeletePetOwner = (res) => {
+        petOwnerDelete(user, res.data.pet_owner.id)
         .then(() => {
             setDeleted(true)
             msgAlert({
@@ -81,51 +81,29 @@ const handleDeletePetOwner = () => {
             })
         })
 }
-    // logical &&
-    // both sides of this check NEED to be truthy values = true
-    // logical ||
-    // only one side of this check needs to be truthy = true
-
-    // let petOwnerCards
-    // if (petOwner) {
-    //     if (petOwner.length > 0) {
-    //         // map over the reviews
-    //         // produce one ShowReview component for each of them
-    //         petOwnerCards = petOwner.map(petOwner => (
-    //             <Container>
-    //                 <PetOwnerShow
-    //                     petOwner={petOwner}
-    //                     user={user}
-    //                     msgAlert={msgAlert}
-    //                     triggerRefresh={() => setUpdated(prev => !prev)}
-    //                 />
-    //             </Container>
-    //         ))
-    //     }
-    // }
-
-  
-
+    
 if (deleted) navigate('/petsitters/')
     return (
 			<>
-            "hello"
-            <Container classba='text-center mb-5'>
+            <div className='text-center mb-5'>Pet Owner Profile Page</div>
+            <Container className='text-center mb-5'>
                 
 				<h3>Pet Owner' Name: {petOwner.first_name} {petOwner.last_name}</h3>
 				<p>Pet Type: {petOwner.pet_type}</p>
                 <p>Pet's Name:{petOwner.pet_name}</p>
                 <p>Pet Photo: {petOwner.images}</p>
-				<Button onClick={toggleShowUpdate}> Update</Button>
+				<Button onClick={() =>toggleShowUpdate()}> Update</Button>
 				{isUpdateShown && (
 					<petOwnerUpdate
 						petOwner={petOwner}
 						handleChange={handleChange}
 						handleUpdatePetOwner={handleUpdatePetOwner}
+                        // triggerRefresh={() => setUpdated(prev => !prev)}
+
 					/>
 
 				)}
-                <Button onClick={handleDeletePetOwner}>Delete</Button>
+                <Button onClick={() =>handleDeletePetOwner()}>Delete</Button>
                 </Container>
 			</>
 		)

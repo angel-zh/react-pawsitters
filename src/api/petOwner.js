@@ -39,7 +39,7 @@ export const petOwnerShow = (user, id) => {
 export const petOwnerUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/petowners/' + id + "/",
+		url: apiUrl + '/petowners/' + user.id + "/",
 		data: {
 			pet_owner: data,
 		},
