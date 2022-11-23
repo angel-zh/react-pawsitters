@@ -47,7 +47,8 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
             .then(res => console.log('Create Pet Sitter:', res.data))
-            .then(res => { navigate(`/petsitters/${res.data.petSitter.id}`) })
+            // .then(res => { navigate(`/petsitters/${res.data.petSitter.id}`) })
+            .then(res => { navigate(`/petsitters`) })
             .then(() => {
                 msgAlert({
                     heading: 'Success',
