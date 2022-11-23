@@ -3,16 +3,11 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'none'
+	color: 'white',
+	textDecoration: 'none'
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Item className='m-2'>
-			<Link to='petsitters' style={linkStyle}>
-				Pet Sitters
-			</Link>
-		</Nav.Item>
 		<Nav.Item className='m-2'>
 			<Link to='petowners' style={linkStyle}>
 				Pet owners
@@ -48,39 +43,39 @@ const authenticatedOptions = (
 
 const unauthenticatedOptions = (
 	<>
-        <Nav.Item className='m-2'>
-		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
-        </Nav.Item>
-        <Nav.Item className='m-2'>
-		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
-        </Nav.Item>
+		<Nav.Item className='m-2'>
+			<Link to='sign-up' style={linkStyle}>Sign Up</Link>
+		</Nav.Item>
+		<Nav.Item className='m-2'>
+			<Link to='sign-in' style={linkStyle}>Sign In</Link>
+		</Nav.Item>
 	</>
 )
 
-// const alwaysOptions = (
-// 	<>
-// 		<Nav.Link>
-// 			<Link to='/' style={linkStyle}>
-// 				Home
-// 			</Link>
-// 		</Nav.Link>
-// 	</>
-// )
+const alwaysOptions = (
+	<>
+		<Nav.Item className='m-2'>
+			<Link to='petsitters' style={linkStyle}>
+				Pet Sitters
+			</Link>
+		</Nav.Item>
+ 	</>
+)
 
 const Header = ({ user }) => (
 	<Navbar bg='primary' variant='dark' expand='md'>
 		<Navbar.Brand className='m-2'>
-            <Link to='/' style={linkStyle}>
-                PawSitters
-            </Link>
-        </Navbar.Brand>
+			<Link to='/' style={linkStyle}>
+				PawSitters
+			</Link>
+		</Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
 			<Nav className='ml-auto m-2'>
 				{user && (
 					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
 				)}
-				{/* {alwaysOptions} */}
+				{alwaysOptions}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 		</Navbar.Collapse>
