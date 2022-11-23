@@ -50,6 +50,17 @@ const PetOwnerForm = (props) => {
                     />
                 </Form.Group>
 
+                <Form.Group>
+                    <Form.Label className='mt-2'>Images:</Form.Label>
+                    <Form.Control
+                        placeholder="Image Link"
+                        name=""
+                        id=""
+                        value={petOwner.images}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+
                 <Row>
                 
                 </Row>
