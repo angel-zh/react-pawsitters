@@ -11,8 +11,8 @@ const PetOwnerForm = (props) => {
                 <Form.Label>Pet Owner's First Name:</Form.Label>
                 <Form.Control
                     placeholder="Owner's First Name"
-                    name="First Name"
-                    id="name"
+                    name="first_name"
+                    id="first_name"
                     value={petOwner.first_name}
                     onChange={handleChange}
                 />
@@ -20,9 +20,9 @@ const PetOwnerForm = (props) => {
                     <Form.Group as={Col}>
                         <Form.Label className='mt-2'>Pet Owner's Last Name:</Form.Label>
                         <Form.Control
-                            placeholder="Owner's Last Name;"
-                            name="last name"
-                            id="last name"
+                            placeholder="Owner's Last Name"
+                            name="last_name"
+                            id="last_name"
                             value={petOwner.last_name}
                             onChange={handleChange}
                         />
@@ -31,8 +31,8 @@ const PetOwnerForm = (props) => {
                         <Form.Label className='mt-2'>Pet Type:</Form.Label>
                         <Form.Control
                             placeholder="Type of Pet"
-                            name="Pet type"
-                            id="type"
+                            name="pet_type"
+                            id="pet_type"
                             value={petOwner.pet_type}
                             onChange={handleChange}
                         />
@@ -43,8 +43,8 @@ const PetOwnerForm = (props) => {
                     <Form.Label className='mt-2'>Pet's Name:</Form.Label>
                     <Form.Control
                         placeholder="What is your Pet's Name?"
-                        name="Pet Name"
-                        id="Pet Name"
+                        name="pet_name"
+                        id="pet_name"
                         value={petOwner.pet_name}
                         onChange={handleChange}
                     />

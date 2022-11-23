@@ -13,6 +13,16 @@ const authenticatedOptions = (
 				Pet Sitters
 			</Link>
 		</Nav.Item>
+		<Nav.Item className='m-2'>
+			<Link to='petowners' style={linkStyle}>
+				Pet owners
+			</Link>
+		</Nav.Item>
+		<Nav.Item className='m-2'>
+			<Link to='petowners/create' style={linkStyle}>
+				Create pet owner
+			</Link>
+		</Nav.Item>
 		<Nav.Item>
 			<Link to='change-password' style={linkStyle}>
 				Change Password
