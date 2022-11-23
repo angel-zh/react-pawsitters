@@ -20,9 +20,6 @@ export const petSitterIndex = (user) => {
 	return axios({
 		method: 'GET',
 		url: apiUrl + '/petsitters/',
-        headers: {
-			Authorization: `Token ${user.token}`,
-		},
 	})
 }
 
@@ -31,9 +28,9 @@ export const petSitterShow = (user, id) => {
 	return axios({
 		method: 'GET',
 		url: apiUrl + '/petsitters/' + id + '/',
-        headers: {
-			Authorization: `Token ${user.token}`,
-		},
+        // headers: {
+		// 	Authorization: `Token ${user.token}`,
+		// },
 	})
 }
 

@@ -80,16 +80,16 @@ const App = () => {
 				<Route
 						path='/petsitters'
 						element={
-						<RequireAuth user={user}>
+						
 							<PetSitterIndex msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
+						}
 				/>
 				<Route
 						path='/petsitters/:id'
 						element={
-						<RequireAuth user={user}>
+						
 							<PetSitterShow msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
+						}
 				/>
 				<Route
 						path='/petsitters/create'
