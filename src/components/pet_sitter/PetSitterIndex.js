@@ -17,7 +17,9 @@ const PetSitterIndex = ({ user, msgAlert }) => {
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
-                setAllPetSitters(res.data.petsitters)
+                console.log(res.data)
+                setAllPetSitters(res.data.pet_sitters)
+            
             })
             .catch((error) => {
                 msgAlert({
@@ -49,6 +51,10 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
                 {petSitterCards}
             </div>
+			<Link to='create'>
+				Create a Pet Sitter Profile
+			</Link>
+
         </>
     )
 }
