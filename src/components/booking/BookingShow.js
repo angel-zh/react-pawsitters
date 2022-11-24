@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
-import { reviewDelete } from '../../api/review'
+import { bookingDelete } from '../../api/booking'
 import BookingEdit from './BookingEdit'
 import moment from 'moment'
-import StarRating from '../shared/StarRating'
 
 const BookingShow = (props) => {
-    const { review, restaurant, user, msgAlert, triggerRefresh } = props
+    const { booking, user, msgAlert, triggerRefresh, pet_owner, pet_sitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
 
-
     const handleDeleteBooking = () => {
-        reviewDelete(user, restaurant._id, review.id)
+        bookingDelete(user, pet_owner._id, booking.id, pet_sitter._id)
 
             .then(() => {
                 msgAlert({
                     heading: 'Success: Booking Deleted',
-                    message: "We'll never speak of it again",
+                    message: "Booking Deleted",
                     variant: 'success'
                 })
             })
@@ -30,31 +28,31 @@ const BookingShow = (props) => {
                 })
             })
     }
-    let date = moment(review.createdAt).format('MMMM Do YYYY, h:mm a')
+    let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
 
     return (
 
         <>
             <Card className="m-2" style={{ backgroundColor: '#f2f6ec' }}>
                 <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee' }}>
-                    <p>{review.username} said:</p>
-                    <StarRating
-                        value={review.rating}
-                        style={{ fontSize: 15 }}
-                    />
+                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
                 </Card.Header>
                 <Card.Body>
-                    <small>Comments: </small>
-                    <p>{review.comment}</p>
-                    <img
+                    <small>Note: </small>
+                    <p>{booking.note}</p>
+                    <small>Days: </small>
+                    <p>{booking.start_date} - {booking.end_date}</p>
+                    <small>Time Frame: </small>
+                    <p>{booking.start_time} - {booking.end_time}</p>
+                    {/* <img
                         style={{ width: 200 }}
-                        src={review.image}
+                        src={booking.image}
                         alt={""}
-                    />
+                    /> */}
                 </Card.Body>
                 <Card.Footer>
                     {
-                        user && user.email === review.ownerEmail
+                        user && user.email === booking.ownerEmail
                             ?
                             <>
                                 <Button
@@ -79,8 +77,7 @@ const BookingShow = (props) => {
             </Card>
             <BookingEdit
                 user={user}
-                restaurant={restaurant}
-                review={review}
+                booking={booking}
                 msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}

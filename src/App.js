@@ -18,6 +18,7 @@ import PetOwnerCreate from './components/pet_owner/PetOwnerCreate'
 import PetOwnerShow from './components/pet_owner/PetOwnerShow'
 import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
 import BookingCreate from './components/booking/BookingCreate'
+import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
 // import ReviewCreate from './components/reviews/ReviewCreate'
 
@@ -123,10 +124,19 @@ const App = () => {
 						path='/bookings'
 						element={
 						<RequireAuth user={user}>
+							<BookingIndex msgAlert={msgAlert} user={user} />
 							<BookingCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
 				/>
+				{/* <Route
+						path='/bookings/create'
+						element={
+						<RequireAuth user={user}>
+							<BookingCreate msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/> */}
 				<Route
 						path='/reviews'
 						element={

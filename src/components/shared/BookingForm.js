@@ -13,8 +13,8 @@ const BookingForm = (props) => {
                 <Form.Control
                     placeholder="A sentence or two about why you need a petsitter."
                     type='textbox'
-                    id="textbox"
-                    value={booking.pet_sitter_name}
+                    id="note"
+                    value={booking.note}
                     onChange={handleChange}
                 />
 

@@ -8,12 +8,10 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingEdit = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, triggerRefresh, restaurant
+        msgAlert, triggerRefresh, pet_owner
     } = props
 
     const [booking, setBooking] = useState(props.booking)
-    const [picture, setPicture] = useState(props.booking.image)
-    const [imageSelected, setImageSelected] = useState(props.imageSelected)
 
     const handleChange = (e) => {
         setBooking(prevBooking => {
@@ -28,20 +26,10 @@ const BookingEdit = (props) => {
         })
     }
 
-    const handleImageChange = (image) => {
-        setBooking(prevBooking => {
-            const name = 'image'
-            const updatedBooking = {[name]: image}
-            return {
-                ...prevBooking, ...updatedBooking
-            }
-        })
-    } 
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        bookingUpdate(user, restaurant._id, booking)
+        bookingUpdate(user, pet_owner._id, booking)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -65,16 +53,11 @@ const BookingEdit = (props) => {
             <Modal.Header closeButton/>
             <Modal.Body>
                 <BookingForm 
-                    imageSelected={imageSelected}
-                    setImageSelected={setImageSelected}
-                    picture={picture}
-                    setPicture={setPicture}
                     booking={booking}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     triggerRefresh={() => setPicture(prev => !prev)}
-                    handleImageChange={handleImageChange}
-                    heading="Edit this booking!"
+                    heading="Edit booking"
                 />
             </Modal.Body>
         </Modal>
