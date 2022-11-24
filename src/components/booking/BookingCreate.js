@@ -9,9 +9,11 @@ const BookingCreate = (props) => {
     } = props
 
     const [booking, setBooking] = useState({
-        comment: '',
-        rating: '',
-        image: ''
+        note: '',
+        start_date: '',
+        end_date: '',
+        start_time: '',
+        end_time: ''
     })
 
     // These states are to clear the image data from the booking form after a booking submit
@@ -31,25 +33,17 @@ const BookingCreate = (props) => {
             }
         })
     }
-    const handleImageChange = (image) => {
-        setBooking(prevBooking => {
-            const name = 'image'
-            const updatedBooking = {[name]: image}
-            return {
-                ...prevBooking, ...updatedBooking
-            }
-        })
-    } 
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
         let updatedBooking = booking
         updatedBooking.ownerEmail = user.email
         setBooking({
-            comment: '',
-            rating: '',
-            image: ''
+            note: '',
+            start_date: '',
+            end_date: '',
+            start_time: '',
+            end_time: ''
         })
 
         
@@ -60,11 +54,6 @@ const BookingCreate = (props) => {
                     message: 'Pawsitter booked! Your pets thank you for taking the time to care.',
                     variant: 'success'
                 })
-            })
-            // sets the image preview back to an empty string
-            .then(() => {
-                setPicture('')
-                setImageSelected('')
             })
             .then(() => triggerRefresh())
             .catch(() => {
