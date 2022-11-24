@@ -4,6 +4,7 @@ import { petSitterShow, petSitterDelete } from '../../api/petSitter'
 import { Container, Button  } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
+// import ReviewShow from '../reviews/ReviewShow'
 
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
