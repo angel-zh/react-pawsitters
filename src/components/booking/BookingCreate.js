@@ -1,5 +1,4 @@
 import React, { useState }from 'react'
-import Accordion from 'react-bootstrap/Accordion';
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
 
@@ -15,12 +14,6 @@ const BookingCreate = (props) => {
         start_time: '',
         end_time: ''
     })
-
-    // These states are to clear the image data from the booking form after a booking submit
-    // They are set here and then used as props in CloudinaryUploadWidget.js, BookingForm.js, and EditBooking.js
-    // Shoutout to Timm and Aisha for helping with this tricky part
-    const [picture, setPicture] = useState('')
-    const [imageSelected, setImageSelected] = useState('')
 
     // sets the new values for a new booking
     const handleChange = (e) => {
