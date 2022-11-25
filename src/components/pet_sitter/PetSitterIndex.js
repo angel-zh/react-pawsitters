@@ -38,7 +38,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Card.Header><b>{petSitter.first_name} {petSitter.last_name}</b> </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <Link to={`/petsitters/${petSitter.id}`}>View details</Link>
+                    <Link to={`/petsitters/${petSitter.owner}`}>View details</Link>
                 </Card.Text>
             </Card.Body>
         </Card>
