@@ -41,7 +41,7 @@ const BookingShow = (props) => {
                     <small>Note: </small>
                     <p>{booking.note}</p>
                     <small>Days: </small>
-                    <p>{booking.start_date} - {booking.end_date}</p>
+                    <p>{booking.start_day} - {booking.end_day}</p>
                     <small>Time: </small>
                     <p>{booking.start_time} - {booking.end_time}</p>
                     {/* <img

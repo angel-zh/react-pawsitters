@@ -48,10 +48,10 @@ const BookingIndex = ({ user, msgAlert }) => {
                         Note: {booking.note}
                     </smal><br/>
                     <small>
-                        Start Date: {booking.start_date}
+                        Start Date: {booking.start_day}
                     </small><br/>
                     <small>
-                        End Date: {booking.end_date}
+                        End Date: {booking.end_day}
                     </small><br/>
                     <small>
                         Start Time: {booking.start_time}

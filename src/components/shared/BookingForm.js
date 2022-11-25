@@ -25,8 +25,8 @@ const BookingForm = (props) => {
                         <Form.Label>Start Date:</Form.Label>
                         <Form.Control
                             type='date'
-                            id="start_date"
-                            value={booking.start_date}
+                            id="start_day"
+                            value={booking.start_day}
                             onChange={handleChange}
                         />
                     </Form.Group>
@@ -34,8 +34,8 @@ const BookingForm = (props) => {
                         <Form.Label>End Date:</Form.Label>
                         <Form.Control
                             type='date'
-                            id="start_date"
-                            value={booking.start_date}
+                            id="end_day"
+                            value={booking.end_day}
                             onChange={handleChange}
                         />
                     </Form.Group>
