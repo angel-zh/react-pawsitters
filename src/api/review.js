@@ -2,13 +2,18 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a review- token required
-export const createReview= (user, petsitterId, newReview) => {
-	const ownerId = { owner: user._id }
-	const review = {...newReview, ...ownerId}
+export const createReview= (user, petsitterOwner, petownerId, createReview) => {
+    console.log(user.token)
+    console.log(petsitterOwner)
+	const ownerId = { owner: user.id }
+	const review = {...createReview, ...ownerId, ...petsitterOwner, ...petownerId}
 
 	return axios({
-		url: `${apiUrl}/reviews/${petsitterId}/`,
+		url: `${apiUrl}/reviews/${petsitterOwner}/`,
 		method: 'POST',
+        headers: {
+			Authorization: `Token ${user.token}`,
+		},
 		data: { review: review }
 	})
 }
