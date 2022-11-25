@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { petSitterShow, petSitterDelete } from '../../api/petSitter'
-import { Container } from 'react-bootstrap'
+import { Container, Button  } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
+import PetSitterUpdate from './PetSitterUpdate'
+// import ReviewShow from '../reviews/ReviewShow'
 
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
+    const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
     // scroll to top on page load
@@ -79,38 +82,69 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
 
     return (
-        <div className='container-md text-center'> 
-        <i>Pet Sitter Show Page <br/> -Under Construction-</i>
+        <div className='container-md text-center'>
+            <i>Pet Sitter Show Page <br /> -Under Construction-</i>
             <h2>{petSitter.first_name} {petSitter.last_name}</h2>
             <h3>Services Provided: </h3>
-            { 
+            {
                 petSitter.dog_walking
                     ?
-                        <h5>Dog walking</h5>
-                    :
-                    null
-            }
-            { 
-                petSitter.pet_sitting
-                    ?
-                        <h5>Pet Sitting</h5>
+                    <h5>Dog walking</h5>
                     :
                     null
             }
             {
-                    user
+                petSitter.pet_sitting
+                    ?
+                    <h5>Pet Sitting</h5>
+                    :
+                    null
+            }
+
+            <Container className='mb-5'>
+                {
+                    user && petSitter.owner === user.id
                         ?
-                        <Container style={{ width: '40rem' }}>
-                            <ReviewCreate
-                                user={user}
-                                petSitter={petSitter}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                            />
-                        </Container>
+                        <>
+                            <Button onClick={() => setEditModalShow(true)} className="m-2"
+                                variant="success"
+                            >
+                                Edit Profile
+                            </Button>
+                            <Button onClick={() => handleDeletePetSitter()}
+                                className="m-2"
+                                variant="danger"
+                            >
+                                Delete Profile
+                            </Button>
+                        </>
                         :
-                        <h5 className='text-center'><i>Please sign in if you would like to leave a review.</i></h5>
+                        null
                 }
+            </Container>
+            <PetSitterUpdate
+                    user={user}
+                    petSitter={petSitter}
+                    show={editModalShow}
+                    msgAlert={msgAlert}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                    handleClose={() => setEditModalShow(false)}
+                />
+
+            {
+                user
+                    ?
+                    <Container style={{ width: '40rem' }}>
+                        <ReviewCreate
+                            user={user}
+                            petSitter={petSitter}
+                            msgAlert={msgAlert}
+                            triggerRefresh={() => setUpdated(prev => !prev)}
+                        />
+                    </Container>
+                    :
+                    <h5 className='text-center'><i>Please sign in if you would like to leave a review.</i></h5>
+            }
         </div>
     )
 }

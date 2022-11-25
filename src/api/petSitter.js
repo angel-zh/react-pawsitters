@@ -40,7 +40,7 @@ export const petSitterUpdate = (data, user, id) => {
 		method: 'PATCH',
 		url: apiUrl + '/petsitters/' + id + '/',
 		data: {
-			petSitter: data,
+			pet_sitter: data,
 		},
 		headers: {
 			Authorization: `Token ${user.token}`,

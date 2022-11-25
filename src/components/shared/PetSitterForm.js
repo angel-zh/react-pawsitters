@@ -1,9 +1,12 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
 const PetSitterForm = (props) => {
-    const { petSitter, handleChange, heading, handleSubmit } = props
-
+    const { petSitter, handleChange, heading, handleSubmit, handleSelect, dayOptions, availability } = props
+   
+    const animatedComponents = makeAnimated()    
     return (
         <Container className="justify-content-center">
             <h3 className='mt-3'>{heading}</h3>
@@ -91,21 +94,17 @@ const PetSitterForm = (props) => {
                     value={petSitter.rate}
                     onChange={handleChange}
                 />
-                <Form.Label>Start Date:</Form.Label>
-                <Form.Control
-                    type="date"
-                    name="from_date"
-                    id="from_date"
-                    value={petSitter.from_date}
-                    onChange={handleChange}
-                />
-                <Form.Label>End Date:</Form.Label>
-                <Form.Control
-                    type="date"
-                    name="to_date"
-                    id="to_date"
-                    value={petSitter.to_date}
-                    onChange={handleChange}
+                <Form.Label>Available Days:</Form.Label>
+                <Select 
+                    isMulti
+                    defaultValue={availability}
+                    name='availability'
+                    className='basic-multi-select'
+                    classNamePrefix='select'
+                    components={animatedComponents}
+                    closeMenuOnSelect={false}
+                    options={dayOptions} 
+                    onChange={handleSelect}
                 />
                 <Form.Label>Start Time:</Form.Label>
                 <Form.Control
