@@ -11,7 +11,7 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         first_name: '',
         last_name: '',
         age: '',
-        dog_walking : '',
+        dog_walking: '',
         pet_sitting: false,
         dog: false,
         cat: false,
@@ -20,8 +20,7 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         bird: false,
         medicine: false,
         rate: '',
-        from_date: '',
-        to_date: '',
+        availability: '',
         from_time: '',
         to_time: '',
         bio: '',
@@ -29,6 +28,16 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     }
 
     const [petSitter, setPetSitter] = useState(defaultPetSitter)
+
+    const dayOptions = [
+        { value: 'monday', label: 'Monday' },
+        { value: 'tuesday', label: 'Tuesday' },
+        { value: 'wednesday', label: 'Wednesday' },
+        { value: 'thursday', label: 'Thursday' },
+        { value: 'friday', label: 'Friday' },
+        { value: 'saturday', label: 'Saturday' },
+        { value: 'sunday', label: 'Sunday' }
+    ]
 
 
     const handleChange = event => {
@@ -43,10 +52,25 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         })
     }
 
+    const handleSelect = event => {
+        setPetSitter(prevPetSitter => {
+            console.log(event)
+            let updatedValue = ''
+            event.map((e, index) => {
+                if (index === 0) {
+                    updatedValue += e.value
+                } else {
+                    updatedValue += ` ${e.value}`
+                }
+            })
+            return { ...prevPetSitter, availability: updatedValue }
+        })
+    }
+
     const handleCreatePetSitter = event => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
-            .then(res => console.log('Create Pet Sitter:', res.data))
+            .then(res => console.log('Created Pet Sitter:', res.data))
             // .then(res => { navigate(`/petsitters/${res.data.petSitter.id}`) })
             .then(res => { navigate(`/petsitters`) })
             .then(() => {
@@ -66,14 +90,15 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     }
 
     return (
-        
+
         <PetSitterForm
             petSitter={petSitter}
             handleChange={handleChange}
             heading="Sign Up to be a Pet Sitter"
             handleSubmit={handleCreatePetSitter}
+            handleSelect={handleSelect}
+            dayOptions={dayOptions}
         />
-       
     )
 }
 
