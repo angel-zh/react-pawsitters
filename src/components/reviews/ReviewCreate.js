@@ -1,17 +1,18 @@
 import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
-import { createReview, reviewCreate } from '../../api/review'
+import { createReview} from '../../api/review'
 
 const ReviewCreate = (props) => {
     const {
-        user, petSitter, msgAlert, triggerRefresh
+        user, petSitter, msgAlert, triggerRefresh, petOwner
     } = props
-
+    
     const [review, setReview] = useState({
         comment: '',
         rating: '',
         image: '',
+
     })
 
     // These states are to clear the image data from the review form after a review submit
@@ -52,8 +53,8 @@ const ReviewCreate = (props) => {
             image: ''
         })
 
-        
-        createReview(user, petSitter._id, updatedReview)
+        // pet sitter_.id throws a 404 
+        createReview(user, petSitter.owner, updatedReview, petOwner)
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',
