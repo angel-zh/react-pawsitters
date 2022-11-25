@@ -15,22 +15,21 @@ const BookingIndex = ({ user, msgAlert }) => {
 
     useEffect(() => {
         bookingIndex(user)
-        .then(res => {
-            setAllBookings(res.data.bookings)
+            .then(res => {
+                console.log(res.data)
+                setAllBookings(res.data.bookings)
 
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Index Failure: ' + error,
-                variant: 'danger'
             })
-        })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Index Failure: ' + error,
+                    variant: 'danger'
+                })
+            })
     }, [])
 
-    // Filters Bookings by owner
-    const usersBookings = allBookings.filter(booking => booking.ownerEmail === user.email)
-    const bookingCards = usersBookings.map(booking => (
+    const allBookingsJSX = allBookings.map(booking => (
         
         <Card key={ booking.id } style={{ width: '25rem', margin: 5, backgroundColor: '#f2f6ec' }}>      
             <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
@@ -39,14 +38,27 @@ const BookingIndex = ({ user, msgAlert }) => {
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    
-                    {/* <small>Pet Owner: {booking.pet_owner}</small><br/>
-                    <small>Pet Sitter: {booking.pet_sitter}</small> */}
-                    <smal>Note: {booking.note}</smal><br/>
-                    <small>Start Date: {booking.start_date}</small><br/>
-                    <small>End Date: {booking.end_date}</small><br/>
-                    <small>Start Time: {booking.start_time}</small><br/>
-                    <small>End Time: {booking.end_time}</small><br/>
+                    <small>
+                        Pet Owner: {booking.pet_owner}
+                    </small><br/>
+                    <small>
+                        Pet Sitter: {booking.pet_sitter}
+                    </small><br/>
+                    <smal>
+                        Note: {booking.note}
+                    </smal><br/>
+                    <small>
+                        Start Date: {booking.start_date}
+                    </small><br/>
+                    <small>
+                        End Date: {booking.end_date}
+                    </small><br/>
+                    <small>
+                        Start Time: {booking.start_time}
+                    </small><br/>
+                    <small>
+                        End Time: {booking.end_time}
+                    </small><br/>
                 </Card.Text>
             </Card.Body>
         </Card>
@@ -55,9 +67,12 @@ const BookingIndex = ({ user, msgAlert }) => {
     return (
         <div>
             <h2 className='text-center mt-3'>All My Bookings</h2>
-            <div className='container-md text-center' style={ cardContainerLayout }>
-                { bookingCards }
-            </div>
+            <ul>
+                { allBookingsJSX }
+            </ul>
+            {/* <div className='container-md text-center' style={ cardContainerLayout }>
+                { allBookingsJSX }
+            </div> */}
         </div>
     )
 }
