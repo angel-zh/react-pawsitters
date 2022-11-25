@@ -34,16 +34,12 @@ const BookingIndex = ({ user, msgAlert }) => {
         <Card key={ booking.id } style={{ width: '25rem', margin: 5, backgroundColor: '#f2f6ec' }}>      
             <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
-                {/* <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/restaurants/${booking.ownerEmail._id}` }>View { booking.ownerEmail.name } </Link> */}
+                <small>Pet Owner: {booking.pet_owner}</small><br/>
+                <small>Pet Sitter: {booking.pet_sitter}</small><br/>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <small>
-                        Pet Owner: {booking.pet_owner}
-                    </small><br/>
-                    <small>
-                        Pet Sitter: {booking.pet_sitter}
-                    </small><br/>
+
                     <smal>
                         Note: {booking.note}
                     </smal><br/>
