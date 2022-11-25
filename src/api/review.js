@@ -2,11 +2,11 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a review- token required
-export const createReview= (user, petsitterOwner, petownerId, createReview) => {
+export const reviewCreate= (user, petsitterOwner, petownerId, reviewCreate) => {
     console.log(user.token)
     console.log(petsitterOwner)
 	const ownerId = { owner: user.id }
-	const review = {...createReview, ...ownerId, ...petsitterOwner, ...petownerId}
+	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId}
 
 	return axios({
 		url: `${apiUrl}/reviews/${petsitterOwner}/`,
