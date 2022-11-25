@@ -67,12 +67,10 @@ const BookingIndex = ({ user, msgAlert }) => {
     return (
         <div>
             <h2 className='text-center mt-3'>All My Bookings</h2>
-            <ul>
+
+            <div className='container-md text-center' style={ cardContainerLayout }>
                 { allBookingsJSX }
-            </ul>
-            {/* <div className='container-md text-center' style={ cardContainerLayout }>
-                { allBookingsJSX }
-            </div> */}
+            </div>
         </div>
     )
 }
