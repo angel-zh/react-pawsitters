@@ -1,7 +1,7 @@
 import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
-import { createReview} from '../../api/review'
+import { reviewCreate} from '../../api/review'
 
 const ReviewCreate = (props) => {
     const {
@@ -54,7 +54,7 @@ const ReviewCreate = (props) => {
         })
 
         // pet sitter_.id throws a 404 
-        createReview(user, petSitter.owner, updatedReview, petOwner)
+        reviewCreate(user, petSitter.owner, updatedReview, petOwner)
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',
