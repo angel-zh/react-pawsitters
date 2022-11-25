@@ -9,8 +9,8 @@ const BookingCreate = (props) => {
 
     const [booking, setBooking] = useState({
         note: '',
-        start_date: '',
-        end_date: '',
+        start_day: '',
+        end_day: '',
         start_time: '',
         end_time: ''
     })
@@ -33,8 +33,8 @@ const BookingCreate = (props) => {
         updatedBooking.ownerEmail = user.email
         setBooking({
             note: '',
-            start_date: '',
-            end_date: '',
+            start_day: '',
+            end_day: '',
             start_time: '',
             end_time: ''
         })
