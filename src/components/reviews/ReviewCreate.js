@@ -2,6 +2,7 @@ import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
 import { reviewCreate} from '../../api/review'
+import { useIsRTL } from 'react-bootstrap/esm/ThemeProvider';
 
 
 const ReviewCreate = (props) => {
@@ -9,20 +10,20 @@ const ReviewCreate = (props) => {
         user, petSitter, msgAlert, triggerRefresh
     } = props
     
-    const  pet_sitter = petSitter.owner
-    const pet_owner = user.id
+    
     
     const [review, setReview] = useState({
         comment: '',
         rating: '',
         image: '',
-        // pet_sitter: '',
+        pet_sitter: '',
+        pet_owner: '',
         
         
     })
     
     // These states are to clear the image data from the review form after a review submit
-    // They are set here and then used as props in CloudinaryUploadWidget.js, ReviewForm.js, and EditReview.js
+    // They are set here and then used as props in CloudinaryUploadWidget.js, ReviewForm.js, and ReviewEdit.js
     // Shoutout to Timm and Aisha for helping with this tricky part
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
@@ -51,16 +52,21 @@ const ReviewCreate = (props) => {
     
     const handleSubmit = (e) => {
         console.log('this is petsitter', petSitter)
-        const pet_sitter = petSitter
+        // const pet_sitter = petSitter
         e.preventDefault()
         let updatedReview = review
         updatedReview.ownerEmail = user.email
+        let anotherUpdate = review
+        anotherUpdate.pet_sitter = petSitter.owner
+        let reviewUpdate = review 
+        reviewUpdate.pet_owner = user.id
         
         setReview({
             comment: '',
             rating: '',
             image: '',
-            // pet_sitter: '',
+            pet_sitter: '',
+            pet_owner: '',
            
         })
         console.log('create a review', review)

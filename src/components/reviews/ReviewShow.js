@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { reviewDelete } from '../../api/review'
-import EditReview from '../Reviews/EditReview'
+import ReviewEdit from '../reviews/ReviewEdit'
 import moment from 'moment'
 import StarRating from '../shared/StarRating'
 
@@ -78,7 +78,7 @@ const ReviewShow = (props) => {
                     <div className='float-end'>{date}</div>
                 </Card.Footer>
             </Card>
-            <EditReview
+            <ReviewEdit
                 user={user}
                 petSitter={petSitter}
                 review={review}
