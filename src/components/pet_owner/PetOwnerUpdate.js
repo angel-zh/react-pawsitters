@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import { PetOwnerUpdate } from '../../api/petOwner'
+import { petOwnerUpdate } from '../../api/petOwner'
 import PetOwnerForm from '../shared/PetOwnerForm'
 
 const PetOwnerUpdate = (props) => {
@@ -22,11 +22,25 @@ const PetOwnerUpdate = (props) => {
             return { ...prevPetOwner, ...updatedPetOwner }
         })
     }
+    const handleSelect = event => {
+        setPetOwner(prevPetOwner => {
+            console.log(event)
+            let updatedValue = ''
+            event.map((e, index) => {
+                if (index === 0) {
+                    updatedValue += e.value
+                } else {
+                    updatedValue += ` ${e.value}`
+                }
+            })
+            return { ...prevPetOwner, availability: updatedValue }
+        })
+    }
 
     const handleSubmit = event => {
         event.preventDefault()
 
-        PetOwnerUpdate(petOwner, user, props.petOwner._id)
+        petOwnerUpdate(petOwner, user, props.petOwner._id)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -53,6 +67,7 @@ const PetOwnerUpdate = (props) => {
                     petOwner={petOwner}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    handleSelect={handleSelect}
                     heading="Update Your Pet Owner Profile"
                 />
             </Modal.Body>
