@@ -136,6 +136,15 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 user
                     ?
                     <>
+                        {/* This is one way to show the Booking request */}
+                        {/* <Container style={{ width: '40rem' }}>
+                            <BookingCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container> */}
                         <Container style={{ width: '40rem' }}>
                             <ReviewCreate
                                 user={user}
@@ -144,17 +153,9 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                 triggerRefresh={() => setUpdated(prev => !prev)}
                             />
                         </Container>
-                        <Container style={{ width: '40rem' }}>
-                            <BookingCreate
-                                user={user}
-                                petSitter={petSitter}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                            />
-                        </Container>
                     </>
                     :
-                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or book this pawsitter.</i></h5>
+                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this pawsitter.</i></h5>
             }
         </div>
     )
