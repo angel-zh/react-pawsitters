@@ -30,6 +30,22 @@ const PetOwnerCreate = ({ user, msgAlert }) => {
         })
     }
 
+
+    const handleSelect = event => {
+        setPetOwner(prevPetOwner => {
+            console.log(event)
+            let updatedValue = ''
+            event.map((e, index) => {
+                if (index === 0) {
+                    updatedValue += e.value
+                } else {
+                    updatedValue += ` ${e.value}`
+                }
+            })
+            return { ...prevPetOwner, availability: updatedValue }
+        })
+    }
+
     const handleCreatePetOwner = event => {
         event.preventDefault()
         petOwnerCreate(petOwner, user)
