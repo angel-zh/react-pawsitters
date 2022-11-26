@@ -93,9 +93,9 @@ const App = () => {
 						<>
 							<PetSitterShow msgAlert={msgAlert} user={user} />
 
-							<RequireAuth user={user}>
+							{/* <RequireAuth user={user}>
 								<BookingCreate msgAlert={msgAlert} user={user} />
-							</RequireAuth>
+							</RequireAuth> */}
 						</>
 						}
 				/>
