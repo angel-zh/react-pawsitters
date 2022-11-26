@@ -6,7 +6,7 @@ const PetOwnerForm = (props) => {
     const { petOwner, handleChange, heading, handleSubmit, handleSelect } = props
     const animatedComponents = makeAnimated() 
     return (
-        <Container className="justify-content-center rest-form" style={{ width: '48em', padding: '2rem' }} >
+        <Container className= "justify-content-center rest-form" style={{ width: '48em', padding: '2rem' }} >
             <h3 className='mt-3'>{heading}</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Label>Pet Owner's First Name:</Form.Label>
@@ -28,16 +28,24 @@ const PetOwnerForm = (props) => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group as={Col}>
-                        <Form.Label className='mt-2'>Pet Type:</Form.Label>
-                        <Form.Control
-                            placeholder="Type of Pet"
+                    
+                    <Form.Label className='mt-2'>Pet Type:</Form.Label>
+                        <Col sm={4}>
+                        <Form.Select
+                            aria-label="Type of Pet"
                             name="pet_type"
                             id="pet_type"
                             value={petOwner.pet_type}
                             onChange={handleChange}
-                        />
-                    </Form.Group>
+                        >
+                        <option>Select an option</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Small Animal">Small Animal</option>
+                        <option value="Reptile">Reptile</option>
+                        <option value="Bird">Bird</option>
+                        </Form.Select>
+                    </Col>
                 </Row>
 
                 <Form.Group>
