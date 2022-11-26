@@ -1,9 +1,10 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 const PetOwnerForm = (props) => {
-    const { petOwner, handleChange, heading, handleSubmit } = props
-
+    const { petOwner, handleChange, heading, handleSubmit, handleSelect } = props
+    const animatedComponents = makeAnimated() 
     return (
         <Container className="justify-content-center rest-form" style={{ width: '48em', padding: '2rem' }} >
             <h3 className='mt-3'>{heading}</h3>
@@ -50,7 +51,7 @@ const PetOwnerForm = (props) => {
                     />
                 </Form.Group>
 
-                <Form.Group>
+                {/* <Form.Group>
                     <Form.Label className='mt-2'>Images:</Form.Label>
                     <Form.Control
                         placeholder="Image Link"
@@ -59,7 +60,7 @@ const PetOwnerForm = (props) => {
                         value={petOwner.images}
                         onChange={handleChange}
                     />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Row>
                 
