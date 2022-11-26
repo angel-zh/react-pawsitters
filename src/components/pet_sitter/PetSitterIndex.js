@@ -1,15 +1,19 @@
 
 import React, { useEffect, useState } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { petSitterIndex } from '../../api/petSitter'
 
-const cardContainerLayout = {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'center'
-}
 
+// const cardContainerLayout = {
+//     display: 'flex',
+//     flexFlow: 'row wrap',
+//     justifyContent: 'center'
+// }
+const linkStyle = {
+    color: 'black',
+    textDecoration: 'none'
+}
 const PetSitterIndex = ({ user, msgAlert }) => {
 
     const [allPetSitters, setAllPetSitters] = useState([])
@@ -19,7 +23,6 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             .then(res => {
                 console.log(res.data)
                 setAllPetSitters(res.data.pet_sitters)
-            
             })
             .catch((error) => {
                 msgAlert({
@@ -32,29 +35,45 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     // map over all restaurants to produce cards to display each restaurant with an image and link
     const petSitterCards = allPetSitters.map(petSitter => (
+        <Link to={`/petsitters/${petSitter.owner}`} style={linkStyle}>
+            <Card key={petSitter.Owner} style={{ width: 'auto', margin: 8, backgroundColor: '#afc2f2' }}>
+                <Card.Body>
+                    <Image src='https://i.imgur.com/2y0Ysu1.jpg' className=' profile-pic float-start border'></Image>
+                    <Card.Text>
+                        <h3>{petSitter.first_name} {petSitter.last_name}</h3>
 
-        <Card key={petSitter.id} style={{ width: '30rem', margin: 8, backgroundColor: '#f2f6ec' }}>
-            {/* <Card.Img variant="top" src={FoodImages[`${restaurant.type}`]} style={{ height: '300px' }} alt={restaurant.type} /> */}
-            <Card.Header><b>{petSitter.first_name} {petSitter.last_name}</b> </Card.Header>
-            <Card.Body>
-                <Card.Text>
-                    <Link to={`/petsitters/${petSitter.owner}`}>View details</Link>
-                </Card.Text>
-            </Card.Body>
-        </Card>
+                        {
+                            petSitter.dog_walking
+                                ?
+                                <h5>Dog Walker</h5>
+                                :
+                                null
+                        }
+                        {
+                            petSitter.pet_sitting
+                                ?
+                                <h5>Pet Sitter</h5>
+                                :
+                                null
+                        }
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </Link>
     ))
 
     return (
         <div className='container-md'>
             <Link to='create'>
-				Register to be a Pet Sitter
-			</Link>
+                Register to be a Pet Sitter
+            </Link>
+
             <h2 className='text-center mt-3'>All Pet Sitters</h2>
-            <div className='container-md text-center' style={cardContainerLayout}>
+            <div className='container-md text-center pet-sitter-index'>
 
                 {petSitterCards}
+
             </div>
-			
 
         </div>
     )
