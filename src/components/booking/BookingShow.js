@@ -30,6 +30,10 @@ const BookingShow = (props) => {
     }
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
 
+    if (booking === none)
+        return 
+            "Nothing scheduled yet"
+
     return (
 
         <>

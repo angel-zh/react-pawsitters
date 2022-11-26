@@ -1,10 +1,11 @@
 import React, { useState }from 'react'
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
+import { reviewCreate } from '../../api/review'
 
 const BookingCreate = (props) => {
     const {
-        user, petSitter, msgAlert, triggerRefresh
+        user, petSitter, petOwner, msgAlert, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState({
@@ -31,6 +32,10 @@ const BookingCreate = (props) => {
         e.preventDefault()
         let updatedBooking = booking
         updatedBooking.ownerEmail = user.email
+        let anotherUpdate = booking
+        anotherUpdate.pet_sitter = petSitter.owner
+        let bookingUpdate = booking
+        bookingUpdate.pet_owner = user.id
         setBooking({
             note: '',
             start_day: '',
@@ -40,7 +45,7 @@ const BookingCreate = (props) => {
         })
 
         
-        bookingCreate(user, petSitter.owner, updatedBooking)
+        bookingCreate(user, petSitter.owner, petOwner.owner, updatedBooking)
             console.log(petSitter.owner, 'petSitter.owner')
             .then(() => {
                 msgAlert({
