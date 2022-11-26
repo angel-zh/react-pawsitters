@@ -27,6 +27,10 @@ body {
   margin-bottom: 0;
 }
 
+.logo-hover:hover {
+  color: #8baafa;
+}
+
 .grip-lines {
   background-color: #31344b;
   color: white;
@@ -49,12 +53,18 @@ body {
   background-color: #56596e;
 }
 
-.pet-sitter-form {
-  border: 2px solid #8baafa;
+.pet-sitter-form, .pet-sitter-index {
+  border: 2px solid #757d90;
   padding: 20px;
   border-radius: 3px;
   overflow-y: auto;
   height: 82vh;
   width: 78%;
-  box-shadow: 3px 3px 1px 1px #282a3e;
 }
+.profile-pic {
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+
+}
+
