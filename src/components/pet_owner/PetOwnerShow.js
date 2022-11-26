@@ -3,9 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
 import { Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
+import ReviewCreate from '../reviews/ReviewCreate'
 
 const PetOwnerShow = ({ user, msgAlert }) => {
-
     const [petOwner, setPetOwner] = useState({
         first_name: '',
         last_name:'',
@@ -73,7 +73,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         .catch((error) => {
             msgAlert({
                 heading: 'Failure',
-                message: 'deleted Pet sitter Failure' + error,
+                message: 'deleted Pet Owner Failure' + error,
                 variant: 'danger'
             })
         })
@@ -83,13 +83,14 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 
     return (
         <div className='container-md text-center'>
-             <i>Pet Owner Profile Page <br /> -Under Construction-</i>
-            <h2>{petOwner.first_name} {petOwner.last_name}</h2>
+             <i>Pet Owner Profile Page <br /> </i>
+             <h2>{petOwner.first_name} {petOwner.last_name}</h2>
 
 
         <Container className='mb-5'>
-
             {
+                user && petOwner.owner === user.id
+                    ?
                     <>
                         <Button onClick={() => setEditModalShow(true)} className="m-2"
                             variant="success"
@@ -102,7 +103,9 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                         >
                             Delete Profile
                         </Button>
-                    </>     
+                    </> 
+                    :
+                    null    
             }
         </Container>
         <PetOwnerUpdate
@@ -114,21 +117,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 handleClose={() => setEditModalShow(false)}
             />
 
-        {
-            user
-                ?
-                <Container style={{ width: '40rem' }}>
-                        user={user}
-                        petOwner={petOwner}
-                        msgAlert={msgAlert}
-                        triggerRefresh={() => setUpdated(prev => !prev)}
-                
-                </Container>
-                :
-                <h5 className='text-center'><i>Please sign in if you would like to leave a review.</i></h5>
-        }
-    </div>
-)
+     </div>
+    )
 }
 
 export default PetOwnerShow
