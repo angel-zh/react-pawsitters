@@ -5,6 +5,7 @@ import { Container, Button  } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
 // import ReviewShow from '../reviews/ReviewShow'
+import BookingCreate from '../booking/BookingCreate'
 
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
@@ -134,16 +135,27 @@ const PetSitterShow = ({ user, msgAlert }) => {
             {
                 user
                     ?
-                    <Container style={{ width: '40rem' }}>
-                        <ReviewCreate
-                            user={user}
-                            petSitter={petSitter}
-                            msgAlert={msgAlert}
-                            triggerRefresh={() => setUpdated(prev => !prev)}
-                        />
-                    </Container>
+                    <>
+                        {/* This is one way to show the Booking request */}
+                        {/* <Container style={{ width: '40rem' }}>
+                            <BookingCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container> */}
+                        <Container style={{ width: '40rem' }}>
+                            <ReviewCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container>
+                    </>
                     :
-                    <h5 className='text-center'><i>Please sign in if you would like to leave a review.</i></h5>
+                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this pawsitter.</i></h5>
             }
         </div>
     )
