@@ -4,7 +4,7 @@ import { bookingCreate } from '../../api/booking'
 
 const BookingCreate = (props) => {
     const {
-        user, petSitter, petOwner, msgAlert, triggerRefresh
+        user, petSitter, msgAlert, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState({
@@ -40,9 +40,8 @@ const BookingCreate = (props) => {
         })
 
         
-        bookingCreate(user, petSitter.owner, petOwner.owner, updatedBooking)
+        bookingCreate(user, petSitter.owner, updatedBooking)
             console.log(petSitter.owner, 'petSitter.owner')
-            console.log(petOwner.owner, 'petOwner.owner')
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',

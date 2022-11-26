@@ -93,9 +93,9 @@ const App = () => {
 						<>
 							<PetSitterShow msgAlert={msgAlert} user={user} />
 
-							{/* <RequireAuth user={user}>
+							<RequireAuth user={user}>
 								<BookingCreate msgAlert={msgAlert} user={user} />
-							</RequireAuth> */}
+							</RequireAuth>
 						</>
 						}
 				/>
@@ -135,14 +135,14 @@ const App = () => {
 						</RequireAuth>
 						}
 				/>
-				{/* <Route
+				<Route
 						path='/bookings/create'
 						element={
 						<RequireAuth user={user}>
 							<BookingCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
-				/> */}
+				/>
 				<Route
 						path='/reviews'
 						element={
