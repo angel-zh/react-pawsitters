@@ -6,7 +6,7 @@ const BookingForm = (props) => {
 
     return (
 
-        <Container className='justify-content-center' style={{ width: '48em', padding: '2rem' }} >
+        <Container className='justify-content-center' style={{ width: '48em', padding: '2rem', backgroundColor: '#56596e' }} >
             <h3 className='mt-3'>{heading}</h3> 
             <Form onSubmit={handleSubmit}>
                 {/* adding this for testing purposes - I don't think we'll need it in the long run, bc the booking should be made on the petsitter's profile page.
@@ -79,9 +79,6 @@ const BookingForm = (props) => {
                         />
                     </Form.Group>
                 </Row>
-
-                
-                <hr class="bg-success border-2 border-top border-success" />
 
                 <Button className='btn btn-light text-light mt-3' type="submit" style={{ backgroundColor: '#ba7a5f' }}>Submit</Button>
 

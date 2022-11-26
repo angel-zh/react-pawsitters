@@ -137,7 +137,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     ?
                     <>
                         <Container style={{ width: '40rem' }}>
-                            <ReviewCreate
+                            <BookingCreate
                                 user={user}
                                 petSitter={petSitter}
                                 msgAlert={msgAlert}
@@ -145,7 +145,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                             />
                         </Container>
                         <Container style={{ width: '40rem' }}>
-                            <BookingCreate
+                            <ReviewCreate
                                 user={user}
                                 petSitter={petSitter}
                                 msgAlert={msgAlert}
@@ -154,7 +154,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         </Container>
                     </>
                     :
-                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or book this pawsitter.</i></h5>
+                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this pawsitter.</i></h5>
             }
         </div>
     )
