@@ -31,7 +31,7 @@ const BookingIndex = ({ user, msgAlert }) => {
 
     const allBookingsJSX = allBookings.map(booking => (
         
-        <Card key={ booking.id } style={{ width: '25rem', margin: 5, backgroundColor: '#f2f6ec' }}>      
+        <Card key={ booking.id } style={{ width: '25rem', margin: 5, backgroundColor: '#56596e' }}>      
             <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
                 <small>Pet Owner: {booking.pet_owner}</small><br/>
