@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+// import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const ReviewForm = (props) => {
     const { review, handleChange, handleSubmit, heading, handleImageChange, picture, setPicture, imageSelected, setImageSelected } = props
@@ -37,8 +38,8 @@ const ReviewForm = (props) => {
                 </Col>
                 <hr class="bg-success border-2 border-top border-success" />
                 <>
-                    <Form.Label>Upload an Image:</Form.Label>
-                    {/* <CloudinaryUploadWidget
+                    {/* <Form.Label>Upload an Image:</Form.Label>
+                    <CloudinaryUploadWidget
                         handleImageChange={handleImageChange}
                         picture={picture}
                         setPicture={setPicture}
@@ -46,6 +47,7 @@ const ReviewForm = (props) => {
                         setImageSelected={setImageSelected}
                     /> */}
                 </>
+
                 <hr class="bg-success border-2 border-top border-success" />
                 <Button variant='success' type="submit">Submit</Button>
 
