@@ -20,6 +20,7 @@ import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
 import BookingCreate from './components/booking/BookingCreate'
 import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
+import SideNav from './components/shared/SideNav'
 // import ReviewCreate from './components/reviews/ReviewCreate'
 
 const App = () => {
@@ -51,7 +52,8 @@ const App = () => {
 
 	return (
 		<Fragment>
-			<Header user={user} />
+			{/* <Header user={user} /> */}
+			<SideNav className='d-flex' user={user} />
 			<Routes>
 				<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
 				<Route
