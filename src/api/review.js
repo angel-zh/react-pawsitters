@@ -3,8 +3,8 @@ import axios from 'axios'
 
 // CREATE a review- token required
 export const reviewCreate= (user, petsitterOwner, petownerId, reviewCreate) => {
-    console.log(user.token)
-    console.log(petsitterOwner)
+    // console.log('user', user)
+    // console.log('petsitter', petsitterOwner)
 	const ownerId = { owner: user.id }
 	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId}
 
