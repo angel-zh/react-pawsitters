@@ -58,3 +58,7 @@ body {
   width: 78%;
   box-shadow: 3px 3px 1px 1px #282a3e;
 }
+
+.card-text{
+  color:#31344b
+}
