@@ -35,7 +35,7 @@ const BookingIndex = ({ user, msgAlert }) => {
             <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
                 <small>Pet Owner: {booking.pet_owner}</small><br/>
-                <small>Pet Sitter: {booking.pet_sitter}</small><br/>
+                <small>Pawsitter: {booking.pet_sitter}</small><br/>
             </Card.Header>
             <Card.Body>
                 <Card.Text>

@@ -90,8 +90,13 @@ const App = () => {
 				<Route
 						path='/petsitters/:id'
 						element={
-						
+						<>
 							<PetSitterShow msgAlert={msgAlert} user={user} />
+
+							{/* <RequireAuth user={user}>
+								<BookingCreate msgAlert={msgAlert} user={user} />
+							</RequireAuth> */}
+						</>
 						}
 				/>
 				<Route
@@ -127,7 +132,6 @@ const App = () => {
 						element={
 						<RequireAuth user={user}>
 							<BookingIndex msgAlert={msgAlert} user={user} />
-							<BookingCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
 				/>
