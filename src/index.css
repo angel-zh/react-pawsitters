@@ -10,4 +10,51 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+    /* background-color: #31344b; */
+}
+
+body {
+  background-color: #3f4257;
+  color: white;
+}
+
+.logo {
+  background-color: #292c41;
+  border-right: 1px solid #494f5e;
+}
+
+.logo h2 {
+  margin-bottom: 0;
+}
+
+.grip-lines {
+  background-color: #31344b;
+  color: white;
+}
+
+.grip-lines:hover {
+  color: #8baafa;
+  background-color: #56596e;
+}
+
+.icon {
+  padding-right: 8px;
+}
+
+.body-modal {
+ background-color: #31344b;
+}
+
+.head-modal {
+  background-color: #56596e;
+}
+
+.pet-sitter-form {
+  border: 2px solid #8baafa;
+  padding: 20px;
+  border-radius: 3px;
+  overflow-y: auto;
+  height: 82vh;
+  width: 78%;
+  box-shadow: 3px 3px 1px 1px #282a3e;
 }

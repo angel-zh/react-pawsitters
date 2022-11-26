@@ -4,13 +4,13 @@ import { bookingCreate } from '../../api/booking'
 
 const BookingCreate = (props) => {
     const {
-        user, pet_sitter, pet_owner, msgAlert, triggerRefresh
+        user, petSitter, petOwner, msgAlert, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState({
         note: '',
-        start_date: '',
-        end_date: '',
+        start_day: '',
+        end_day: '',
         start_time: '',
         end_time: ''
     })
@@ -33,14 +33,16 @@ const BookingCreate = (props) => {
         updatedBooking.ownerEmail = user.email
         setBooking({
             note: '',
-            start_date: '',
-            end_date: '',
+            start_day: '',
+            end_day: '',
             start_time: '',
             end_time: ''
         })
 
         
-        bookingCreate(user, pet_sitter._id, pet_owner.id, updatedBooking)
+        bookingCreate(user, petSitter.owner, petOwner.owner, updatedBooking)
+            console.log(petSitter.owner, 'petSitter.owner')
+            console.log(petOwner.owner, 'petOwner.owner')
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',
