@@ -57,7 +57,7 @@ const SideNav = ({ user }) => {
                 <h2>R</h2>
                 <h2>S</h2>
             </div>
-            <Sidebar backgroundColor="#31344b">
+            <Sidebar backgroundColor="#31344b" transitionDuration={800}>
                 <button className='grip-lines mt-2 mx-3 btn mb-2' onClick={() => collapseSidebar()}>
                     <FontAwesomeIcon icon={faAlignJustify} size='xl' />
                 </button>

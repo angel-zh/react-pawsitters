@@ -87,8 +87,8 @@ const PetSitterUpdate = (props) => {
 
     return (
         <Modal size='lg' show={show} onHide={handleClose}>
-            <Modal.Header closeButton />
-            <Modal.Body>
+            <Modal.Header closeButton className='head-modal'/>
+            <Modal.Body className='body-modal'>
                 <PetSitterForm
                     petSitter={petSitter}
                     handleChange={handleChange}

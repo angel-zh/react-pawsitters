@@ -20,7 +20,7 @@ body {
 
 .logo {
   background-color: #292c41;
-  border-right: 1px solid rgb(73, 79, 94);
+  border-right: 1px solid #494f5e;
 }
 
 .logo h2 {
@@ -33,10 +33,28 @@ body {
 }
 
 .grip-lines:hover {
-  color: rgb(139, 170, 250);
+  color: #8baafa;
   background-color: #56596e;
 }
 
 .icon {
   padding-right: 8px;
+}
+
+.body-modal {
+ background-color: #31344b;
+}
+
+.head-modal {
+  background-color: #56596e;
+}
+
+.pet-sitter-form {
+  border: 2px solid #8baafa;
+  padding: 20px;
+  border-radius: 3px;
+  overflow-y: auto;
+  height: 82vh;
+  width: 78%;
+  box-shadow: 3px 3px 1px 1px #282a3e;
 }
