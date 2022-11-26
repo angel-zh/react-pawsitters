@@ -2,7 +2,6 @@ import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
 import { reviewCreate} from '../../api/review'
-import { useIsRTL } from 'react-bootstrap/esm/ThemeProvider';
 
 
 const ReviewCreate = (props) => {
@@ -52,7 +51,6 @@ const ReviewCreate = (props) => {
     
     const handleSubmit = (e) => {
         console.log('this is petsitter', petSitter)
-        // const pet_sitter = petSitter
         e.preventDefault()
         let updatedReview = review
         updatedReview.ownerEmail = user.email
