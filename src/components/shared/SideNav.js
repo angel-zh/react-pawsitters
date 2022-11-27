@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faUserClock } from '@fortawesome/free-solid-svg-icons'
 
 
-
+const linkStyle = {
+    color: 'white',
+    textDecoration: 'none'
+}
 const SideNav = ({ user }) => {
     const { collapseSidebar } = useProSidebar();
 
@@ -46,19 +49,25 @@ const SideNav = ({ user }) => {
 
     return (
         <div style={{ display: 'flex', height: '100vh', minHeight: '400px' }}>
+
             <div className='logo container-fluid pt-3 text-center'>
-                <FontAwesomeIcon icon={faPaw} size='xl' />
-                <h2 className='mt-2'>P</h2>
-                <h2>A</h2>
-                <h2>W</h2>
-                <h2>S</h2>
-                <h2>I</h2>
-                <h2>T</h2>
-                <h2>T</h2>
-                <h2>E</h2>
-                <h2>R</h2>
-                <h2>S</h2>
+                <Link to='/' style={linkStyle}>
+                    <div className='logo-hover'>
+                    <h2><FontAwesomeIcon icon={faPaw} size='sm' /></h2>
+                    <h2 className='mt-2'>P</h2>
+                    <h2>A</h2>
+                    <h2>W</h2>
+                    <h2>S</h2>
+                    <h2>I</h2>
+                    <h2>T</h2>
+                    <h2>T</h2>
+                    <h2>E</h2>
+                    <h2>R</h2>
+                    <h2>S</h2>
+                    </div>
+                </Link>
             </div>
+
             <Sidebar backgroundColor="#31344b" transitionDuration={800}>
                 <button className='grip-lines mt-2 mx-3 btn mb-2' onClick={() => collapseSidebar()}>
                     <FontAwesomeIcon icon={faAlignJustify} size='xl' />
