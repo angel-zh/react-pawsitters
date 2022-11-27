@@ -62,9 +62,33 @@ body {
   width: 78%;
 }
 .profile-pic {
-  width: 120px;
+  width: 125px;
   height: auto;
   border-radius: 50%;
-
+  margin-right: 50px;
 }
 
+::-webkit-scrollbar {
+  background-color: #292c41;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8baafa;
+  border-radius: 2px; 
+}
+
+.link {
+  text-decoration: none;
+  color: #8baafa;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.link:hover {
+  color: #c0cff8;
+  text-shadow: 1px 1px 3px black;
+}
+
+.page-heading {
+  text-shadow: 2px 2px black;
+}
