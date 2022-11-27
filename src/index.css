@@ -92,3 +92,21 @@ body {
 .page-heading {
   text-shadow: 2px 2px black;
 }
+
+.homepage {
+  margin: 0 auto;
+  margin-top: 8%;
+  width: 60vw;
+}
+
+.homepage h1 {
+  font-size: 3rem;
+}
+
+.homepage img {
+  width: 12vw;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-right: 5px;
+}
