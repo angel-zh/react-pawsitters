@@ -6,7 +6,7 @@ export const reviewCreate= (user, petsitterOwner, petownerId, reviewCreate) => {
     // console.log('user', user)
     // console.log('petsitter', petsitterOwner)
 	const ownerId = { owner: user.id }
-	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId}
+	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId, ...review.Id}
 
 	return axios({
 		url: `${apiUrl}/reviews/${petsitterOwner}/`,

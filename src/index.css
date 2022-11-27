@@ -92,3 +92,7 @@ body {
 .page-heading {
   text-shadow: 2px 2px black;
 }
+
+.card-text{
+  color:#31344b
+}
