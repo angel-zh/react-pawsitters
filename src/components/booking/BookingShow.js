@@ -28,11 +28,15 @@ const BookingShow = (props) => {
                 })
             })
     }
-    let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
 
-    if (booking === none)
-        return 
-            "Nothing scheduled yet"
+    let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
+    let start_day = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
+
+
+
+    // if(booking.length < 1){
+    //     return "No Bookings scheduled yet"
+    // }
 
     return (
 
@@ -48,34 +52,22 @@ const BookingShow = (props) => {
                     <p>{booking.start_day} - {booking.end_day}</p>
                     <small>Time: </small>
                     <p>{booking.start_time} - {booking.end_time}</p>
-                    {/* <img
-                        style={{ width: 200 }}
-                        src={booking.image}
-                        alt={""}
-                    /> */}
                 </Card.Body>
                 <Card.Footer>
-                    {
-                        user && user.email === booking.ownerEmail
-                            ?
-                            <>
-                                <Button
-                                    className='m-2'
-                                    variant='success'
-                                    onClick={() => setEditModalShow(true)}
-                                >
-                                    Edit
-                                </Button>
-                                <Button
-                                    variant="danger"
-                                    onClick={() => handleDeleteBooking()}
-                                >
-                                    Delete
-                                </Button>
-                            </>
-                            :
-                            <></>
-                    }
+                    <Button
+                        className='m-2'
+                        variant='success'
+                        onClick={() => setEditModalShow(true)}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={() => handleDeleteBooking()}
+                    >
+                        Delete
+                    </Button>
+                    
                     <div className='float-end'>{date}</div>
                 </Card.Footer>
             </Card>
@@ -94,3 +86,19 @@ const BookingShow = (props) => {
 
 export default BookingShow
 
+
+// {/* <Container>
+//     <h3 className='my-5'>All of {restaurant.name}'s reviews:</h3>
+//     {
+//         restaurant.reviews.length > 0
+//             ?
+//             <>
+//                 {reviewCards}
+//             </>
+//             :
+//             <>
+//                 <h5 className='text-center'>This restaurant does not have any reviews yet. Be the first to review!</h5>
+//             </>
+//     }
+
+// </Container> */}
