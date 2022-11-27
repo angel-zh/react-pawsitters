@@ -32,14 +32,12 @@ const BookingShow = (props) => {
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
     let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
     let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
-    let timeStart = moment(booking.start_time).format('h:mm:ss a')
-    let timeEnd = moment(booking.end_time).format('h:mm:ss a')
+    let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
+    let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
 
-
-
-    // if(booking.length < 1){
-    //     return "No Bookings scheduled yet"
-    // }
+    if(booking.length < 1){
+        return "No Bookings scheduled yet"
+    }
 
     return (
 
@@ -59,20 +57,20 @@ const BookingShow = (props) => {
                 <Card.Footer>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#aa501a', outline: 'none !important' }}
+                        style={{ backgroundColor: '#E6aa501a', borderColor: '#aa501a' }}
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#a32131', outline: 'none !important' }}
+                        style={{ backgroundColor: '#E6a32131', borderColor: '#a32131' }}
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete
                     </Button>
                     
-                    <div className='float-end'>{date}</div>
+                    <div className='float-end'>Booked: <br/>{date}</div>
                 </Card.Footer>
             </Card>
             <BookingEdit
