@@ -21,6 +21,7 @@ import BookingCreate from './components/booking/BookingCreate'
 import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
+import Dashboard from './components/shared/Dashboard'
 // import ReviewCreate from './components/reviews/ReviewCreate'
 
 const App = () => {
@@ -148,6 +149,14 @@ const App = () => {
 						element={
 						<RequireAuth user={user}>
 							<ReviewIndex msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/>
+				<Route
+						path='/dashboard'
+						element={
+						<RequireAuth user={user}>
+							<Dashboard msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
 				/>

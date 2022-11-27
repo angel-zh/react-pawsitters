@@ -14,6 +14,7 @@ const SideNav = ({ user }) => {
 
     const authenticatedOptions = (
         <>
+            <MenuItem routerLink={<Link to='dashboard' />}> Dashboard </MenuItem>
             <MenuItem routerLink={<Link to='petowners' />}> Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='petowners/create' />}> Create Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='bookings' />}> 
