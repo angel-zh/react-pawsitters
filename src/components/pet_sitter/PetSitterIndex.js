@@ -4,6 +4,8 @@ import { Card, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { petSitterIndex } from '../../api/petSitter'
 import PetSitterFilter from './PetSitterFilter'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons'
 
 const linkStyle = {
     color: 'black',
@@ -68,10 +70,10 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     return (
         <div className='container-md'>
-            <h3 className='text-center my-2'>Find the Perfect Sitter for Your Pet</h3>
+            <h3 className='text-center my-2 page-heading'>Find the Perfect Sitter for Your Pet</h3>
             <div className='d-flex justify-content-around'>
-                <Link to='create'>
-                    Register to be a Pet Sitter
+                <Link className='link' to='create'>
+                <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Register to be a Pet Sitter
                 </Link>
                 <div style={{ width: '300px' }}>
                 <PetSitterFilter
