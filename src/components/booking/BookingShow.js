@@ -30,7 +30,10 @@ const BookingShow = (props) => {
     }
 
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
-    let start_day = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
+    let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
+    let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
+    let timeStart = moment(booking.start_time).format('h:mm:ss a')
+    let timeEnd = moment(booking.end_time).format('h:mm:ss a')
 
 
 
@@ -41,28 +44,29 @@ const BookingShow = (props) => {
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#f2f6ec' }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee' }}>
+            <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
+                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                     <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
                 </Card.Header>
                 <Card.Body>
                     <small>Note: </small>
                     <p>{booking.note}</p>
                     <small>Days: </small>
-                    <p>{booking.start_day} - {booking.end_day}</p>
+                    <p>{dateStart} - {dateEnd}</p>
                     <small>Time: </small>
-                    <p>{booking.start_time} - {booking.end_time}</p>
+                    <p>{timeStart} - {timeEnd}</p>
                 </Card.Body>
                 <Card.Footer>
                     <Button
                         className='m-2'
-                        variant='success'
+                        style={{ backgroundColor: '#aa501a', outline: 'none !important' }}
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
-                        variant="danger"
+                        className='m-2'
+                        style={{ backgroundColor: '#a32131', outline: 'none !important' }}
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete

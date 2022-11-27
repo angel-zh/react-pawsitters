@@ -56,7 +56,7 @@ const BookingEdit = (props) => {
                     booking={booking}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    triggerRefresh={() => setPicture(prev => !prev)}
+                    // triggerRefresh={() => setPicture(prev => !prev)}
                     heading="Edit booking"
                 />
             </Modal.Body>
