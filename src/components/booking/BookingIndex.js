@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react' 
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 import { bookingIndex } from '../../api/booking'
 
@@ -8,6 +8,11 @@ const cardContainerLayout = {
     flexFlow: 'row wrap',
     justifyContent: 'center'
 }
+
+// const linkStyle = {
+//     color: 'black',
+//     textDecoration: 'none'
+// }
 
 const BookingIndex = ({ user, msgAlert }) => {
 
@@ -31,7 +36,7 @@ const BookingIndex = ({ user, msgAlert }) => {
 
     const allBookingsJSX = allBookings.map(booking => (
         
-        <Card key={ booking.id } style={{ width: '25rem', margin: 5, backgroundColor: '#56596e' }}>      
+        <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}>      
             <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
                 <small>Pet Owner: {booking.pet_owner}</small><br/>
@@ -39,24 +44,33 @@ const BookingIndex = ({ user, msgAlert }) => {
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-
-                    <smal>
+                    <small>
                         Note: {booking.note}
-                    </smal><br/>
-                    <small>
-                        Start Date: {booking.start_day}
                     </small><br/>
                     <small>
-                        End Date: {booking.end_day}
+                        {booking.start_day} - {booking.end_day}
                     </small><br/>
                     <small>
-                        Start Time: {booking.start_time}
-                    </small><br/>
-                    <small>
-                        End Time: {booking.end_time}
+                        {booking.start_time} - {booking.end_time}
                     </small><br/>
                 </Card.Text>
             </Card.Body>
+            {/* This should be showing up via show page, but is not??? */}
+            <Card.Footer>
+                <Button
+                    className='m-2'
+                    variant='success'
+                >
+                    Edit
+                </Button>
+                <Button
+                    className='m-2'
+                    variant='success'
+                >
+                    Delete
+                </Button>
+
+            </Card.Footer>
         </Card>
     ))    
 

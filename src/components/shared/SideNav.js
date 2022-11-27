@@ -2,7 +2,7 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarDays } from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faUserClock } from '@fortawesome/free-solid-svg-icons'
 
 
 const linkStyle = {
@@ -16,8 +16,8 @@ const SideNav = ({ user }) => {
         <>
             <MenuItem routerLink={<Link to='petowners' />}> Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='petowners/create' />}> Create Pet Owner </MenuItem>
-            <MenuItem routerLink={<Link to='bookings' />}>
-                <FontAwesomeIcon icon={faCalendarDays} size='xl' className='icon' /> My Bookings
+            <MenuItem routerLink={<Link to='bookings' />}> 
+                <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings 
             </MenuItem>
             <MenuItem routerLink={<Link to='reviews' />}> My Reviews </MenuItem>
             <MenuItem routerLink={<Link to='change-password' />}>
