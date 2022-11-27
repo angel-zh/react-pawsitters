@@ -62,9 +62,17 @@ body {
   width: 78%;
 }
 .profile-pic {
-  width: 120px;
+  width: 125px;
   height: auto;
   border-radius: 50%;
-
+  margin-right: 50px;
 }
 
+::-webkit-scrollbar {
+  background-color: #292c41;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8baafa;
+  border-radius: 2px; 
+}
