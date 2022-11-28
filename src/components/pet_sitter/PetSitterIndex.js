@@ -47,7 +47,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Link to={`/petsitters/${petSitter.owner}`} style={linkStyle}>
                 <Card key={petSitter.Owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
                     <Card.Body>
-                        <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
+                        <Image src='https://i.imgur.com/2y0Ysu1.jpg' alt='profile pic' className='profile-pic float-start border'></Image>
                         <Card.Text>
                             <h3 className='mb-2'>{petSitter.first_name} {petSitter.last_name}</h3>
                             <div className='row'>
@@ -76,7 +76,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     return (
         <div className='container-md'>
-            <h3 className='text-center my-2 page-heading'>Find the Perfect Sitter for Your Pet</h3>
+            <h3 className='text-center my-3 page-heading'>Find the Perfect Sitter for Your Pet</h3>
             <div className='d-flex justify-content-around'>
                 {/* {
                     user && { profileExists } ?
