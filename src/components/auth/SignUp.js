@@ -67,7 +67,7 @@ const SignUp = (props) => {
                             type='email'
                             name='email'
                             value={email}
-                            placeholder='Enter email'
+                            placeholder='Enter e-mail'
                             onChange={e => setEmail(e.target.value)}
                         />
                     </Form.Group>
@@ -78,7 +78,7 @@ const SignUp = (props) => {
                             name='password'
                             value={password}
                             type='password'
-                            placeholder='Password'
+                            placeholder='Password must be at least 5 characters long'
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
@@ -93,7 +93,7 @@ const SignUp = (props) => {
                             onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
+                    <Button className='mt-2' variant='outline-info' type='submit'>
                         Submit
                     </Button>
                 </Form>
