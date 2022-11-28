@@ -2,8 +2,6 @@ import React, { useState }from 'react'
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
 
-// petOwner doesn't need to be included here bc they are the user??
-
 const BookingCreate = (props) => {
     const {
         user, petSitter, msgAlert, triggerRefresh
@@ -31,7 +29,7 @@ const BookingCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(petSitter, 'petSitter')
+        // console.log(petSitter, 'petSitter')
         let updatedBooking = booking
         updatedBooking.pet_sitter = petSitter.owner
         updatedBooking.pet_owner = user.id
@@ -44,7 +42,7 @@ const BookingCreate = (props) => {
             start_time: '',
             end_time: ''
         })
-        console.log('new booking', booking)
+        // console.log('new booking', booking)
         
         bookingCreate(user, petSitter.owner, updatedBooking)
             .then(() => {

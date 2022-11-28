@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { bookingDelete } from '../../api/booking'
-import BookingEdit from './BookingEdit'
+import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, pet_owner, pet_sitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petOwner, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
 
     const handleDeleteBooking = () => {
-        bookingDelete(user, pet_owner._id, booking.id, pet_sitter._id)
+        bookingDelete(user, booking.id, petSitter.owner)
 
             .then(() => {
                 msgAlert({
@@ -73,7 +73,7 @@ const BookingShow = (props) => {
                     <div className='float-end'>Booked: <br/>{date}</div>
                 </Card.Footer>
             </Card>
-            <BookingEdit
+            <BookingUpdate
                 user={user}
                 booking={booking}
                 msgAlert={msgAlert}

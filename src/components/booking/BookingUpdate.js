@@ -5,7 +5,7 @@ import { bookingUpdate } from '../../api/booking'
 import messages from '../shared/AutoDismissAlert/messages'
 
 
-const BookingEdit = (props) => {
+const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
         msgAlert, triggerRefresh, petSitter
@@ -29,7 +29,8 @@ const BookingEdit = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(petSitter, 'petSitter')
-        bookingUpdate(user, petSitter.owner.id, booking)
+
+        bookingUpdate(user, petSitter.owner, booking)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -49,14 +50,13 @@ const BookingEdit = (props) => {
     }
 
     return (
-        <Modal size='lg' show={show} onHide={handleClose} >
-            <Modal.Header closeButton className='head-modal'/>
+        <Modal show={show} onHide={handleClose} >
+            <Modal.Header className='head-modal' closeButton/>
             <Modal.Body className='body-modal'>
                 <BookingForm 
                     booking={booking}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    // triggerRefresh={() => setPicture(prev => !prev)}
                     heading="Edit booking"
                 />
             </Modal.Body>
@@ -64,4 +64,4 @@ const BookingEdit = (props) => {
     )
 }
 
-export default BookingEdit
+export default BookingUpdate

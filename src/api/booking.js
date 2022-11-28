@@ -30,11 +30,11 @@ export const bookingIndex = (user) => {
 
 // UPDATE a booking - token Required
 export const bookingUpdate = (user, petSitter, updatedBooking) => {
-	const ownerId = { owner: user._id }
+	const ownerId = { owner: user.id }
 	const booking = {...updatedBooking, ...ownerId}
 
 	return axios({
-		url: `${apiUrl}/bookings/${petSitter.owner}/${booking.id}/`,
+		url: `${apiUrl}/bookings/`,
 		method: 'PATCH',
 		headers: {
 			Authorization: `Token ${user.token}`,
