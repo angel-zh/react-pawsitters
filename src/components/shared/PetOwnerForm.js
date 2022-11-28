@@ -6,7 +6,7 @@ const PetOwnerForm = (props) => {
     const { petOwner, handleChange, heading, handleSubmit, handleSelect } = props
     const animatedComponents = makeAnimated() 
     return (
-        <Container className= "justify-content-center rest-form" style={{ width: '48em', padding: '2rem' }} >
+        <Container className= "justify-content-center rest-form" style={{ width: '48em', padding: '2rem', backgroundColor: '#56596e' }} >
             <h3 className='mt-3'>{heading}</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Label>Pet Owner's First Name:</Form.Label>
