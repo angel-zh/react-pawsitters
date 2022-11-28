@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid'
 
 // import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
-import Header from './components/shared/Header'
+// import Header from './components/shared/Header'
 import RequireAuth from './components/shared/RequireAuth'
 import Home from './components/Home'
 import SignUp from './components/auth/SignUp'
@@ -21,6 +21,7 @@ import BookingCreate from './components/booking/BookingCreate'
 import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
+import Dashboard from './components/shared/Dashboard'
 // import ReviewCreate from './components/reviews/ReviewCreate'
 
 const App = () => {
@@ -93,9 +94,9 @@ const App = () => {
 						<>
 							<PetSitterShow msgAlert={msgAlert} user={user} />
 
-							<RequireAuth user={user}>
+							{/* <RequireAuth user={user}> */}
 								<BookingCreate msgAlert={msgAlert} user={user} />
-							</RequireAuth>
+							{/* </RequireAuth> */}
 						</>
 						}
 				/>
@@ -148,6 +149,14 @@ const App = () => {
 						element={
 						<RequireAuth user={user}>
 							<ReviewIndex msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/>
+				<Route
+						path='/dashboard'
+						element={
+						<RequireAuth user={user}>
+							<Dashboard msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
 				/>

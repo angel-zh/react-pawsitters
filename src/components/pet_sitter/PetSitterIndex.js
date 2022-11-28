@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { petSitterIndex } from '../../api/petSitter'
 import PetSitterFilter from './PetSitterFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed } from '@fortawesome/free-solid-svg-icons'
+import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 
 const linkStyle = {
     color: 'black',
@@ -15,12 +15,17 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     const [allPetSitters, setAllPetSitters] = useState([])
     const [filterParam, setFilterParam] = useState('all')
+    // const [profileExists, setProfileExists] = useState(false)
+
 
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
                 console.log(res.data)
                 setAllPetSitters(res.data.pet_sitters)
+                // if (user) {
+                //    setProfileExists(res.data.pet_sitters.includes(res.data.pet_sitters.owner === user.id)) 
+                // }   
             })
             .catch((error) => {
                 msgAlert({
@@ -45,21 +50,21 @@ const PetSitterIndex = ({ user, msgAlert }) => {
                         <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
                         <Card.Text>
                             <h3 className='mb-2'>{petSitter.first_name} {petSitter.last_name}</h3>
-
-                            {
-                                petSitter.dog_walking
-                                    ?
-                                    <p>Dog Walker</p>
-                                    :
-                                    null
-                            }
-                            {
-                                petSitter.pet_sitting
-                                    ?
-                                    <p>Pet Sitter</p>
-                                    :
-                                    null
-                            }
+                            <div className='row'>
+                                <div className='col'>
+                                    {petSitter.pet_sitting ? <p>Pet Sitter</p> : null}
+                                </div>
+                                <div className='col'>
+                                    {petSitter.dog_walking ? <p>Dog Walker </p> : null}
+                                </div>
+                                <div className='d-flex'>
+                                    {petSitter.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
+                                    {petSitter.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
+                                    {petSitter.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
+                                    {petSitter.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
+                                    {petSitter.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                                </div>
+                            </div>
                         </Card.Text>
                     </Card.Body>
                 </Card>
@@ -68,18 +73,24 @@ const PetSitterIndex = ({ user, msgAlert }) => {
     }
 
 
+
     return (
         <div className='container-md'>
             <h3 className='text-center my-2 page-heading'>Find the Perfect Sitter for Your Pet</h3>
             <div className='d-flex justify-content-around'>
+                {/* {
+                    user && { profileExists } ?
+                        null
+                        : */}
                 <Link className='link' to='create'>
-                <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Register to be a Pet Sitter
+                    <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Become a Pet Sitter
                 </Link>
+                {/* } */}
                 <div style={{ width: '300px' }}>
-                <PetSitterFilter
-                    filterParam={filterParam}
-                    setFilterParam={setFilterParam}
-                />
+                    <PetSitterFilter
+                        filterParam={filterParam}
+                        setFilterParam={setFilterParam}
+                    />
                 </div>
             </div>
             <div className='container-md mt-2 pet-sitter-index'>

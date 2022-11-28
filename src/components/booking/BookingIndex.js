@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 import { bookingIndex } from '../../api/booking'
+import BookingShow from './BookingShow'
 
 const cardContainerLayout = {
     display: 'flex',
@@ -33,11 +34,18 @@ const BookingIndex = ({ user, msgAlert }) => {
                 })
             })
     }, [])
+    
 
     const allBookingsJSX = allBookings.map(booking => (
         
-        <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}>      
-            <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
+        <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}> 
+            <BookingShow 
+                user={user}
+                booking={booking}
+                msgAlert={msgAlert}
+                
+            />     
+            {/* <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
                 <small>Pet Owner: {booking.pet_owner}</small><br/>
                 <small>Pawsitter: {booking.pet_sitter}</small><br/>
@@ -55,22 +63,23 @@ const BookingIndex = ({ user, msgAlert }) => {
                     </small><br/>
                 </Card.Text>
             </Card.Body>
-            {/* This should be showing up via show page, but is not??? */}
             <Card.Footer>
                 <Button
                     className='m-2'
-                    variant='success'
+                    style={{ backgroundColor: '#aa501a', outline: 'none !important' }}
+                    onClick={() => setEditModalShow(true)}
                 >
                     Edit
                 </Button>
                 <Button
                     className='m-2'
-                    variant='success'
+                    style={{ backgroundColor: '#a32131', outline: 'none !important' }}
+                    onClick={() => handleDeleteBooking()}
                 >
                     Delete
                 </Button>
 
-            </Card.Footer>
+            </Card.Footer> */}
         </Card>
     ))    
 
