@@ -49,9 +49,9 @@ const BookingEdit = (props) => {
     }
 
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton/>
-            <Modal.Body>
+        <Modal size='lg' show={show} onHide={handleClose} >
+            <Modal.Header closeButton className='head-modal'/>
+            <Modal.Body className='body-modal'>
                 <BookingForm 
                     booking={booking}
                     handleChange={handleChange}
