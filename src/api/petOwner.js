@@ -2,13 +2,13 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a pet owner - token require
-export const petOwnerCreate = (data, user) => {
+export const petOwnerCreate = (data, user ) => {
 	return axios({
 		method: 'POST',
 		url: apiUrl + '/petowners/',
-		// data: {
-		// 	pet_owner: data,
-		// },
+		data: {
+			pet_owner: data,
+		},
 		headers: {
 			Authorization: `Token ${user.token}`,
 		},
