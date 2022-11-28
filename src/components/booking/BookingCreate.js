@@ -45,7 +45,6 @@ const BookingCreate = (props) => {
             start_time: '',
             end_time: ''
         })
-
         
         bookingCreate(user, petSitter.owner, updatedBooking)
             .then(() => {
@@ -56,10 +55,10 @@ const BookingCreate = (props) => {
                 })
             })
             .then(() => triggerRefresh())
-            .catch(() => {
+            .catch((error) => {
                 msgAlert({
                     heading: 'Oh No!',
-                    message: 'Something went wrong! Please try again',
+                    message: 'Something went wrong! Please try again' + error,
                     variant: 'danger'
                 })
             })

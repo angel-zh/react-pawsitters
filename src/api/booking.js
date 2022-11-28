@@ -9,9 +9,9 @@ export const bookingCreate = (user, petSitter, newBooking) => {
 	return axios({
 		url: `${apiUrl}/bookings/`,
 		method: 'POST',
-		// headers: {
-		// 	Authorization: `Token ${user.token}`,
-		// },
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
 		data: { booking: booking }
 	})
 }
