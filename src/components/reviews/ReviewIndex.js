@@ -10,7 +10,7 @@ const cardContainerLayout = {
 }
 
 
-const ReviewIndex = ({ user, msgAlert, pet_sitter, }) => {
+const ReviewIndex = ({ user, msgAlert, pet_sitter, review }) => {
 
     const [allReviews, setAllReviews] = useState([])
 
@@ -29,7 +29,8 @@ const ReviewIndex = ({ user, msgAlert, pet_sitter, }) => {
         })
     }, [])
 
-    const allReviewsJSX = allReviews.map(review => (
+    const usersReviews = allReviews.filter(review => review.owner === user.id)
+    const reviewCards = usersReviews.map(review => (
         
         <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
             <Card.Img variant="top" style={{height: '10rem'}}src="https://i.imgur.com/dujfkLL.jpg" />
@@ -54,7 +55,7 @@ const ReviewIndex = ({ user, msgAlert, pet_sitter, }) => {
     return (
         <>
             <h1 > All of my reviews:</h1>    
-            <ul>{allReviewsJSX}</ul>
+            <ul>{reviewCards}</ul>
         </>
     )
 }

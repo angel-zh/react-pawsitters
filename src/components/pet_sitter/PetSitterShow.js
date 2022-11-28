@@ -4,7 +4,7 @@ import { petSitterShow, petSitterDelete } from '../../api/petSitter'
 import { Container, Button, Image } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
-// import ReviewShow from '../reviews/ReviewShow'
+import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,6 +18,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
+    const [allReviews, setAllReviews] = useState([])
     // scroll to top on page load
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -78,6 +79,26 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
+
+  
+    let reviewCards
+    if (petSitter) {
+    
+    reviewCards = allReviews.map(review => (
+                <div>
+                    <ReviewShow
+                        key={review.id}
+                        review={review}
+                        petSitter={petSitter}
+                        user={user}
+                        msgAlert={msgAlert}
+                        triggerRefresh={() => setUpdated(prev => !prev)}
+                    />
+                </div>
+            ))
+        }    
+    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
+
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
     }
@@ -100,7 +121,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
     return (
         <div className='pet-sitter-show container-md text-center d-flex'>
-            <div className='bio-container'>
+            <div className='bio-container container-fluid'>
                 <div>
                     <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
                     <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
@@ -227,6 +248,21 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
                 }
+                <Container>
+                    <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
+                    {
+                        petSitter.review
+                            ?
+                            <>
+                                {reviewCards}
+                            </>
+                            :
+                            <>
+                                <h5 className='text-center'>This restaurant does not have any reviews yet. Be the first to review!</h5>
+                            </>
+                    }
+
+                </Container>
             </div>
 
             {
