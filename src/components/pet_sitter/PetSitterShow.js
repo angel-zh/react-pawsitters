@@ -219,14 +219,14 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     ?
                     <>
                         {/* This is one way to show the Booking request */}
-                        {/* <Container style={{ width: '40rem' }}>
+                        <Container style={{ width: '40rem' }}>
                             <BookingCreate
                                 user={user}
                                 petSitter={petSitter}
                                 msgAlert={msgAlert}
                                 triggerRefresh={() => setUpdated(prev => !prev)}
                             />
-                        </Container> */}
+                        </Container>
                         <Container style={{ width: '40rem' }}>
                             <ReviewCreate
                                 user={user}

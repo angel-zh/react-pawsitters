@@ -7,8 +7,11 @@ export const bookingCreate = (user, petSitter, newBooking) => {
 	const booking = {...newBooking, ...ownerId}
 
 	return axios({
-		url: `${apiUrl}/bookings/${petSitter.owner}/`,
+		url: `${apiUrl}/bookings/`,
 		method: 'POST',
+		// headers: {
+		// 	Authorization: `Token ${user.token}`,
+		// },
 		data: { booking: booking }
 	})
 }

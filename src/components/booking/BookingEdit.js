@@ -8,7 +8,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingEdit = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, triggerRefresh, pet_owner
+        msgAlert, triggerRefresh, petSitter
     } = props
 
     const [booking, setBooking] = useState(props.booking)
@@ -28,8 +28,8 @@ const BookingEdit = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        bookingUpdate(user, pet_owner._id, booking)
+        console.log(petSitter, 'petSitter')
+        bookingUpdate(user, petSitter.owner.id, booking)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -49,9 +49,9 @@ const BookingEdit = (props) => {
     }
 
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton/>
-            <Modal.Body>
+        <Modal size='lg' show={show} onHide={handleClose} >
+            <Modal.Header closeButton className='head-modal'/>
+            <Modal.Body className='body-modal'>
                 <BookingForm 
                     booking={booking}
                     handleChange={handleChange}

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react' 
 import { useParams, useNavigate } from 'react-router-dom'
 import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
-import { Container, Button } from 'react-bootstrap'
+import { Image, Card, Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
 import ReviewCreate from '../reviews/ReviewCreate'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 const PetOwnerShow = ({ user, msgAlert }) => {
     const [petOwner, setPetOwner] = useState({
         first_name: '',
@@ -78,10 +79,29 @@ const PetOwnerShow = ({ user, msgAlert }) => {
             })
         })
 }
-    
-    if (deleted) navigate('/')
 
+    if (deleted) navigate('/')
+    // if (!petOwner) navigate ('/petowners/create/')
     return (
+        <>
+        <div>
+        <Card key={petOwner.owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
+            <Card.Body>
+                <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
+                <Card.Text>
+                    <h3 className='mb-2'>{petOwner.first_name} {petOwner.last_name}</h3>
+                        <div className='d-flex'>
+                            {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
+                            {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
+                            {petOwner.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
+                            {petOwner.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
+                            {petOwner.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                        </div>
+                    
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </div>
         <div className='container-md text-center'>
              <i>Pet Owner Profile Page <br /> </i>
              <h2>{petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br /> Pet's Name: {petOwner.pet_name}</h2>
@@ -117,32 +137,19 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 handleClose={() => setEditModalShow(false)}
             />
          {
-                !user
+                petOwner
                     ?
                     <>
-                        <h5>Please Create your Pet Owner Profile!</h5>
-                        {/* This is one way to show the Booking request */}
-                        {/* <Container style={{ width: '40rem' }}>
-                            <BookingCreate
-                                user={user}
-                                petSitter={petSitter}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                            />
-                        </Container> */}
-                        {/* <Container style={{ width: '40rem' }}>
-                            <ReviewCreate
-                                user={user}
-                                petSitter={petSitter}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                            />
-                        </Container> */}
+                        <h5></h5>
+                 
                     </>
                     :
                     <h5 className='text-center'><i></i></h5>
+                    
             }
+           
      </div>
+     </>
     )
 }
 
