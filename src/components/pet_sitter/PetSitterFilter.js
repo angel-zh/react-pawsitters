@@ -23,7 +23,6 @@ const PetSitterFilter = ({ msgAlert, filterParam, setFilterParam }) => {
             classNamePrefix='select'
             closeMenuOnSelect={true}
             isSearchable={false}
-            isClearable={true}
             options={filterOptions}
             onChange={(e) => setFilterParam(e.value)}
         />
