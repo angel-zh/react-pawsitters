@@ -5,7 +5,7 @@ import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petOwner, petSitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
 

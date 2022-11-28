@@ -61,7 +61,7 @@ const BookingCreate = (props) => {
                 })
             })
     }
-    console.log('booking status', booking)
+
     return (
         <BookingForm
             booking={booking}
