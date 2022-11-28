@@ -79,7 +79,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         })
 }
     
-    if (deleted) navigate('/petsitters/')
+    if (deleted) navigate('/')
 
     return (
         <div className='container-md text-center'>
