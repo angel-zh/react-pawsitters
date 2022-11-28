@@ -2,16 +2,16 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a booking - token required
-export const bookingCreate = (user, petSitter, newBooking) => {
+export const bookingCreate = (user, petsitterOwner, petownerId, bookingCreate) => {
 	const ownerId = { owner: user._id }
-	const booking = {...newBooking, ...ownerId}
+	const booking = {...bookingCreate, ...ownerId, ...petsitterOwner, ...petownerId}
 
 	return axios({
 		url: `${apiUrl}/bookings/`,
 		method: 'POST',
-		// headers: {
-		// 	Authorization: `Token ${user.token}`,
-		// },
+		headers: {
+			Authorization: `Token ${user.token}`,
+		},
 		data: { booking: booking }
 	})
 }
