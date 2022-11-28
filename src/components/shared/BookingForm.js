@@ -6,14 +6,16 @@ const BookingForm = (props) => {
 
     return (
 
-        <Container className='justify-content-center' style={{ width: '48em', padding: '2rem', backgroundColor: '#56596e' }} >
+        <Container className='justify-content-center booking-form'>
             <h3 className='mt-3'>{heading}</h3> 
             <Form onSubmit={handleSubmit}>
 
                 <Form.Label>Request Note:</Form.Label>
                 <Form.Control
                     placeholder='Please tell us the reason for your request.'
-                    type='text'
+                    type='textbox'
+                    as="textarea"
+                    rows={3}
                     name='note'
                     id='note'
                     value={booking.note}
@@ -70,7 +72,7 @@ const BookingForm = (props) => {
                     </Form.Group>
                 </Row>
 
-                <Button className='btn btn-light text-light mt-3' type="submit" style={{ backgroundColor: '#ba7a5f' }}>Submit</Button>
+                <Button variant='outline-info' className='mt-2' type="submit">Submit</Button>
 
             </Form>
         </Container>
