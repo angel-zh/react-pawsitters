@@ -45,9 +45,9 @@ const ReviewShow = (props) => {
                         style={{ fontSize: 15 }}
                     />
                 </Card.Header>
-                <Card.Body className = 'card-text'>
+                <Card.Body className = 'card-text' style= {{color: '#3f4257'}}>
                     <small>Comments: </small>
-                    <p>{review.comment}</p>
+                    <p >{review.comment}</p>
                     <img
                         style={{ width: 200 }}
                         src={review.image}

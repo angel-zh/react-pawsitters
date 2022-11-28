@@ -7,9 +7,10 @@ export const reviewCreate= (user, petsitterOwner, petownerId, reviewCreate) => {
     // console.log('petsitter', petsitterOwner)
 	const ownerId = { owner: user.id }
 	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId}
-
+	// does the s in petsiiter have to be capitalized?
 	return axios({
-		url: `${apiUrl}/reviews/${petsitterOwner}/`,
+		url: `${apiUrl}/reviews/`,
+		// url: `${apiUrl}/reviews/${petsitterOwner}/`,
 		method: 'POST',
         headers: {
 			Authorization: `Token ${user.token}`,

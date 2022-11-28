@@ -12,11 +12,13 @@ const ReviewCreate = (props) => {
     
     
     const [review, setReview] = useState({
+        owner: '',
         comment: '',
         rating: '',
         image: '',
         pet_sitter: '',
         pet_owner: '',
+        owner_email: '',
         
         
     })
@@ -53,18 +55,19 @@ const ReviewCreate = (props) => {
         console.log('this is petsitter', petSitter)
         e.preventDefault()
         let updatedReview = review
-        updatedReview.ownerEmail = user.email
-        let anotherUpdate = review
-        anotherUpdate.pet_sitter = petSitter.owner
-        let reviewUpdate = review 
-        reviewUpdate.pet_owner = user.id
+        updatedReview.owner_email = user.email
+        updatedReview.pet_sitter = petSitter.owner
+        updatedReview.pet_owner = user.id
+        updatedReview.owner = user.id
         
         setReview({
+            owner: '',
             comment: '',
             rating: '',
             image: '',
             pet_sitter: '',
             pet_owner: '',
+            owner_email: '',
            
         })
         console.log('create a review', review)
