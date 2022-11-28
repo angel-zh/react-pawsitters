@@ -177,7 +177,7 @@ const PetSitterForm = (props) => {
                     as="textarea"
                     rows={3}
                 />
-                <Button className='btn btn-success mt-2' type="submit">Submit</Button>
+                <Button variant='outline-info' className='mt-3' type="submit">Submit</Button>
             </Form>
         </Container>
     )

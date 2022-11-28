@@ -100,7 +100,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
     return (
         <div className='pet-sitter-show container-md text-center d-flex'>
-            <div className='bio-container'>
+            <div className='bio-container container-fluid'>
                 <div>
                     <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
                     <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>

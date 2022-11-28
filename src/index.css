@@ -56,9 +56,9 @@ body {
 .pet-sitter-form, .pet-sitter-index {
   border: 2px solid #757d90;
   padding: 20px;
-  border-radius: 3px;
+  border-radius: 5px;
   overflow-y: auto;
-  height: 82vh;
+  height: 90vh;
   width: 78%;
   background-color: #56596e;
 }
@@ -147,3 +147,15 @@ body {
   height: 300px;
   margin: 20px;
 }
+
+.booking-form {
+  height: 100vh;
+  width: 25vw;
+  background-color: #56596e;
+  padding-top: 35%;
+  display: flex;
+  flex-flow: wrap;
+  border-bottom-left-radius: 13px ;
+  border-bottom-right-radius: 13px ;
+}
+
