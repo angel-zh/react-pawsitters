@@ -2,7 +2,7 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faUserClock } from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faUserClock, faTableColumns } from '@fortawesome/free-solid-svg-icons'
 
 
 const linkStyle = {
@@ -14,11 +14,13 @@ const SideNav = ({ user }) => {
 
     const authenticatedOptions = (
         <>
-            <MenuItem routerLink={<Link to='dashboard' />}> Dashboard </MenuItem>
+            <MenuItem routerLink={<Link to='dashboard' />}>
+                <FontAwesomeIcon icon={faTableColumns} size='xl' className='icon' />My Dashboard
+            </MenuItem>
             <MenuItem routerLink={<Link to='petowners' />}> Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='petowners/create' />}> Create Pet Owner </MenuItem>
-            <MenuItem routerLink={<Link to='bookings' />}> 
-                <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings 
+            <MenuItem routerLink={<Link to='bookings' />}>
+                <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings
             </MenuItem>
             <MenuItem routerLink={<Link to='reviews' />}> My Reviews </MenuItem>
             <div className='mt-5'>
@@ -45,7 +47,7 @@ const SideNav = ({ user }) => {
     const alwaysOptions = (
         <>
             <MenuItem routerLink={<Link to='petsitters' />}>
-                <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Pet Sitters
+                <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Find Pet Sitters
             </MenuItem>
         </>
     )
@@ -79,7 +81,7 @@ const SideNav = ({ user }) => {
                 <Menu>
                     <div className='px-2'>
                         {user && (
-                            <span className='navbar-text mr-2'>Welcome, {user.email}</span>
+                            <span className='navbar-text mr-2'><i>Welcome, {user.email}</i></span>
                         )}
                     </div>
                     {alwaysOptions}
