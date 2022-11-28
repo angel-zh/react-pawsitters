@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { petSitterShow, petSitterDelete } from '../../api/petSitter'
-import { Container, Button  } from 'react-bootstrap'
+import { Container, Button, Image } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
 // import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
+import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
+
 
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
@@ -18,6 +22,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     }, []);
+
 
     useEffect(() => {
         petSitterShow(user, id)
@@ -71,29 +76,47 @@ const PetSitterShow = ({ user, msgAlert }) => {
     //     }
     // }
 
+    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
+
+    const formatString = string => {
+        return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
+    }
+
+    const formatDate = string => {
+        return string.slice(0, -3)
+    }
+
     if (deleted) navigate('/petsitters')
 
     if (!petSitter) {
         return (
             <>
-                Loading
+                Oh No! There is not yet a profile created for this Pet Sitter.
             </>
         )
     }
 
 
+
     return (
-        <div className='container-md text-center'>
-            <i>Pet Sitter Show Page <br /> -Under Construction-</i>
-            <h2>{petSitter.first_name} {petSitter.last_name}</h2>
-            <h3>Services Provided: </h3>
-            {
-                petSitter.dog_walking
-                    ?
-                    <h5>Dog walking</h5>
-                    :
-                    null
-            }
+        <div className='pet-sitter-show container-md text-center'>
+            <div>
+                <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
+                <p>Has been a Paw Sitter since <i>{moment(petSitter.createdAt).format("MMM Do YY")} ({moment(petSitter.createdAt).startOf('day').fromNow()})</i></p>
+            </div>
+
+            <div>
+                {
+                    petSitter.dog_walking
+                        ?
+                        <h5>Dog walking </h5>
+                        :
+                        null
+                }
+                <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog</p>
+            </div>
+
             {
                 petSitter.pet_sitting
                     ?
@@ -101,6 +124,65 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     null
             }
+            <div className='d-flex justify-content-around'>
+                {
+                    petSitter.dog
+                        ?
+                        <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog </p>
+                        :
+                        null
+                }
+                {
+                    petSitter.cat
+                        ?
+                        <p><FontAwesomeIcon icon={faCat} size='md' className='icon' />Cat </p>
+                        :
+                        null
+                }
+                {
+                    petSitter.small_animal
+                        ?
+                        <p><FontAwesomeIcon icon={faFish} size='md' className='icon' />Small Animal </p>
+                        :
+                        null
+                }
+                {
+                    petSitter.small_animal
+                        ?
+                        <p><FontAwesomeIcon icon={faWorm} size='md' className='icon' />Reptile</p>
+                        :
+                        null
+                }
+                {
+                    petSitter.small_animal
+                        ?
+                        <p><FontAwesomeIcon icon={faDove} size='md' className='icon' />Bird </p>
+                        :
+                        null
+                }
+            </div>
+            <div>
+                <h5>Rate</h5>
+                <p>$ {petSitter.rate} / hour</p>
+            </div>
+            <div>
+                <h5>Availability</h5>
+                {formatString(petSitter.availability)} <br />
+                <p><i>Time</i>: {formatDate(petSitter.from_time)} - {formatDate(petSitter.to_time)}</p>
+            </div>
+            <div className='mb-4'>
+            <h5>Biography / Additional Info</h5>
+                {
+                    petSitter.medicine
+                        ?
+                        <p><FontAwesomeIcon icon={faPrescriptionBottleMedical} size='lg' className='icon' />I'm willing to give pet medicine if instructed by owner. </p>
+                        :
+                        null
+                }
+                <p>{petSitter.bio}</p>
+
+            </div>
+
 
             <Container className='mb-5'>
                 {
@@ -108,13 +190,13 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         ?
                         <>
                             <Button onClick={() => setEditModalShow(true)} className="m-2"
-                                variant="success"
+                                variant="info"
                             >
                                 Edit Profile
                             </Button>
                             <Button onClick={() => handleDeletePetSitter()}
                                 className="m-2"
-                                variant="danger"
+                                variant="outline-info"
                             >
                                 Delete Profile
                             </Button>
@@ -124,13 +206,13 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 }
             </Container>
             <PetSitterUpdate
-                    user={user}
-                    petSitter={petSitter}
-                    show={editModalShow}
-                    msgAlert={msgAlert}
-                    triggerRefresh={() => setUpdated(prev => !prev)}
-                    handleClose={() => setEditModalShow(false)}
-                />
+                user={user}
+                petSitter={petSitter}
+                show={editModalShow}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+                handleClose={() => setEditModalShow(false)}
+            />
 
             {
                 user
@@ -157,6 +239,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this pawsitter.</i></h5>
             }
+
         </div>
     )
 }
