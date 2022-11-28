@@ -13,7 +13,7 @@ const BookingForm = (props) => {
                 <Form.Label>Request Note:</Form.Label>
                 <Form.Control
                     placeholder='Please tell us the reason for your request.'
-                    type='textbox'
+                    type='text'
                     name='note'
                     id='note'
                     value={booking.note}

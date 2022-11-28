@@ -45,6 +45,7 @@ const BookingCreate = (props) => {
             start_time: '',
             end_time: ''
         })
+        console.log('new booking', booking)
         
         bookingCreate(user, petSitter.owner, updatedBooking)
             .then(() => {
