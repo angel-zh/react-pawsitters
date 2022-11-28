@@ -33,11 +33,10 @@ const BookingCreate = (props) => {
         e.preventDefault()
         console.log(petSitter, 'petSitter')
         let updatedBooking = booking
-        updatedBooking.ownerEmail = user.email
-        // let anotherUpdate = booking
-        // anotherUpdate.pet_sitter = petSitter.owner
-        // let bookingUpdate = booking
-        // bookingUpdate.pet_owner = user.id
+        updatedBooking.pet_sitter = petSitter.owner
+        updatedBooking.pet_owner = user.id
+        updatedBooking.owner = user.id
+
         setBooking({
             note: '',
             start_day: '',

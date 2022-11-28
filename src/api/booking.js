@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // CREATE a booking - token required
 export const bookingCreate = (user, petsitterOwner, petownerId, bookingCreate) => {
-	const ownerId = { owner: user._id }
+	const ownerId = { owner: user.id }
 	const booking = {...bookingCreate, ...ownerId, ...petsitterOwner, ...petownerId}
 
 	return axios({
