@@ -79,12 +79,12 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         })
 }
     
-    if (deleted) navigate('/petsitters/')
+    if (deleted) navigate('/')
 
     return (
         <div className='container-md text-center'>
              <i>Pet Owner Profile Page <br /> </i>
-             <h2>{petOwner.first_name} {petOwner.last_name}</h2>
+             <h2>{petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br /> Pet's Name: {petOwner.pet_name}</h2>
 
 
         <Container className='mb-5'>
@@ -116,7 +116,32 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 handleClose={() => setEditModalShow(false)}
             />
-
+         {
+                !user
+                    ?
+                    <>
+                        <h5>Please Create your Pet Owner Profile!</h5>
+                        {/* This is one way to show the Booking request */}
+                        {/* <Container style={{ width: '40rem' }}>
+                            <BookingCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container> */}
+                        {/* <Container style={{ width: '40rem' }}>
+                            <ReviewCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container> */}
+                    </>
+                    :
+                    <h5 className='text-center'><i></i></h5>
+            }
      </div>
     )
 }
