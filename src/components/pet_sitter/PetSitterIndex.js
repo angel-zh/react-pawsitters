@@ -47,7 +47,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Link to={`/petsitters/${petSitter.owner}`} style={linkStyle}>
                 <Card key={petSitter.Owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
                     <Card.Body>
-                        <Image src='https://i.imgur.com/2y0Ysu1.jpg' alt='profile pic' className='profile-pic float-start border'></Image>
+                        <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image>
                         <Card.Text>
                             <h3 className='mb-2'>{petSitter.first_name} {petSitter.last_name}</h3>
                             <div className='row'>
