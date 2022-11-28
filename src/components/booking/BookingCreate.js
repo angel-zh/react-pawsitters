@@ -1,11 +1,12 @@
 import React, { useState }from 'react'
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
-import { reviewCreate } from '../../api/review'
+
+// petOwner doesn't need to be included here bc they are the user??
 
 const BookingCreate = (props) => {
     const {
-        user, petSitter, petOwner, msgAlert, triggerRefresh
+        user, petSitter, msgAlert, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState({
@@ -45,12 +46,12 @@ const BookingCreate = (props) => {
         })
 
         
-        bookingCreate(user, petSitter.owner, petOwner.owner, updatedBooking)
-            console.log(petSitter.owner, 'petSitter.owner')
+        bookingCreate(user, petSitter.owner, updatedBooking)
+            console.log(petSitter, 'petSitter')
             .then(() => {
                 msgAlert({
                     heading: 'Thanks!',
-                    message: 'Pawsitter booked! Your pets thank you for taking the time to care.',
+                    message: 'Pawsitter booked!',
                     variant: 'success'
                 })
             })
