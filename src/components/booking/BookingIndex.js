@@ -45,47 +45,13 @@ const BookingIndex = ({ user, msgAlert }) => {
                 msgAlert={msgAlert}
                 
             />     
-            {/* <Card.Img variant="top" src="https://i.imgur.com/dujfkLL.jpg" />
-            <Card.Header>
-                <small>Pet Owner: {booking.pet_owner}</small><br/>
-                <small>Pawsitter: {booking.pet_sitter}</small><br/>
-            </Card.Header>
-            <Card.Body>
-                <Card.Text>
-                    <small>
-                        Note: {booking.note}
-                    </small><br/>
-                    <small>
-                        {booking.start_day} - {booking.end_day}
-                    </small><br/>
-                    <small>
-                        {booking.start_time} - {booking.end_time}
-                    </small><br/>
-                </Card.Text>
-            </Card.Body>
-            <Card.Footer>
-                <Button
-                    className='m-2'
-                    style={{ backgroundColor: '#aa501a', outline: 'none !important' }}
-                    onClick={() => setEditModalShow(true)}
-                >
-                    Edit
-                </Button>
-                <Button
-                    className='m-2'
-                    style={{ backgroundColor: '#a32131', outline: 'none !important' }}
-                    onClick={() => handleDeleteBooking()}
-                >
-                    Delete
-                </Button>
-
-            </Card.Footer> */}
         </Card>
     ))    
 
     return (
-        <div>
-            <h2 className='text-center mt-3'>All My Bookings</h2>
+        <div className='text-center mt-3'>
+            <h2>All My Bookings</h2>
+            <i>~currently under construction~</i>
 
             <div className='container-md text-center' style={ cardContainerLayout }>
                 { allBookingsJSX }

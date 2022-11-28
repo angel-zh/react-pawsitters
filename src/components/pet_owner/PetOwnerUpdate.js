@@ -60,9 +60,9 @@ const PetOwnerUpdate = (props) => {
     }
 
     return (
-        <Modal size='lg' show={show} onHide={handleClose}>
-            <Modal.Header closeButton />
-            <Modal.Body>
+        <Modal size='lg' show={show} onHide={handleClose} >
+            <Modal.Header closeButton className='head-modal'   />
+            <Modal.Body className='body-modal'>
                 <PetOwnerForm
                     petOwner={petOwner}
                     handleChange={handleChange}
