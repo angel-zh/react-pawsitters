@@ -13,7 +13,8 @@ const ReviewShow = (props) => {
 
 
     const handleDeleteReview = () => {
-        reviewDelete(user, petSitter._id, review._id)
+        // removed the _ from _.id
+        reviewDelete(user, petSitter.owner, review.id)
 // check if review id needs an underscore
             .then(() => {
                 msgAlert({
@@ -36,17 +37,17 @@ const ReviewShow = (props) => {
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#f2f6ec' }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee' }}>
+            <Card className="m-2" style={{ backgroundColor: '#f2f6ec'  }}>
+                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee'  }}>
                     <p>{review.username} said:</p>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
                     />
                 </Card.Header>
-                <Card.Body>
+                <Card.Body className = 'card-text' style= {{color: '#3f4257'}}>
                     <small>Comments: </small>
-                    <p>{review.comment}</p>
+                    <p >{review.comment}</p>
                     <img
                         style={{ width: 200 }}
                         src={review.image}
