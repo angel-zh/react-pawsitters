@@ -227,30 +227,25 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
                 }
-
-
             </div>
 
-            <div className='booking-container'>
-                {
-                    user
-                        ?
-                        <>
-                            {/* This is one way to show the Booking request */}
-                            <Container>
-                                <BookingCreate
-                                    user={user}
-                                    petSitter={petSitter}
-                                    msgAlert={msgAlert}
-                                    triggerRefresh={() => setUpdated(prev => !prev)}
-                                />
-                            </Container>
-
-                        </>
-                        :
-                        null
-                }
-            </div>
+            {
+                user
+                    ?
+                    <div className='booking-container'>
+                        {/* This is one way to show the Booking request */}
+                        <Container>
+                            <BookingCreate
+                                user={user}
+                                petSitter={petSitter}
+                                msgAlert={msgAlert}
+                                triggerRefresh={() => setUpdated(prev => !prev)}
+                            />
+                        </Container>
+                    </div>
+                    :
+                    null
+            }
         </div>
     )
 }
