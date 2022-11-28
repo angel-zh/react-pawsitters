@@ -49,7 +49,7 @@ const PetOwnerCreate = ({ user, msgAlert }) => {
     const handleCreatePetOwner = event => {
         event.preventDefault()
         petOwnerCreate(petOwner, user)
-            .then(res => { navigate(`/petowners/${res.data.petOwner._id}`) })
+            .then(res => { navigate(`/`) })
            
             .then(() => {
                 msgAlert({
