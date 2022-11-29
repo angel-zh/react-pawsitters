@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
 
 
-const PetSitterShow = ({ user, msgAlert }) => {
+const PetSitterShow = ({ user, msgAlert, review }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
@@ -81,21 +81,22 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
 
   
-    let reviewCards
+    let reviewCards = allReviews
     if (petSitter) {
-    
+    console.log(petSitter.reviews)
     reviewCards = allReviews.map(review => (
                 <div>
                     <ReviewShow
-                        key={review.id}
+                        // key={review.id}
                         review={review}
                         petSitter={petSitter}
                         user={user}
                         msgAlert={msgAlert}
-                        triggerRefresh={() => setUpdated(prev => !prev)}
+                        // triggerRefresh={() => setUpdated(prev => !prev)}
                     />
                 </div>
             ))
+            console.log(reviewCards)
         }    
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
@@ -251,14 +252,14 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 <Container>
                     <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
                     {
-                        petSitter.review
+                        petSitter.reviews
                             ?
                             <>
                                 {reviewCards}
                             </>
                             :
                             <>
-                                <h5 className='text-center'>This restaurant does not have any reviews yet. Be the first to review!</h5>
+                                <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
                             </>
                     }
 
