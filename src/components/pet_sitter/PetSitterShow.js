@@ -18,11 +18,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
-    // scroll to top on page load
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, []);
-
 
     useEffect(() => {
         petSitterShow(user, id)
@@ -129,35 +124,35 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         }
                         <div className='d-flex justify-content-around'>
                             {
-                                petSitter.dog
+                                petSitter.pet_sitting && petSitter.dog
                                     ?
                                     <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog </p>
                                     :
                                     null
                             }
                             {
-                                petSitter.cat
+                                petSitter.pet_sitting && petSitter.cat
                                     ?
                                     <p><FontAwesomeIcon icon={faCat} size='md' className='icon' />Cat </p>
                                     :
                                     null
                             }
                             {
-                                petSitter.small_animal
+                                petSitter.pet_sitting && petSitter.small_animal
                                     ?
                                     <p><FontAwesomeIcon icon={faFish} size='md' className='icon' />Small Animal </p>
                                     :
                                     null
                             }
                             {
-                                petSitter.small_animal
+                                petSitter.pet_sitting && petSitter.reptile
                                     ?
                                     <p><FontAwesomeIcon icon={faWorm} size='md' className='icon' />Reptile</p>
                                     :
                                     null
                             }
                             {
-                                petSitter.small_animal
+                                petSitter.pet_sitting && petSitter.bird
                                     ?
                                     <p><FontAwesomeIcon icon={faDove} size='md' className='icon' />Bird </p>
                                     :

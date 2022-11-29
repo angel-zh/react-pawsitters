@@ -100,12 +100,13 @@ body {
 .link {
   text-decoration: none;
   color: #8baafa;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .link:hover {
-  color: #c0cff8;
+  color: #9ab5fa;
   text-shadow: 1px 1px 3px black;
+  text-decoration: underline;
 }
 
 .page-heading {
@@ -114,7 +115,7 @@ body {
 
 .homepage {
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 3%;
   width: 60vw;
 }
 
@@ -166,4 +167,11 @@ body {
 .dashboard {
   height: 90vh;
   overflow-y: auto;
+}
+
+.recent-booking, .recent-review {
+  background-color: #4a4d60;
+  padding: 10px;
+  border-radius: 5px;
+  border-top: 1px solid #c0cff8;
 }
