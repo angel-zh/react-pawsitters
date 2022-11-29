@@ -16,6 +16,9 @@ const BookingShow = (props) => {
 
         bookingDelete(user, booking)
             .then(() => {
+                // console.log('BookingShow.js booking', booking)
+                // console.log('BookingShow.js user', booking)
+
                 setDeleted(true)
                 msgAlert({
                     heading: 'Success: Booking Deleted',
@@ -34,8 +37,12 @@ const BookingShow = (props) => {
             })
     }
 
-    if(booking.length < 1){
-        return "No Bookings scheduled yet"
+    if(!booking){
+        return (
+            <>
+                "No Bookings scheduled yet"
+            </>
+        )
     }
 
     if (deleted) navigate('/')
@@ -52,7 +59,10 @@ const BookingShow = (props) => {
         <>
             <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
                 <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
-                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
+                    <div>
+                        <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
+                        <small className='float-end'>Booked: {date}</small>
+                    </div>
                 </Card.Header>
                 <Card.Body>
                     <small>Note: </small>
@@ -62,23 +72,21 @@ const BookingShow = (props) => {
                     <small>Time: </small>
                     <p>{timeStart} - {timeEnd}</p>
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className='mb-3'>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#3f4257', borderColor: '#aa501a', color: '#aa501a' }}
+                        variant="info"
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#3f4257', borderColor: '#a32131', color: '#a32131' }}
+                        variant="outline-info"
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete
                     </Button>
-                    
-                    <div className='float-end'>Booked: <br/>{date}</div>
                 </Card.Footer>
             </Card>
             <BookingUpdate
