@@ -10,7 +10,6 @@ const Dashboard = ({ user, msgAlert }) => {
     const petSitterLink = `/petsitters/${user.id}`
     const [allReviews, setAllReviews] = useState([])
     const [allBookings, setAllBookings] = useState([])
-    // const [recentReview, setRecentReview] = useState([])
 
     useEffect(() => {
         bookingIndex(user)
@@ -40,7 +39,10 @@ const Dashboard = ({ user, msgAlert }) => {
     }, [])
 
     const allBookingsJSX = allBookings.map(booking => (
-        <div> {booking.start_time} - {booking.end_time}</div>
+        <div> 
+            <h5>Pet Sitter:</h5>
+            {booking.start_time} - {booking.end_time}
+        </div>
     ))
 
     const allReviewsJSX = allReviews.map(review => (
