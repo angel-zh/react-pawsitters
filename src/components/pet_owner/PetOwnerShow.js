@@ -84,12 +84,14 @@ const PetOwnerShow = ({ user, msgAlert }) => {
     // if (!petOwner) navigate ('/petowners/create/')
     return (
         <>
-        <div>
-        <Card key={petOwner.owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
+        {/* <i>Pet Owner Profile Page <br /> </i> */}
+        <div className= 'container-md' >
+            <div style= {{border:'2px rounded black'}}>
+        <Card key={petOwner.owner} style={{ width: '48em', margin: 10, backgroundColor: '#afc2f2'}} >
             <Card.Body>
                 <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
                 <Card.Text>
-                    <h3 className='mb-2'>{petOwner.first_name} {petOwner.last_name}</h3>
+                    <h3 className='mb-2'>Pet Owner Profile</h3>
                         <div className='d-flex'>
                             {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
                             {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
@@ -101,25 +103,25 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 </Card.Text>
             </Card.Body>
         </Card>
-        </div>
+        
         <div className='container-md text-center'>
-             <i>Pet Owner Profile Page <br /> </i>
-             <h2>{petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br /> Pet's Name: {petOwner.pet_name}</h2>
-
-
+             <div className='="container-md' style= {{border: '2px solid black'}}>
+             <h2>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br /> Pet's Name: {petOwner.pet_name} <br /> About {petOwner.pet_name} : {petOwner.pet_bio}</h2>
+</div>
+<br/>
         <Container className='mb-5'>
             {
                 user && petOwner.owner === user.id
                     ?
                     <>
-                        <Button onClick={() => setEditModalShow(true)} className="m-2"
-                            variant="success"
+                        <Button onClick={() => setEditModalShow(true)} className='btn btn-outline-info mx-1'
+                            // variant="success"
                         >
                             Edit Profile
                         </Button>
                         <Button onClick={() => handleDeletePetOwner()}
-                            className="m-2"
-                            variant="danger"
+                            className='btn btn-outline-info mx-1'
+                            /* variant="danger" */
                         >
                             Delete Profile
                         </Button>
@@ -148,7 +150,9 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                     
             }
            
-     </div>
+                </div>
+            </div>
+         </div>
      </>
     )
 }

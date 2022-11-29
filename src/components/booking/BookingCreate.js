@@ -33,11 +33,10 @@ const BookingCreate = (props) => {
         e.preventDefault()
         console.log(petSitter, 'petSitter')
         let updatedBooking = booking
-        updatedBooking.ownerEmail = user.email
-        // let anotherUpdate = booking
-        // anotherUpdate.pet_sitter = petSitter.owner
-        // let bookingUpdate = booking
-        // bookingUpdate.pet_owner = user.id
+        updatedBooking.pet_sitter = petSitter.owner
+        updatedBooking.pet_owner = user.id
+        updatedBooking.owner = user.id
+
         setBooking({
             note: '',
             start_day: '',
@@ -45,7 +44,7 @@ const BookingCreate = (props) => {
             start_time: '',
             end_time: ''
         })
-
+        console.log('new booking', booking)
         
         bookingCreate(user, petSitter.owner, updatedBooking)
             .then(() => {
@@ -56,15 +55,15 @@ const BookingCreate = (props) => {
                 })
             })
             .then(() => triggerRefresh())
-            .catch(() => {
+            .catch((error) => {
                 msgAlert({
                     heading: 'Oh No!',
-                    message: 'Something went wrong! Please try again',
+                    message: 'Something went wrong! Please try again' + error,
                     variant: 'danger'
                 })
             })
     }
-
+    console.log('booking status', booking)
     return (
         <BookingForm
             booking={booking}
