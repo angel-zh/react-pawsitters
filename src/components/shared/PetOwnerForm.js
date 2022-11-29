@@ -63,6 +63,17 @@ const PetOwnerForm = (props) => {
                         onChange={handleChange}
                     />
                 </Form.Group>
+                <Form.Group>
+                    <Form.Label className='mt-2'>About Your Pet:</Form.Label>
+                    <Form.Control
+                        placeholder="Tell us about your Pet"
+                        required= "true"
+                        name="pet_bio"
+                        id="pet_bio"
+                        value={petOwner.pet_bio}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
 
                 {/* <Form.Group>
                     <Form.Label className='mt-2'>Images:</Form.Label>
