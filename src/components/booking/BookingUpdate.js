@@ -8,7 +8,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, triggerRefresh, petSitter
+        msgAlert, petSitter
     } = props
 
     const [booking, setBooking] = useState(props.booking)
@@ -47,7 +47,7 @@ const BookingUpdate = (props) => {
                     variant: 'success'
                 })
             })
-            .then(() => triggerRefresh())
+            // .then(() => triggerRefresh())
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',

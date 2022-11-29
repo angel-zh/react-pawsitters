@@ -22,7 +22,7 @@ const BookingIndex = ({ user, msgAlert }) => {
     useEffect(() => {
         bookingIndex(user)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setAllBookings(res.data.bookings)
 
             })

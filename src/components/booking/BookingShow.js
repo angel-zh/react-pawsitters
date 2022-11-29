@@ -17,7 +17,7 @@ const BookingShow = (props) => {
         // updatedBooking.pet_sitter = petSitter.owner
         // updatedBooking.pet_owner = user.id
         // updatedBooking.owner = user.id
-        console.log(petSitter, 'first petSitter')
+        // console.log(petSitter, 'first petSitter')
         // console.log(pet_sitter, 'first pet_sitter')
 
         bookingDelete(user, booking.id, petSitter.owner)
