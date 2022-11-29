@@ -67,9 +67,12 @@ const BookingCreate = (props) => {
 
     return (
         <BookingForm
+            user={user} // added during button fix attempts
+            petSitter={petSitter} // added during button fix attempts
             booking={booking}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            triggerRefresh={triggerRefresh} // added during button fix attempts
             heading="Pawsitter Booking Request Form"
         />
     )

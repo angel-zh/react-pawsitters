@@ -8,7 +8,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, petSitter
+        msgAlert, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState(props.booking)
@@ -37,8 +37,8 @@ const BookingUpdate = (props) => {
         // if(this.booking === undefined) {return}
 
         // petSitter gives a 405 error
-        console.log(petSitter, 'petSitter')
-        bookingUpdate(user, petSitter.owner, booking)
+        // console.log(petSitter, 'petSitter')
+        bookingUpdate(user, booking)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -47,7 +47,7 @@ const BookingUpdate = (props) => {
                     variant: 'success'
                 })
             })
-            // .then(() => triggerRefresh())
+            .then(() => triggerRefresh())
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
