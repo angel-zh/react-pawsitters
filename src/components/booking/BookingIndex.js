@@ -22,7 +22,7 @@ const BookingIndex = ({ user, msgAlert }) => {
     useEffect(() => {
         bookingIndex(user)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setAllBookings(res.data.bookings)
 
             })
@@ -43,6 +43,7 @@ const BookingIndex = ({ user, msgAlert }) => {
                 user={user}
                 booking={booking}
                 msgAlert={msgAlert}
+                petSitter={booking.pet_sitter}
                 
             />     
         </Card>
