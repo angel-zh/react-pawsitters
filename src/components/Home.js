@@ -7,7 +7,7 @@ const Home = ({ user }) => {
 		<>
 			<div className="homepage">
 				<h1 className="page-heading">Welcome to the PawSitters!</h1>
-				<h3>We are dedicated to making sure pawrents can easily and conveniently connect with our pawsitters to find care for their beloved pets of all shapes and sizes.</h3>
+				<h3>We are dedicated to making sure pawrents can easily and conveniently connect with our PawSitters to find care for their beloved pets of all shapes and sizes.</h3>
 				<h4 className='mt-3'>Our PawSitters provide a range of services:</h4>
 				<ul>
 					<li>Dog walking</li>

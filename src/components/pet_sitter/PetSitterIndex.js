@@ -21,7 +21,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setAllPetSitters(res.data.pet_sitters)
                 // if (user) {
                 //    setProfileExists(res.data.pet_sitters.includes(res.data.pet_sitters.owner === user.id)) 

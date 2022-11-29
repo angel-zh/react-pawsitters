@@ -87,8 +87,10 @@ const SideNav = ({ user }) => {
                             <span className='navbar-text mr-2'><i>Welcome, {user.email}</i></span>
                         )}
                     </div>
+                    <div className='mt-3'>
                     {alwaysOptions}
                     {user ? authenticatedOptions : unauthenticatedOptions}
+                    </div>
                 </Menu>
             </Sidebar>
         </div>

@@ -78,10 +78,10 @@ const PetSitterShow = ({ user, msgAlert }) => {
         if (petSitter.first_name == '') {
             return (
                 <div className='container-fluid text-center mt-5'>
-                    <h5>Oh No! There is not yet a profile created for this Pet Sitter.</h5>
-                    <p>Register to be a pet sitter with us!</p>
+                    <h5>Oh No! There is not yet a profile created for this PawSitter.</h5>
+                    <p>Register to be a PawSitter with us!</p>
 
-                    <Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a Pet Sitter</Link>
+                    <Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a PawSitter</Link>
                 </div>
             )
         } else {

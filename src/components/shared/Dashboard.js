@@ -15,7 +15,7 @@ const Dashboard = ({ user, msgAlert }) => {
     useEffect(() => {
         bookingIndex(user)
             .then(res => {
-                // console.log('Dashboard bookings', res.data)
+                console.log('Dashboard bookings', res.data)
                 setAllBookings(res.data.bookings)
             })
             .catch((error) => {
@@ -80,8 +80,8 @@ const Dashboard = ({ user, msgAlert }) => {
                     <p className='text-center'>Logged in as {user.email}<br /></p>
                     <h5 className='mt-3 container-fluid mb-3'><b>My Links</b></h5>
                     <Link className='link' to='/petowners'><FontAwesomeIcon icon={faBone} size='md' className='icon' />My Pet Owner Profile</Link> <br />
-                    <Link className='link' to={petSitterLink}><FontAwesomeIcon icon={faBone} size='md' className='icon' />My Pet Sitter Profile</Link> <br />
-                    <Link className='link' to='/petsitters'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Find Pet Sitters</Link><br />
+                    <Link className='link' to={petSitterLink}><FontAwesomeIcon icon={faBone} size='md' className='icon' />My PawSitter Profile</Link> <br />
+                    <Link className='link' to='/petsitters'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Find PawSitters</Link><br />
                     <Link className='link' to='/change-password'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Change My Password</Link>
                 </div>
                 <div className='col db-div-1'>
