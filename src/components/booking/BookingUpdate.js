@@ -5,10 +5,10 @@ import { bookingUpdate } from '../../api/booking'
 import messages from '../shared/AutoDismissAlert/messages'
 
 
-const BookingEdit = (props) => {
+const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, triggerRefresh, petSitter
+        msgAlert, petSitter
     } = props
 
     const [booking, setBooking] = useState(props.booking)
@@ -27,9 +27,18 @@ const BookingEdit = (props) => {
     }
 
     const handleSubmit = (e) => {
+        console.log('regular string')
+
         e.preventDefault()
+        // let updatedBooking = booking
+        // updatedBooking.pet_sitter = petSitter.owner
+        // updatedBooking.pet_owner = user.id
+        // updatedBooking.owner = user.id
+        // if(this.booking === undefined) {return}
+
+        // petSitter gives a 405 error
         console.log(petSitter, 'petSitter')
-        bookingUpdate(user, petSitter.owner.id, booking)
+        bookingUpdate(user, petSitter.owner, booking)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
@@ -38,7 +47,7 @@ const BookingEdit = (props) => {
                     variant: 'success'
                 })
             })
-            .then(() => triggerRefresh())
+            // .then(() => triggerRefresh())
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
@@ -49,14 +58,13 @@ const BookingEdit = (props) => {
     }
 
     return (
-        <Modal size='lg' show={show} onHide={handleClose} >
-            <Modal.Header closeButton className='head-modal'/>
+        <Modal show={show} onHide={handleClose} >
+            <Modal.Header className='head-modal' closeButton/>
             <Modal.Body className='body-modal'>
                 <BookingForm 
                     booking={booking}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    // triggerRefresh={() => setPicture(prev => !prev)}
                     heading="Edit booking"
                 />
             </Modal.Body>
@@ -64,4 +72,4 @@ const BookingEdit = (props) => {
     )
 }
 
-export default BookingEdit
+export default BookingUpdate

@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
+// import { useNavigate } from 'react-router-dom'
 import { bookingDelete } from '../../api/booking'
-import BookingEdit from './BookingEdit'
+import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, pet_owner, pet_sitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
+    // const [deleted, setDeleted] = useState(false)
+    // const navigate = useNavigate()
 
     const handleDeleteBooking = () => {
-        bookingDelete(user, pet_owner._id, booking.id, pet_sitter._id)
+        // let updatedBooking = booking
+        // updatedBooking.pet_sitter = petSitter.owner
+        // updatedBooking.pet_owner = user.id
+        // updatedBooking.owner = user.id
+        // console.log(petSitter, 'first petSitter')
+        // console.log(pet_sitter, 'first pet_sitter')
 
+        bookingDelete(user, booking.id, petSitter.owner)
             .then(() => {
                 msgAlert({
                     heading: 'Success: Booking Deleted',
@@ -39,6 +48,8 @@ const BookingShow = (props) => {
         return "No Bookings scheduled yet"
     }
 
+    // if (deleted) navigate('/')
+
     return (
 
         <>
@@ -57,14 +68,14 @@ const BookingShow = (props) => {
                 <Card.Footer>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#E6aa501a', borderColor: '#aa501a' }}
+                        style={{ backgroundColor: '#3f4257', borderColor: '#aa501a', color: '#aa501a' }}
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#E6a32131', borderColor: '#a32131' }}
+                        style={{ backgroundColor: '#3f4257', borderColor: '#a32131', color: '#a32131' }}
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete
@@ -73,13 +84,14 @@ const BookingShow = (props) => {
                     <div className='float-end'>Booked: <br/>{date}</div>
                 </Card.Footer>
             </Card>
-            <BookingEdit
+            <BookingUpdate
                 user={user}
                 booking={booking}
                 msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}
+                petSitter={petSitter}
             />
         </>
 

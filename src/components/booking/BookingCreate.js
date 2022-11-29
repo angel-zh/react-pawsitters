@@ -1,8 +1,7 @@
 import React, { useState }from 'react'
+import { useNavigate } from 'react-router-dom'
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
-
-// petOwner doesn't need to be included here bc they are the user??
 
 const BookingCreate = (props) => {
     const {
@@ -16,6 +15,7 @@ const BookingCreate = (props) => {
         start_time: '',
         end_time: ''
     })
+    const navigate = useNavigate()
 
     // sets the new values for a new booking
     const handleChange = (e) => {
@@ -31,7 +31,7 @@ const BookingCreate = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(petSitter, 'petSitter')
+        // console.log(petSitter, 'petSitter')
         let updatedBooking = booking
         updatedBooking.pet_sitter = petSitter.owner
         updatedBooking.pet_owner = user.id
@@ -44,7 +44,7 @@ const BookingCreate = (props) => {
             start_time: '',
             end_time: ''
         })
-        console.log('new booking', booking)
+        // console.log('new booking', booking)
         
         bookingCreate(user, petSitter.owner, updatedBooking)
             .then(() => {
@@ -55,6 +55,7 @@ const BookingCreate = (props) => {
                 })
             })
             .then(() => triggerRefresh())
+            .then(() => navigate('/bookings/'))
             .catch((error) => {
                 msgAlert({
                     heading: 'Oh No!',
@@ -63,7 +64,7 @@ const BookingCreate = (props) => {
                 })
             })
     }
-    console.log('booking status', booking)
+
     return (
         <BookingForm
             booking={booking}
