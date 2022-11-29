@@ -10,14 +10,15 @@ const cardContainerLayout = {
 }
 
 
-const ReviewIndex = ({ user, msgAlert, pet_sitter, review }) => {
+const ReviewIndex = ({ user, msgAlert, pet_sitter, reviews, id, petSitter }) => {
 
     const [allReviews, setAllReviews] = useState([])
 
     useEffect(() => {
         reviewIndex(user)
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
+            console.log('review index', reviews)    
             setAllReviews(res.data.reviews)
         })
         .catch((error) => {
@@ -31,12 +32,11 @@ const ReviewIndex = ({ user, msgAlert, pet_sitter, review }) => {
 
     const usersReviews = allReviews.filter(review => review.owner === user.id)
     const reviewCards = usersReviews.map(review => (
-        
         <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
             <Card.Img variant="top" style={{height: '10rem'}}src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header>
-                <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${pet_sitter}` }
-                // link is not functioing fully
+                <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
+                // link is not functioning fully
                 >View { review.pet_sitter} </Link>
             </Card.Header>
             <Card.Body>

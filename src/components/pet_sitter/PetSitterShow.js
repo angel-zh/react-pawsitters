@@ -9,9 +9,12 @@ import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
+import apiUrl from '../apiConfig'
 
 
-const PetSitterShow = ({ user, msgAlert, review }) => {
+
+const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
@@ -19,6 +22,8 @@ const PetSitterShow = ({ user, msgAlert, review }) => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [allReviews, setAllReviews] = useState([])
+    const [reviews, setReviews] = useState([])
+    
     // scroll to top on page load
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -59,6 +64,15 @@ const PetSitterShow = ({ user, msgAlert, review }) => {
             })
     }
 
+    const getReviews = () => {
+        axios.get(apiUrl + `/reviews/`)
+            .then((response) => console.log (response.data))
+        return (
+            {getReviews}
+        )
+    } 
+
+
     // let reviewCards
     // if (petSitter) {
     //     if (petSitter.reviews.length > 0) {
@@ -80,19 +94,21 @@ const PetSitterShow = ({ user, msgAlert, review }) => {
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
 
-  
-    let reviewCards = allReviews
+    
+    let reviewCards 
     if (petSitter) {
+    console.log(petSitter)
+    console.log(reviews)
     console.log(petSitter.reviews)
-    reviewCards = allReviews.map(review => (
+    reviewCards = reviews.map(review => (
                 <div>
                     <ReviewShow
-                        // key={review.id}
+                        key={review.id}
                         review={review}
                         petSitter={petSitter}
                         user={user}
                         msgAlert={msgAlert}
-                        // triggerRefresh={() => setUpdated(prev => !prev)}
+                        triggerRefresh={() => setUpdated(prev => !prev)}
                     />
                 </div>
             ))

@@ -59,7 +59,7 @@ const ReviewCreate = (props) => {
         updatedReview.pet_sitter = petSitter.owner
         updatedReview.pet_owner = user.id
         updatedReview.owner = user.id
-        // updatedReview.rating = 5
+    
         
         setReview({
             owner: '',
