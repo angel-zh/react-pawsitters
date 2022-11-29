@@ -67,7 +67,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
             setDeleted(true)
             msgAlert({
                 heading: 'Success',
-                message: 'Updating Pet Owner',
+                message: 'Pet Owner Deleted',
                 variant: 'success'
             })
         })
@@ -82,6 +82,19 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 
     if (deleted) navigate('/')
     // if (!petOwner) navigate ('/petowners/create/')
+    if (petOwner.first_name == '') {
+        return(      
+
+            <>
+                <h5>create pet owner account</h5>
+         
+            
+            
+            <h5 className='text-center'><i></i></h5>
+            </>
+        )
+    }else{
+        
     return (
         <>
         {/* <i>Pet Owner Profile Page <br /> </i> */}
@@ -106,7 +119,11 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         
         <div className='container-md text-center'>
              <div className='="container-md' style= {{border: '2px solid black'}}>
-             <h2>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br /> Pet's Name: {petOwner.pet_name} <br /> About {petOwner.pet_name} : {petOwner.pet_bio}</h2>
+             <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
+             <h3>Pet's Name: {petOwner.pet_name} </h3>
+             <p>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</p>
+
+
 </div>
 <br/>
         <Container className='mb-5'>
@@ -138,23 +155,14 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 handleClose={() => setEditModalShow(false)}
             />
-         {
-                petOwner
-                    ?
-                    <>
-                        <h5></h5>
-                 
-                    </>
-                    :
-                    <h5 className='text-center'><i></i></h5>
-                    
-            }
+    
            
                 </div>
             </div>
          </div>
      </>
     )
+}
 }
 
 export default PetOwnerShow
