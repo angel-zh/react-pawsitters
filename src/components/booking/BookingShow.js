@@ -68,14 +68,14 @@ const BookingShow = (props) => {
                 <Card.Footer>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#E6aa501a', borderColor: '#aa501a' }}
+                        style={{ backgroundColor: '#3f4257', borderColor: '#aa501a', color: '#aa501a' }}
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#E6a32131', borderColor: '#a32131' }}
+                        style={{ backgroundColor: '#3f4257', borderColor: '#a32131', color: '#a32131' }}
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete
