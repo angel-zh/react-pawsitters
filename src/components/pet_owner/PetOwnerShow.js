@@ -21,18 +21,21 @@ const PetOwnerShow = ({ user, msgAlert }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (user){ petOwnerShow(user, id)
-        .then((res) => {
-            console.log("petOwner", res.data)
-            setPetOwner(res.data.pet_owner)
-        })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Show Pet Owner Failure' + error,
-                variant: 'danger'
+        if (user){ 
+            petOwnerShow(user, id)
+                .then((res) => {
+                    console.log("petOwner", res.data)
+                    setPetOwner(res.data.pet_owner)
+                })
+            .catch((error) => {
+                console.log("error", error)
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Show Pet Owner Failure' + error,
+                    variant: 'danger'
+                })
             })
-        })}
+        }
     }, [updated])
 
     // const toggleShowUpdate = () => {

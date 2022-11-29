@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
@@ -9,26 +9,22 @@ const BookingShow = (props) => {
     const { booking, user, msgAlert, triggerRefresh, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
-    // const [deleted, setDeleted] = useState(false)
-    // const navigate = useNavigate()
+    const [deleted, setDeleted] = useState(false)
+    const navigate = useNavigate()
 
     const handleDeleteBooking = () => {
-        // let updatedBooking = booking
-        // updatedBooking.pet_sitter = petSitter.owner
-        // updatedBooking.pet_owner = user.id
-        // updatedBooking.owner = user.id
-        // console.log(petSitter, 'first petSitter')
-        // console.log(pet_sitter, 'first pet_sitter')
 
-        bookingDelete(user, booking.id, petSitter.owner)
+        bookingDelete(user, booking)
             .then(() => {
+                setDeleted(true)
                 msgAlert({
                     heading: 'Success: Booking Deleted',
                     message: "Booking Deleted",
                     variant: 'success'
                 })
             })
-            .then(() => triggerRefresh())
+            // .then(() => triggerRefresh())
+            // on success redirect/make new index
             .catch((error) => {
                 msgAlert({
                     heading: 'Oops',
@@ -38,17 +34,18 @@ const BookingShow = (props) => {
             })
     }
 
+    if(booking.length < 1){
+        return "No Bookings scheduled yet"
+    }
+
+    if (deleted) navigate('/')
+
+
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
     let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
     let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
     let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
     let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
-
-    if(booking.length < 1){
-        return "No Bookings scheduled yet"
-    }
-
-    // if (deleted) navigate('/')
 
     return (
 
@@ -99,20 +96,3 @@ const BookingShow = (props) => {
 }
 
 export default BookingShow
-
-
-// {/* <Container>
-//     <h3 className='my-5'>All of {restaurant.name}'s reviews:</h3>
-//     {
-//         restaurant.reviews.length > 0
-//             ?
-//             <>
-//                 {reviewCards}
-//             </>
-//             :
-//             <>
-//                 <h5 className='text-center'>This restaurant does not have any reviews yet. Be the first to review!</h5>
-//             </>
-//     }
-
-// </Container> */}
