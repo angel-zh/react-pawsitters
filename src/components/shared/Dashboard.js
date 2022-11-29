@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { faLink, faBone, faAllergies } from '@fortawesome/free-solid-svg-icons'
+import { faBone } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -59,8 +59,8 @@ const Dashboard = ({ user, msgAlert }) => {
                     <p className='text-center'>Logged in as {user.email}<br />
                         Member since {moment(user.createdAt).format("MMM Do YY")} ({moment(user.createdAt).startOf('day').fromNow()})</p>
                     <h5 className='mt-3 container-fluid mb-3'><b>My Links</b></h5>
-                    <Link className='link' to='/petowners'><FontAwesomeIcon icon={faBone} size='md' className='icon' />View/Edit My Pet Owner Profile</Link> <br />
-                    <Link className='link' to={petSitterLink}><FontAwesomeIcon icon={faBone} size='md' className='icon' />View/Edit My Pet Sitter Profile</Link> <br />
+                    <Link className='link' to='/petowners'><FontAwesomeIcon icon={faBone} size='md' className='icon' />My Pet Owner Profile</Link> <br />
+                    <Link className='link' to={petSitterLink}><FontAwesomeIcon icon={faBone} size='md' className='icon' />My Pet Sitter Profile</Link> <br />
                     <Link className='link' to='/petsitters'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Find Pet Sitters</Link><br />
                     <Link className='link' to='/change-password'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Change My Password</Link>
                 </div>
