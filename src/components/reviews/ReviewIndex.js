@@ -10,7 +10,7 @@ const cardContainerLayout = {
 }
 
 
-const ReviewIndex = ({ user, msgAlert, pet_sitter, reviews, id, petSitter }) => {
+const ReviewIndex = ({ user, msgAlert, reviews }) => {
 
     const [allReviews, setAllReviews] = useState([])
 
@@ -44,7 +44,7 @@ const ReviewIndex = ({ user, msgAlert, pet_sitter, reviews, id, petSitter }) => 
                     
                     <small>Comments: {review.comment}</small><br/>
                     <small>Rating: {review.rating}</small><br/>
-                    <small>{review.pet_sitter}</small><br/>
+                    {/* <small>{review.pet_sitter}</small><br/> */}
                     <small>Owner: {review.pet_owner}</small><br/>
                     <small>Image: {review.image}</small><br/>
                 </Card.Text>

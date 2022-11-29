@@ -10,7 +10,9 @@ import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import apiUrl from '../apiConfig'
+import apiUrl from '../../apiConfig'
+import  { reviewCards }  from '../../api/review'
+
 
 
 
@@ -21,8 +23,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
-    const [allReviews, setAllReviews] = useState([])
-    const [reviews, setReviews] = useState([])
+    // const [allReviews, setAllReviews] = useState([])
+    const [reviews, setReviews] = useState()
     
     // scroll to top on page load
     useEffect(() => {
@@ -64,14 +66,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }
 
-    const getReviews = () => {
-        axios.get(apiUrl + `/reviews/`)
-            .then((response) => console.log (response.data))
-        return (
-            {getReviews}
-        )
-    } 
-
+   
+    
 
     // let reviewCards
     // if (petSitter) {
@@ -92,15 +88,10 @@ const PetSitterShow = ({ user, msgAlert }) => {
     // }
 
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
+    const reviewCards = (reviewCards => {
+        if (reviewCards) {
 
-
-    
-    let reviewCards 
-    if (petSitter) {
-    console.log(petSitter)
-    console.log(reviews)
-    console.log(petSitter.reviews)
-    reviewCards = reviews.map(review => (
+            reviewCards = reviewCards.map(review => (
                 <div>
                     <ReviewShow
                         key={review.id}
@@ -112,8 +103,39 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     />
                 </div>
             ))
-            console.log(reviewCards)
-        }    
+        } 
+        console.log(reviewCards)
+
+    })
+    
+
+    
+    // let reviewCards 
+    // console.log('reviewCards', reviewCards)
+    // useEffect(() => {
+    //     axios.get({url: apiUrl + `/reviews/`})
+    //         .then(response => {
+    //             setReviews(response.data)
+    //         })
+    //     console.log('reviews.data', reviews)
+    // }, [])
+
+    // if (reviewCards) {
+
+    //     reviewCards = reviewCards.map(review => (
+    //                 <div>
+    //                     <ReviewShow
+    //                         key={review.id}
+    //                         review={review}
+    //                         petSitter={petSitter}
+    //                         user={user}
+    //                         msgAlert={msgAlert}
+    //                         triggerRefresh={() => setUpdated(prev => !prev)}
+    //                     />
+    //                 </div>
+    //             ))
+    //             console.log(reviewCards)
+        // }    
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
     const formatString = string => {

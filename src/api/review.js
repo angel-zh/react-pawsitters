@@ -32,6 +32,18 @@ export const reviewIndex = (user) => {
 	})
 }
 
+// INDEX reviews - no token
+export const reviewCards = (user) => {
+    // console.log(user.token)
+	return axios({
+		url: apiUrl + `/reviews/`,
+		method: 'GET',
+        headers: {
+			Authorization: `Token ${user.token}`,
+		},
+	})
+}
+
 // UPDATE a review - token Required
 export const reviewUpdate = (user, petsitterId, updatedReview) => {
 	const ownerId = { owner: user._id }
