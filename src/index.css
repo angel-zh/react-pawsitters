@@ -58,7 +58,7 @@ body {
   padding: 20px;
   border-radius: 5px;
   overflow-y: auto;
-  height: 90vh;
+  height: 83vh;
   width: 78%;
   background-color: #56596e;
 }
@@ -100,8 +100,7 @@ body {
 .link {
   text-decoration: none;
   color: #8baafa;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .link:hover {
@@ -131,21 +130,26 @@ body {
   margin-right: 5px;
 }
 
-.db-div-1, .db-div-2 {
-  color: black;
-  border: 1px solid pink;
+.db-div-0, .db-div-1, .db-div-2 {
   height: 250px;
-  margin: 40px 20px 20px 20px;
+  width: auto;
+  margin: 20px;
   overflow-y: auto;
   border: 2px solid #757d90;
   border-radius: 10px;
-  background-color: #afc2f2;
+  background-color: #56596e;
   box-shadow: 1px 1px 1px 2px #333335;
+}
+
+.db-div-0 {
+  background-color: #3f4257;
+  border: none;
+  height: 270px;
+  box-shadow: none;
 }
 
 .db-div-2 {
   height: 300px;
-  margin: 20px;
 }
 
 .booking-form {
@@ -159,3 +163,7 @@ body {
   border-bottom-right-radius: 13px ;
 }
 
+.dashboard {
+  height: 90vh;
+  overflow-y: auto;
+}
