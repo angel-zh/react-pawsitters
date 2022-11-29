@@ -11,7 +11,7 @@ const Home = ({ user }) => {
 				<h4 className='mt-3'>Our PawSitters provide a range of services:</h4>
 				<ul>
 					<li>Dog walking</li>
-					<li>Pet sitting (from the comfort of your home or at the awsitter's home)</li>
+					<li>Pet sitting (from the comfort of your home or at the pawsitter's location)</li>
 					<li>Drop-in visits</li>
 					<li>Administration of pet medication</li>
 				</ul>
