@@ -17,7 +17,7 @@ const SideNav = ({ user }) => {
             <MenuItem routerLink={<Link to='dashboard' />}>
                 <FontAwesomeIcon icon={faTableColumns} size='xl' className='icon' />My Dashboard
             </MenuItem>
-            <MenuItem routerLink={<Link to='petowners' />}> Pet Owner </MenuItem>
+            <MenuItem routerLink={<Link to='petowners/' />}> Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='petowners/create' />}> Create Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='bookings' />}>
                 <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings
