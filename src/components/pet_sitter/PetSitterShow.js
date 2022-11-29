@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { petSitterShow, petSitterDelete } from '../../api/petSitter'
 import { Container, Button, Image } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
@@ -76,7 +76,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
     //     }
     // }
 
-    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
@@ -90,9 +89,12 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
     if (!petSitter) {
         return (
-            <>
-                Oh No! There is not yet a profile created for this Pet Sitter.
-            </>
+            <div className='container-fluid text-center mt-5'>
+                <h5>Oh No! There is not yet a profile created for this Pet Sitter.</h5>
+                <p>Register to be a pet sitter with us!</p>
+
+                <Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a Pet Sitter</Link>
+            </div>
         )
     }
 
