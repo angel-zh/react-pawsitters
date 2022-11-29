@@ -114,13 +114,13 @@ const App = () => {
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						}
 				/>
-				<Route
+				{/* <Route
 						path='/petowners/:id'
 						element={
 						<RequireAuth user={user}>
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/>
+				/> */}
 				<Route
 						path='/petowners/create'
 						element={
