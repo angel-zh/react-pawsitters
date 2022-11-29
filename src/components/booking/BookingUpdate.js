@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import BookingForm from '../shared/BookingForm'
 import { bookingUpdate } from '../../api/booking'
 import messages from '../shared/AutoDismissAlert/messages'
@@ -12,6 +13,8 @@ const BookingUpdate = (props) => {
     } = props
 
     const [booking, setBooking] = useState(props.booking)
+    const [updated, setUpdated] = useState(false)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setBooking(prevBooking => {
@@ -27,27 +30,18 @@ const BookingUpdate = (props) => {
     }
 
     const handleSubmit = (e) => {
-        console.log('regular string')
-
         e.preventDefault()
-        // let updatedBooking = booking
-        // updatedBooking.pet_sitter = petSitter.owner
-        // updatedBooking.pet_owner = user.id
-        // updatedBooking.owner = user.id
-        // if(this.booking === undefined) {return}
-
-        // petSitter gives a 405 error
-        // console.log(petSitter, 'petSitter')
         bookingUpdate(user, booking)
             .then(() => handleClose())
             .then(() => {
+                setUpdated(true)
                 msgAlert({
                     heading: 'Success',
                     message: messages.updateBookingSuccess,
                     variant: 'success'
                 })
             })
-            .then(() => triggerRefresh())
+            // .then(() => triggerRefresh())
             .catch((error) => {
                 msgAlert({
                     heading: 'Failure',
@@ -56,6 +50,8 @@ const BookingUpdate = (props) => {
                 })
             })
     }
+
+    if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >
