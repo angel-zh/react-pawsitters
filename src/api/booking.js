@@ -16,7 +16,7 @@ export const bookingCreate = (user, petsitterOwner, petownerId, bookingCreate) =
 	})
 }
 
-// INDEX bookings - no token
+// INDEX bookings - token Required
 export const bookingIndex = (user) => {
     console.log(user.token)
 	return axios({
@@ -31,10 +31,11 @@ export const bookingIndex = (user) => {
 // UPDATE a booking - token Required
 export const bookingUpdate = (user, petSitter, updatedBooking) => {
 	const ownerId = { owner: user.id }
-	const booking = {...updatedBooking, ...ownerId}
+	const booking = {...updatedBooking, ...ownerId, ...petSitter}
+	console.log(booking, 'booking')
 
 	return axios({
-		url: `${apiUrl}/bookings/`,
+		url: `${apiUrl}/bookings/${updatedBooking.id}/`,
 		method: 'PATCH',
 		headers: {
 			Authorization: `Token ${user.token}`,
@@ -46,7 +47,7 @@ export const bookingUpdate = (user, petSitter, updatedBooking) => {
 // DELETE booking - token required
 export const bookingDelete = (user, petSitter, bookingId) => {
 	return axios({
-		url: `${apiUrl}/bookings/${petSitter.owner}/${bookingId}/`,
+		url: `${apiUrl}/bookings/`,
 		method: 'DELETE',
 		headers: {
 			Authorization: `Token ${user.token}`,

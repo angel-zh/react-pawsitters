@@ -43,6 +43,7 @@ const BookingIndex = ({ user, msgAlert }) => {
                 user={user}
                 booking={booking}
                 msgAlert={msgAlert}
+                petSitter={booking.pet_sitter}
                 
             />     
         </Card>

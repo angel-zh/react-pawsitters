@@ -27,9 +27,17 @@ const BookingUpdate = (props) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(petSitter, 'petSitter')
+        console.log('regular string')
 
+        e.preventDefault()
+        // let updatedBooking = booking
+        // updatedBooking.pet_sitter = petSitter.owner
+        // updatedBooking.pet_owner = user.id
+        // updatedBooking.owner = user.id
+        // if(this.booking === undefined) {return}
+
+        // petSitter gives a 405 error
+        console.log(petSitter, 'petSitter')
         bookingUpdate(user, petSitter.owner, booking)
             .then(() => handleClose())
             .then(() => {

@@ -5,13 +5,21 @@ import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petSitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter, pet_sitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
 
     const handleDeleteBooking = () => {
-        bookingDelete(user, booking.id, petSitter.owner)
+        // let updatedBooking = booking
+        // updatedBooking.pet_sitter = petSitter.owner
+        // updatedBooking.pet_owner = user.id
+        // updatedBooking.owner = user.id
+        console.log(petSitter, 'first petSitter')
+        console.log(pet_sitter, 'first pet_sitter')
 
+        bookingDelete(user, booking.id, petSitter.owner)
+            console.log(petSitter, 'petSitter')
+            console.log(pet_sitter, 'pet_sitter')
             .then(() => {
                 msgAlert({
                     heading: 'Success: Booking Deleted',
@@ -80,6 +88,7 @@ const BookingShow = (props) => {
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}
+                petSitter={petSitter}
             />
         </>
 
