@@ -85,22 +85,18 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 
     if (deleted) navigate('/')
     // if (!petOwner) navigate ('/petowners/create/')
-    if (petOwner.first_name == '') {
-        return(      
-
-            <>
-                <h5>create pet owner account</h5>
-         
-            
-            
-            <h5 className='text-center'><i></i></h5>
-            </>
-        )
-    }else{
-        
+   
     return (
         <>
-        {/* <i>Pet Owner Profile Page <br /> </i> */}
+       {petOwner.first_name == '' ? 
+         <>
+         <h5>create pet owner account</h5>
+  
+     
+     
+     <h5 className='text-center'><i></i></h5>
+     </>:
+       
         <div className= 'container-md' >
             <div style= {{border:'2px rounded black'}}>
         <Card key={petOwner.owner} style={{ width: '48em', margin: 10, backgroundColor: '#afc2f2'}} >
@@ -108,24 +104,33 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
                 <Card.Text>
                     <h3 className='mb-2'>Pet Owner Profile</h3>
-                        <div className='d-flex'>
+                        {/* <div className='d-flex'>
                             {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
                             {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
                             {petOwner.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
                             {petOwner.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
                             {petOwner.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
-                        </div>
+                        </div> */}
                     
                 </Card.Text>
             </Card.Body>
+            <Card.Body>
+                    {/* <small>Comments: </small>
+                    <p></p> */}
+                    <img
+                        style={{ width: 200 }}
+                        src={petOwner.images}
+                        alt={""}
+                    />
+                </Card.Body>
         </Card>
         
         <div className='container-md text-center'>
              <div className='="container-md' style= {{border: '2px solid black'}}>
              <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
              <h3>Pet's Name: {petOwner.pet_name} </h3>
-             <p>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</p>
-
+             <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
+            
 
 </div>
 <br/>
@@ -163,9 +168,10 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 </div>
             </div>
          </div>
+         } 
      </>
     )
 }
-}
+
 
 export default PetOwnerShow
