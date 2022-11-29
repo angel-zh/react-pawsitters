@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
+// import { useNavigate } from 'react-router-dom'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
 import moment from 'moment'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petSitter, pet_sitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
+    // const [deleted, setDeleted] = useState(false)
+    // const navigate = useNavigate()
 
     const handleDeleteBooking = () => {
         // let updatedBooking = booking
@@ -15,11 +18,9 @@ const BookingShow = (props) => {
         // updatedBooking.pet_owner = user.id
         // updatedBooking.owner = user.id
         console.log(petSitter, 'first petSitter')
-        console.log(pet_sitter, 'first pet_sitter')
+        // console.log(pet_sitter, 'first pet_sitter')
 
         bookingDelete(user, booking.id, petSitter.owner)
-            console.log(petSitter, 'petSitter')
-            console.log(pet_sitter, 'pet_sitter')
             .then(() => {
                 msgAlert({
                     heading: 'Success: Booking Deleted',
@@ -46,6 +47,8 @@ const BookingShow = (props) => {
     if(booking.length < 1){
         return "No Bookings scheduled yet"
     }
+
+    // if (deleted) navigate('/')
 
     return (
 

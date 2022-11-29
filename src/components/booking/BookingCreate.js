@@ -1,4 +1,5 @@
 import React, { useState }from 'react'
+import { useNavigate } from 'react-router-dom'
 import BookingForm from '../shared/BookingForm'
 import { bookingCreate } from '../../api/booking'
 
@@ -14,6 +15,7 @@ const BookingCreate = (props) => {
         start_time: '',
         end_time: ''
     })
+    const navigate = useNavigate()
 
     // sets the new values for a new booking
     const handleChange = (e) => {
@@ -53,6 +55,7 @@ const BookingCreate = (props) => {
                 })
             })
             .then(() => triggerRefresh())
+            .then(() => navigate('/bookings/'))
             .catch((error) => {
                 msgAlert({
                     heading: 'Oh No!',
