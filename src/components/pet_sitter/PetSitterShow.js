@@ -68,27 +68,29 @@ const PetSitterShow = ({ user, msgAlert }) => {
     useEffect(() => {
         reviewIndex(user)
             .then((res) => {
-                console.log('this is res.data', res.data) 
+                console.log('this is res.data', res.data)
                 setReviews(res.data.reviews)
             })
     }, [])
 
+    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
     const reviewCards = () => {
-      
-            console.log('This is the reviews from petsitterShow', reviews)
-            return   reviews.map(review => (
-                <div>
-                    <ReviewShow
-                        key={review.id}
-                        review={review}
-                        petSitter={petSitter}
-                        user={user}
-                        msgAlert={msgAlert}
-                        triggerRefresh={() => setUpdated(prev => !prev)}
-                    />
-                </div>
-            ))
-    } 
+        // if (reviews.id) {
+        console.log('reviews', reviews)
+        return reviews.map(review => (
+            <div>
+                <ReviewShow
+                    key={review.id}
+                    review={review}
+                    petSitter={petSitter}
+                    user={user}
+                    msgAlert={msgAlert}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                />
+            </div>
+        ))
+    }
+
          
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
