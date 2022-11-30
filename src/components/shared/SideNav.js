@@ -2,7 +2,7 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaw, faDog, faPlay, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faTableColumns } from '@fortawesome/free-solid-svg-icons'
+import { faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faTableColumns, faBars } from '@fortawesome/free-solid-svg-icons'
 
 
 const linkStyle = {
@@ -78,7 +78,7 @@ const SideNav = ({ user }) => {
 
             <Sidebar backgroundColor="#31344b" transitionDuration={800}>
                 <button className='grip-lines mt-2 mx-3 btn mb-2' onClick={() => collapseSidebar()}>
-                    <FontAwesomeIcon icon={faAlignJustify} size='xl' />
+                    <FontAwesomeIcon icon={faBars} size='xl' />
                 </button>
 
                 <Menu>

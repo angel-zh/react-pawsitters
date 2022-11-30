@@ -46,27 +46,36 @@ const Dashboard = ({ user, msgAlert }) => {
 
     const allReviewsJSX = allReviews.map(review => (
         <div>
-            <p><b>Pet Sitter: </b> {review.pet_sitter}</p>
-            <p><b>Pet Owner: </b> {review.pet_owner}</p>
-            <p><b>Comment: </b> {review.comment}</p>
-            <p><b>Rating: </b>
+            <p><b>Pet Sitter: </b> {review.pet_sitter} <br />
+                <b>Comment: </b> {review.comment} <br />
+                <b>Rating: </b>
                 <StarRating
                     value={review.rating}
-                    style={{ fontSize: 17 }}
+                    style={{ fontSize: 15 }}
                 />
             </p>
-            <p className='d-flex justify-content-end'><i>Review created on {formatDate(review.created_at)} by {user.email}
+            <p className='d-flex justify-content-end'><i>Posted on {formatDate(review.created_at)} by me
             </i></p>
         </div>
     ))
 
-    const allBookingsJSX = allBookings.map(booking => (
-        <div>
-            <p><b>Pet Sitter: </b> {booking.pet_sitter}</p>
-            <p><b>Pet Owner: </b> {booking.pet_owner}</p>
-            <p><b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}</p>
-            <p><b>Note: </b> {booking.note}</p>
-            <p className='d-flex justify-content-end'><i>Booking created on {formatDate(booking.created_at)} by {user.email}
+    let ownerBookings = allBookings.filter(booking => booking.owner === user.id)
+    let recipientBookings = allBookings.filter(booking => booking.owner !== user.id)
+
+    const ownerBookingsJSX = ownerBookings.map(booking => (
+        <div className='recent-booking'>
+            <p><b>For Pet Sitter: </b> {booking.pet_sitter}<br />
+                <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}</p>
+            <p className='d-flex justify-content-end'><i>Requested on {formatDate(booking.created_at)} by me
+            </i></p>
+        </div>
+    ))
+
+    const recipientBookingsJSX = recipientBookings.map(booking => (
+        <div className='recent-booking'>
+            <p><b>From Pet Owner: </b> {booking.pet_owner} <br />
+                <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}<br /><b>Note: </b> {booking.note}</p>
+            <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)} by {booking.pet_owner}
             </i></p>
         </div>
     ))
@@ -102,11 +111,10 @@ const Dashboard = ({ user, msgAlert }) => {
 
 
     return (
-        <div className='dashboard mt-5 container-fluid'>
+        <div className='dashboard mt-3 container-fluid'>
             <h2 className='page-heading text-center'>My Dashboard</h2>
-
-            <div className='row mx-5'>
-                <div className='col-3 ms-5 db-div-0'>
+            <div className='row'>
+                <div className='col-2 db-div-0'>
                     <h5 className='container-fluid mb-3'><b>Account</b></h5>
                     <p className='text-center'>Logged in as {user.email}<br /></p>
                     <h5 className='mt-3 container-fluid mb-3'><b>My Links</b></h5>
@@ -115,33 +123,49 @@ const Dashboard = ({ user, msgAlert }) => {
                     <Link className='link' to='/petsitters'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Find PawSitters</Link><br />
                     <Link className='link' to='/change-password'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Change My Password</Link>
                 </div>
-                {/* <div className='col db-div-1'> */}
-                    <Calendar
-                        tileClassName={tileClassName}
-                    />
-                {/* </div> */}
-            </div>
-            <div className='row mx-5 mt-3'>
-                <div className='col db-div-2'>
-                    <Link className='link float-end mt-2' to='/reviews'><FontAwesomeIcon icon={faStar} size='md' className='icon' />My Reviews</Link>
-                    <h5 className='container-fluid mb-3 mt-2'><b>Recent Review I Posted</b></h5>
-
+                <div className='col db-div-1'>
+                    <h5 className='container-fluid mb-3 mt-2'><Link to='/reviews' className='link'><FontAwesomeIcon icon={faStar} size='md' className='icon' /><b>Most Recent Review Made</b></Link></h5>
                     {
                         allReviewsJSX.length > 0 ?
-                            <div className='recent-review'>{allReviewsJSX[allReviewsJSX.length - 1]}</div>
+                            <div className='recent-review'>
+                                {allReviewsJSX[allReviewsJSX.length - 1]}
+                            </div>
                             :
                             <div className='recent-review pb-2'>No Reviews Yet</div>
                     }
                 </div>
+                <Calendar
+                    tileClassName={tileClassName}
+                />
+                
+
+            </div>
+            <div className='row mx-5 mt-3'>
+                <div className='col db-div-2'>
+                    <p className='float-end mt-2'>(as pet owner)</p>
+                    <h5 className='container-fluid mb-3 mt-2'><Link to='/bookings' className='link'><FontAwesomeIcon icon={faCalendarAlt} size='md' className='icon' /><b>Bookings Requested</b></Link></h5>
+
+                    {
+                        ownerBookingsJSX.length > 0 ?
+                            <div>
+                                {ownerBookingsJSX}
+                            </div>
+                            :
+                            <div className='recent-booking pb-2'>No Bookings Requested</div>
+                    }
+
+                </div>
 
                 <div className='col db-div-2'>
-                    <Link className='link float-end mt-2' to='/bookings'><FontAwesomeIcon icon={faCalendarAlt} size='md' className='icon' />My Bookings</Link>
-                    <h5 className='container-fluid mb-3 mt-2'><b>Recent Booking I Requested</b></h5>
+                    <p className='float-end mt-2'>(as paw sitter)</p>
+                    <h5 className='container-fluid mb-3 mt-2'><Link to='/bookings' className='link'><FontAwesomeIcon icon={faCalendarAlt} size='md' className='icon' /><b>Bookings Received</b></Link></h5>
                     {
-                        allBookingsJSX.length > 0 ?
-                            <div className='recent-booking'>{allBookingsJSX[allBookingsJSX.length - 1]}</div>
+                        recipientBookingsJSX.length > 0 ?
+                            <div>
+                                {recipientBookingsJSX}
+                            </div>
                             :
-                            <div className='recent-booking'>No Bookings Yet</div>
+                            <div className='recent-booking'>No Bookings Received</div>
                     }
                 </div>
             </div>

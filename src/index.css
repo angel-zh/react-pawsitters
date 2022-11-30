@@ -135,9 +135,9 @@ body {
 .db-div-0,
 .db-div-1,
 .db-div-2 {
-  height: 250px;
+  height: 280px;
   width: auto;
-  margin: 20px;
+  margin: 15px;
   overflow-y: auto;
   border: 2px solid #757d90;
   border-radius: 10px;
@@ -145,12 +145,15 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
+
+
 .db-div-0 {
   background-color: #3f4257;
   border: none;
   height: 270px;
   box-shadow: none;
 }
+
 
 .db-div-2 {
   height: 300px;
@@ -175,20 +178,20 @@ body {
 .recent-booking,
 .recent-review {
   background-color: #4a4d60;
-  padding: 10px;
+  padding: 10px 10px 0px 10px;
   border-radius: 5px;
   border-top: 1px solid #c0cff8;
 }
 
-
-
 .react-calendar {
-  width: 400px;
+  width: 420px;
   max-width: 100%;
   background-color: #56596e;
   color: #8baafa;
   border-radius: 10px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border: 2px solid #9d91d8;
+  box-shadow: 0 12px 24px #00000033;
+  margin-right: 30px;
 }
 
 .react-calendar__navigation button {
@@ -226,6 +229,12 @@ body {
 .highlight {
   font-weight: bold;
   color: white;
-  background-color: #6364a2;
+  background-color: #58b2b2;
+  text-shadow: 1px 1px black;
   
+}
+
+.booking-calendar {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
 }
