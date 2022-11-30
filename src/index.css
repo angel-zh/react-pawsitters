@@ -248,3 +248,8 @@ body {
   width: 100%;
   background-color: #56596e;
 }
+
+.booking-img {
+  margin: auto;
+  border: black;
+}

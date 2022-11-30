@@ -47,7 +47,7 @@ const BookingShow = (props) => {
     }
 
     // navigating to '/bookings' was causing errors - fix later
-    if (deleted) navigate('/dashboard')
+    if (deleted) navigate('/')
 
     // Formating Dates and times
     let date = moment(booking.created_at).format('MMMM Do YYYY, h:mm a')
@@ -70,15 +70,16 @@ const BookingShow = (props) => {
             <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                 <Card.Header style={{ backgroundColor: '#56596e' }}>
                     <div>
-                        <img src={booking.pet_owner.images} style={{width: 'auto', height: '25em'}} class='resonsive'/>
+                        <img className='container-md booking-img' src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/>
                     </div>
                 </Card.Header>
                 <Card.Body>
                     <div>
                         <small className='float-end'>Booked: {date}</small><br/>
                         <br/>
-                        <p>{booking.pet_owner.first_name} {booking.pet_owner.last_name} has booked {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}</p>
-                        <p>Note: {booking.note}</p>
+                        <b>{booking.pet_owner.first_name} {booking.pet_owner.last_name} has booked {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}</b><br/><br/>
+                        <b>Note:</b><br/> <i>{booking.note}</i><br/>
+                        <br/>
                         <b>{dateStart} - {dateEnd}</b><br/>
                         <b>{timeStart} - {timeEnd}</b>
                     </div>
