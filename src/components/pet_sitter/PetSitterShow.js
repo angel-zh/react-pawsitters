@@ -22,7 +22,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [reviews, setReviews] = useState([])
-
+    const [allReviews, setAllReviews] = useState([])
+    
     // scroll to top on page load
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -87,6 +88,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
             </div>
         ))
 
+         
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
     }

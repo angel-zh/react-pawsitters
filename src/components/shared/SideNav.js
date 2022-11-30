@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns } from '@fortawesome/free-solid-svg-icons'
+
+import { faSquarePlus, faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -21,7 +22,8 @@ const SideNav = ({ user }) => {
             </MenuItem>
             <MenuItem routerLink={<Link to='petowners/' />}> 
             <FontAwesomeIcon icon={faUser} size='xl' className='icon' /> Pet Owner </MenuItem>
-            <MenuItem routerLink={<Link to='petowners/create' />}> Create Pet Owner </MenuItem>
+            <MenuItem routerLink={<Link to='petowners/create' />}> 
+            <FontAwesomeIcon icon={faSquarePlus} size='xl' className='icon' />Create Pet Owner </MenuItem>
             <MenuItem routerLink={<Link to='bookings' />}>
                 <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings
             </MenuItem>
