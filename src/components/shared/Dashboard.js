@@ -6,6 +6,9 @@ import moment from 'moment'
 import { bookingIndex } from '../../api/booking'
 import { reviewIndex } from '../../api/review'
 import StarRating from './StarRating'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+
 
 const Dashboard = ({ user, msgAlert }) => {
     const petSitterLink = `/petsitters/${user.id}`
@@ -41,17 +44,6 @@ const Dashboard = ({ user, msgAlert }) => {
 
     const formatDate = date => { return moment(date).format("MMM Do YY") }
 
-    const allBookingsJSX = allBookings.map(booking => (
-        <div>
-            <p><b>Pet Sitter: </b> {booking.pet_sitter}</p>
-            <p><b>Pet Owner: </b> {booking.pet_owner}</p>
-            <p><b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end)}</p>
-            <p><b>Note: </b> {booking.note}</p>
-            <p className='d-flex justify-content-end'><i>Booking created on {formatDate(booking.created_at)} by {user.email}
-            </i></p>
-        </div>
-    ))
-
     const allReviewsJSX = allReviews.map(review => (
         <div>
             <p><b>Pet Sitter: </b> {review.pet_sitter}</p>
@@ -68,6 +60,45 @@ const Dashboard = ({ user, msgAlert }) => {
         </div>
     ))
 
+    const allBookingsJSX = allBookings.map(booking => (
+        <div>
+            <p><b>Pet Sitter: </b> {booking.pet_sitter}</p>
+            <p><b>Pet Owner: </b> {booking.pet_owner}</p>
+            <p><b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}</p>
+            <p><b>Note: </b> {booking.note}</p>
+            <p className='d-flex justify-content-end'><i>Booking created on {formatDate(booking.created_at)} by {user.email}
+            </i></p>
+        </div>
+    ))
+
+
+
+    const getDatesInRange = (startDate, endDate) => {
+        if (!startDate || !endDate) return []
+
+        const dateArray = []
+        const formattedCurrentDate = new Date(startDate)
+        const formattedEndDate = new Date(endDate)
+        while (formattedCurrentDate <= formattedEndDate) {
+            dateArray.push(formattedCurrentDate.toISOString().split('T')[0]);
+            formattedCurrentDate.setDate(formattedCurrentDate.getDate() + 1);
+        }
+        return dateArray
+    }
+
+
+    function tileClassName({ date, view }) {
+        const allDates = []
+        allBookings.forEach((booking) => {
+            const dateRange = getDatesInRange(booking.start_day, booking.end_day)
+            allDates.push(...dateRange)
+        })
+        if (view === 'month') {
+            if (allDates.find(currentDate => currentDate === date.toISOString().split('T')[0])) {
+                return 'highlight';
+            }
+        }
+    }
 
 
     return (
@@ -84,14 +115,16 @@ const Dashboard = ({ user, msgAlert }) => {
                     <Link className='link' to='/petsitters'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Find PawSitters</Link><br />
                     <Link className='link' to='/change-password'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Change My Password</Link>
                 </div>
-                <div className='col db-div-1'>
-                    hello
-                </div>
+                {/* <div className='col db-div-1'> */}
+                    <Calendar
+                        tileClassName={tileClassName}
+                    />
+                {/* </div> */}
             </div>
             <div className='row mx-5 mt-3'>
                 <div className='col db-div-2'>
                     <Link className='link float-end mt-2' to='/reviews'><FontAwesomeIcon icon={faStar} size='md' className='icon' />My Reviews</Link>
-                    <h5 className='container-fluid mb-3 mt-2'><b>My Most Recent Review</b></h5>
+                    <h5 className='container-fluid mb-3 mt-2'><b>Recent Review I Posted</b></h5>
 
                     {
                         allReviewsJSX.length > 0 ?
@@ -103,7 +136,7 @@ const Dashboard = ({ user, msgAlert }) => {
 
                 <div className='col db-div-2'>
                     <Link className='link float-end mt-2' to='/bookings'><FontAwesomeIcon icon={faCalendarAlt} size='md' className='icon' />My Bookings</Link>
-                    <h5 className='container-fluid mb-3 mt-2'><b>My Most Recent Booking</b></h5>
+                    <h5 className='container-fluid mb-3 mt-2'><b>Recent Booking I Requested</b></h5>
                     {
                         allBookingsJSX.length > 0 ?
                             <div className='recent-booking'>{allBookingsJSX[allBookingsJSX.length - 1]}</div>
