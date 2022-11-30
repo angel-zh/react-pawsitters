@@ -46,20 +46,23 @@ const BookingShow = (props) => {
         )
     }
 
+    // navigating to '/bookings' was causing errors - fix later
     if (deleted) navigate('/dashboard')
 
-
+    // Formating Dates and times
     let date = moment(booking.created_at).format('MMMM Do YYYY, h:mm a')
     let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
     let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
     let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
     let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
 
-    let petImage = booking.pet_owner.images
-    if (petImage = null)
-        return {
-
-        }
+    // adding the pet image here - if none, default image will be provided
+    // let petImage = booking.pet_owner.images
+    // if (petImage = null)
+    //     return {
+    //         petImage = {PetImages[`{booking.pet_owner.pet_type}`]}
+    //         // <Card.Img variant="top" src={FoodImages[`${restaurant.type}`]} style={{ height: '300px' }} alt={restaurant.type} />
+    //     }
 
     return (
 
@@ -67,7 +70,7 @@ const BookingShow = (props) => {
             <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                 <Card.Header style={{ backgroundColor: '#56596e' }}>
                     <div>
-                        <img src={petImage} style={{width: 'auto', height: '25em'}}/>
+                        <img src={booking.pet_owner.images} style={{width: 'auto', height: '25em'}} class='resonsive'/>
                     </div>
                 </Card.Header>
                 <Card.Body>
