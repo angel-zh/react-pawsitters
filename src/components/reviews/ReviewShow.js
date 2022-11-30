@@ -14,7 +14,6 @@ const ReviewShow = (props) => {
 
 
     const handleDeleteReview = () => {
-        // removed the _ from _.id
         reviewDelete(user, petSitter.owner, review.id)
         // const navigate = useNavigate()
             .then(() => {

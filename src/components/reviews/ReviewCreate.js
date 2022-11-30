@@ -26,8 +26,8 @@ const ReviewCreate = (props) => {
     // These states are to clear the image data from the review form after a review submit
     // They are set here and then used as props in CloudinaryUploadWidget.js, ReviewForm.js, and ReviewEdit.js
     // Shoutout to Timm and Aisha for helping with this tricky part
-    // const [picture, setPicture] = useState('')
-    // const [imageSelected, setImageSelected] = useState('')
+    const [picture, setPicture] = useState('')
+    const [imageSelected, setImageSelected] = useState('')
     
     // sets the new values for a new review
     const handleChange = (e) => {
@@ -40,15 +40,15 @@ const ReviewCreate = (props) => {
             }
         })
     }
-    // const handleImageChange = (image) => {
-    //     setReview(prevReview => {
-    //         const name = 'image'
-    //         const updatedReview = {[name]: image}
-    //         return {
-    //             ...prevReview, ...updatedReview
-    //         }
-    //     })
-    // } 
+    const handleImageChange = (image) => {
+        setReview(prevReview => {
+            const name = 'image'
+            const updatedReview = {[name]: image}
+            return {
+                ...prevReview, ...updatedReview
+            }
+        })
+    } 
     
     
     const handleSubmit = (e) => {
@@ -82,10 +82,10 @@ const ReviewCreate = (props) => {
                 })
             })
             // sets the image preview back to an empty string
-            // .then(() => {
-            //     setPicture('')
-            //     setImageSelected('')
-            // })
+            .then(() => {
+                setPicture('')
+                setImageSelected('')
+            })
             .then(() => triggerRefresh())
             .catch((error) => {
                 msgAlert({
@@ -103,13 +103,13 @@ const ReviewCreate = (props) => {
                 <Accordion.Header>Add a Review</Accordion.Header>
                 <Accordion.Body style={{ backgroundColor: '#f2f6ec' }}>
                     <ReviewForm
-                        // imageSelected={imageSelected}
-                        // setImageSelected={setImageSelected}
-                        // picture={picture}
-                        // setPicture={setPicture}
+                        imageSelected={imageSelected}
+                        setImageSelected={setImageSelected}
+                        picture={picture}
+                        setPicture={setPicture}
                         review={review}
                         handleChange={handleChange}
-                        // handleImageChange={handleImageChange}
+                        handleImageChange={handleImageChange}
                         handleSubmit={handleSubmit}
                         heading="Add a review for this pet sitter"
                     />
