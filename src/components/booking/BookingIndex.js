@@ -40,8 +40,7 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
 
     const allBookingsJSX = allBookings.map(booking => (
         
-        <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}> 
-        {/* <Card.Img variant="top" src={PetImages[`${petOwner.pet_type}`]} style={{ height: '300px' }} alt={petOwner.pet_type} /> */}
+        <Card key={ booking.id } style={{ width: 'auto', margin: 10, backgroundColor: '#56596e' }}> 
             <BookingShow 
                 user={user}
                 booking={booking}
@@ -53,11 +52,10 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
     ))    
 
     return (
-        <div className='text-center mt-3'>
-            <h2>All My Bookings</h2>
-            <i>~currently under construction~</i>
+        <div className='container-md'>
+            <h2 className='text-center my-3 page-heading'>All My Bookings</h2>
 
-            <div className='container-md text-center' style={ cardContainerLayout }>
+            <div className='container-md mt-2 booking-index' style={ cardContainerLayout }>
                 { allBookingsJSX }
             </div>
         </div>

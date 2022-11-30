@@ -46,7 +46,7 @@ const BookingShow = (props) => {
         )
     }
 
-    if (deleted) navigate('/')
+    if (deleted) navigate('/dashboard')
 
 
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
@@ -58,8 +58,8 @@ const BookingShow = (props) => {
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
+            <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
+                <Card.Header style={{ backgroundColor: '#56596e' }}>
                     <div>
                         <img src='https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg'/>
                     </div>
