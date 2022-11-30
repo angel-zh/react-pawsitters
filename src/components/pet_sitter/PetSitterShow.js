@@ -214,7 +214,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         </Container>
 
 
-
                         <PetSitterUpdate
                             user={user}
                             petSitter={petSitter}

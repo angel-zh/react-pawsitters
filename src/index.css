@@ -238,3 +238,13 @@ body {
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
+
+.booking-index {
+  border: 2px solid #757d90;
+  padding: 20px;
+  border-radius: 5px;
+  overflow-y: auto;
+  height: 83vh;
+  width: 100%;
+  background-color: #56596e;
+}
