@@ -62,7 +62,7 @@ const PetOwnerCreate = (props) => {
         event.preventDefault()
         console.log(petOwner, user)
         petOwnerCreate(petOwner, user)
-            // .then(res => { navigate(`/`) })
+            .then(res => { navigate(`/petowners/`) })
            
             .then(() => {
                 msgAlert({

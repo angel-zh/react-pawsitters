@@ -104,6 +104,9 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
                 <Card.Text>
                     <h3 className='mb-2'>Pet Owner Profile</h3>
+                    <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
+                    <h3>Pet's Name: {petOwner.pet_name} </h3>
+                    <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
                         {/* <div className='d-flex'>
                             {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
                             {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
@@ -118,7 +121,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                     {/* <small>Comments: </small>
                     <p></p> */}
                     <img
-                        style={{ width: 200 }}
+                        style={{ width: 600 }}
                         src={petOwner.images}
                         alt={""}
                     />
@@ -127,9 +130,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         
         <div className='container-md text-center'>
              <div className='="container-md' style= {{border: '2px solid black'}}>
-             <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
-             <h3>Pet's Name: {petOwner.pet_name} </h3>
-             <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
+             
             
 
 </div>
