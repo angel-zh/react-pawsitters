@@ -10,7 +10,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+<<<<<<< HEAD
     "antd": "^4.24.1",
+=======
+    "antd": "^4.24.4",
+>>>>>>> 86dcceefacaadc1afe7e077b97eb9800079bf761
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
     "cloudinary-react": "^1.8.1",
@@ -18,6 +22,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.0.0-alpha.9",
     "react-router-dom": "^6.4.3",
