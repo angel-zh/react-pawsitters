@@ -3,7 +3,6 @@ import { Card, Button } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 import { bookingIndex } from '../../api/booking'
 import BookingShow from './BookingShow'
-// import PetImages from '../shared/PetImages'
 
 
 const cardContainerLayout = {
