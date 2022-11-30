@@ -7,7 +7,7 @@ import BookingUpdate from './BookingUpdate'
 import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petSitter } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
     const [deleted, setDeleted] = useState(false)
@@ -46,32 +46,42 @@ const BookingShow = (props) => {
         )
     }
 
-    if (deleted) navigate('/')
+    // navigating to '/bookings' was causing errors - fix later
+    if (deleted) navigate('/dashboard')
 
-
-    let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
+    // Formating Dates and times
+    let date = moment(booking.created_at).format('MMMM Do YYYY, h:mm a')
     let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
     let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
     let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
     let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
 
+    // adding the pet image here - if none, default image will be provided
+    // let petImage = booking.pet_owner.images
+    // if (petImage = null)
+    //     return {
+    //         petImage = {PetImages[`{booking.pet_owner.pet_type}`]}
+    //         // <Card.Img variant="top" src={FoodImages[`${restaurant.type}`]} style={{ height: '300px' }} alt={restaurant.type} />
+    //     }
+
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
+            <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
+                <Card.Header style={{ backgroundColor: '#56596e' }}>
                     <div>
-                        <img src='https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg'/>
+                        <img src={booking.pet_owner.images} style={{width: 'auto', height: '25em'}} class='resonsive'/>
                     </div>
                 </Card.Header>
                 <Card.Body>
-                    <small className='float-end'>Booked: {date}</small><br/>
-                    <br/>
-                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
-                    <small>Note: </small>
-                    <p>{booking.note}</p>
-                    <p>{dateStart} - {dateEnd}</p>
-                    <p>{timeStart} - {timeEnd}</p>
+                    <div>
+                        <small className='float-end'>Booked: {date}</small><br/>
+                        <br/>
+                        <p>{booking.pet_owner.first_name} {booking.pet_owner.last_name} has booked {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}</p>
+                        <p>Note: {booking.note}</p>
+                        <b>{dateStart} - {dateEnd}</b><br/>
+                        <b>{timeStart} - {timeEnd}</b>
+                    </div>
                 </Card.Body>
                 <Card.Footer className='mb-3'>
                     <Button
@@ -98,6 +108,7 @@ const BookingShow = (props) => {
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}
                 petSitter={petSitter}
+                petOwner={petOwner}
             />
         </>
 
