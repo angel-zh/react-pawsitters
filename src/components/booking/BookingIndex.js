@@ -3,6 +3,8 @@ import { Card, Button } from 'react-bootstrap'
 // import { Link } from 'react-router-dom'
 import { bookingIndex } from '../../api/booking'
 import BookingShow from './BookingShow'
+// import PetImages from '../shared/PetImages'
+
 
 const cardContainerLayout = {
     display: 'flex',
@@ -15,7 +17,7 @@ const cardContainerLayout = {
 //     textDecoration: 'none'
 // }
 
-const BookingIndex = ({ user, msgAlert }) => {
+const BookingIndex = ({ user, msgAlert, petOwner }) => {
 
     const [allBookings, setAllBookings] = useState([])
 
@@ -39,6 +41,7 @@ const BookingIndex = ({ user, msgAlert }) => {
     const allBookingsJSX = allBookings.map(booking => (
         
         <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}> 
+        {/* <Card.Img variant="top" src={PetImages[`${petOwner.pet_type}`]} style={{ height: '300px' }} alt={petOwner.pet_type} /> */}
             <BookingShow 
                 user={user}
                 booking={booking}

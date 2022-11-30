@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import ReviewForm from '../shared/ReviewForm'
 import { reviewUpdate } from '../../api/review'
 import messages from '../shared/AutoDismissAlert/messages'
@@ -12,10 +13,12 @@ const ReviewEdit = (props) => {
     } = props
 
     const [review, setReview] = useState(props.review)
+    const [updated, setUpdated] = useState(false)
     const [picture, setPicture] = useState(props.review.image)
     const [imageSelected, setImageSelected] = useState(props.imageSelected)
 
     const handleChange = (e) => {
+        console.log('this is the beginging of handlechange review', review)
         setReview(prevReview => {
             const name = e.target.name
             let value = e.target.value
@@ -26,6 +29,7 @@ const ReviewEdit = (props) => {
                 ...prevReview, ...updatedReview
             }
         })
+        console.log('this is the endof handlechange review', review)
     }
 
     const handleImageChange = (image) => {
@@ -39,26 +43,30 @@ const ReviewEdit = (props) => {
     } 
 
     const handleSubmit = (e) => {
+        // console.log('this is handlesubmit review', review)
         e.preventDefault()
 
-        reviewUpdate(user, petSitter._id, review)
-            .then(() => handleClose())
-            .then(() => {
-                msgAlert({
-                    heading: 'Success',
-                    message: messages.updateReviewSuccess,
-                    variant: 'success'
-                })
+        reviewUpdate(user, petSitter.owner, review)
+        .then(() => handleClose())
+        .then(() => {
+            msgAlert({
+                heading: 'Success',
+                message: messages.updateReviewSuccess,
+                variant: 'success'
             })
-            .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: messages.updateReviewFailure + error,
-                    variant: 'danger'
-                })
+        })
+        .then(() => triggerRefresh())
+        .catch((error) => {
+            msgAlert({
+                heading: 'Failure',
+                message: messages.updateReviewFailure + error,
+                variant: 'danger'
             })
+        })
+        console.log('this is review at the end of handle submit', review)
     }
+
+    // if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose}>

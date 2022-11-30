@@ -2,7 +2,10 @@ import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquarePlus, faUser, faPaw, faDog, faBone, faCat, faAlignJustify, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faUserClock, faTableColumns } from '@fortawesome/free-solid-svg-icons'
+
+
+import { faSquarePlus, faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns } from '@fortawesome/free-solid-svg-icons'
+
 
 
 const linkStyle = {
@@ -48,8 +51,11 @@ const SideNav = ({ user }) => {
     )
     const alwaysOptions = (
         <>
+            <MenuItem routerLink={<Link to='/' />}>
+                <FontAwesomeIcon icon={faPlay} size='xl' className='icon' /> Getting Started
+            </MenuItem>
             <MenuItem routerLink={<Link to='petsitters' />}>
-                <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Find Pet Sitters
+                <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Find PawSitters
             </MenuItem>
         </>
     )
@@ -77,7 +83,7 @@ const SideNav = ({ user }) => {
 
             <Sidebar backgroundColor="#31344b" transitionDuration={800}>
                 <button className='grip-lines mt-2 mx-3 btn mb-2' onClick={() => collapseSidebar()}>
-                    <FontAwesomeIcon icon={faAlignJustify} size='xl' />
+                    <FontAwesomeIcon icon={faBars} size='xl' />
                 </button>
 
                 <Menu>
@@ -86,8 +92,10 @@ const SideNav = ({ user }) => {
                             <span className='navbar-text mr-2'><i>Welcome, {user.email}</i></span>
                         )}
                     </div>
+                    <div className='mt-3'>
                     {alwaysOptions}
                     {user ? authenticatedOptions : unauthenticatedOptions}
+                    </div>
                 </Menu>
             </Sidebar>
         </div>

@@ -1,34 +1,34 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
-import moment from 'moment'
+import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
     const { booking, user, msgAlert, triggerRefresh, petSitter } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
-    // const [deleted, setDeleted] = useState(false)
-    // const navigate = useNavigate()
+    const [deleted, setDeleted] = useState(false)
+    const navigate = useNavigate()
 
     const handleDeleteBooking = () => {
-        // let updatedBooking = booking
-        // updatedBooking.pet_sitter = petSitter.owner
-        // updatedBooking.pet_owner = user.id
-        // updatedBooking.owner = user.id
-        // console.log(petSitter, 'first petSitter')
-        // console.log(pet_sitter, 'first pet_sitter')
 
-        bookingDelete(user, booking.id, petSitter.owner)
+        bookingDelete(user, booking)
             .then(() => {
+                // console.log('BookingShow.js booking', booking)
+                // console.log('BookingShow.js user', booking)
+
+                setDeleted(true)
                 msgAlert({
                     heading: 'Success: Booking Deleted',
                     message: "Booking Deleted",
                     variant: 'success'
                 })
             })
-            .then(() => triggerRefresh())
+            // .then(() => triggerRefresh())
+            // on success redirect/make new index
             .catch((error) => {
                 msgAlert({
                     heading: 'Oops',
@@ -38,50 +38,56 @@ const BookingShow = (props) => {
             })
     }
 
+    if(!booking){
+        return (
+            <>
+                "No Bookings scheduled yet"
+            </>
+        )
+    }
+
+    if (deleted) navigate('/')
+
+
     let date = moment(booking.createdAt).format('MMMM Do YYYY, h:mm a')
     let dateStart = moment(booking.start_day).format('MMMM Do YYYY')
     let dateEnd = moment(booking.end_day).format('MMMM Do YYYY')
     let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
     let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
 
-    if(booking.length < 1){
-        return "No Bookings scheduled yet"
-    }
-
-    // if (deleted) navigate('/')
-
     return (
 
         <>
             <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
                 <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
-                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
+                    <div>
+                        <img src='https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg'/>
+                    </div>
                 </Card.Header>
                 <Card.Body>
+                    <small className='float-end'>Booked: {date}</small><br/>
+                    <br/>
+                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
                     <small>Note: </small>
                     <p>{booking.note}</p>
-                    <small>Days: </small>
                     <p>{dateStart} - {dateEnd}</p>
-                    <small>Time: </small>
                     <p>{timeStart} - {timeEnd}</p>
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className='mb-3'>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#3f4257', borderColor: '#aa501a', color: '#aa501a' }}
+                        variant="info"
                         onClick={() => setEditModalShow(true)}
                     >
                         Edit
                     </Button>
                     <Button
                         className='m-2'
-                        style={{ backgroundColor: '#3f4257', borderColor: '#a32131', color: '#a32131' }}
+                        variant="outline-info"
                         onClick={() => handleDeleteBooking()}
                     >
                         Delete
                     </Button>
-                    
-                    <div className='float-end'>Booked: <br/>{date}</div>
                 </Card.Footer>
             </Card>
             <BookingUpdate
@@ -99,20 +105,3 @@ const BookingShow = (props) => {
 }
 
 export default BookingShow
-
-
-// {/* <Container>
-//     <h3 className='my-5'>All of {restaurant.name}'s reviews:</h3>
-//     {
-//         restaurant.reviews.length > 0
-//             ?
-//             <>
-//                 {reviewCards}
-//             </>
-//             :
-//             <>
-//                 <h5 className='text-center'>This restaurant does not have any reviews yet. Be the first to review!</h5>
-//             </>
-//     }
-
-// </Container> */}
