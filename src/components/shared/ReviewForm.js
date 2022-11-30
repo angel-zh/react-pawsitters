@@ -36,7 +36,7 @@ const ReviewForm = (props) => {
                         <option value="1">1 - Terrible</option>
                     </Form.Select>
                 </Col>
-                <hr class="bg-success border-2 border-top border-success" />
+                <hr className="bg-success border-2 border-top border-success" />
                 <>
                     {/* <Form.Label>Upload an Image:</Form.Label>
                     <CloudinaryUploadWidget
@@ -48,7 +48,7 @@ const ReviewForm = (props) => {
                     /> */}
                 </>
 
-                <hr class="bg-success border-2 border-top border-success" />
+                <hr className="bg-success border-2 border-top border-success" />
                 <Button variant='success' type="submit">Submit</Button>
 
             </Form>

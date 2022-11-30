@@ -41,7 +41,7 @@ const ReviewEdit = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        reviewUpdate(user, petSitter._id, review)
+        reviewUpdate(user, petSitter.id, review)
             .then(() => handleClose())
             .then(() => {
                 msgAlert({
