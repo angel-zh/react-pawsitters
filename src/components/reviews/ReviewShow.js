@@ -10,13 +10,15 @@ const ReviewShow = (props) => {
     const { review, petSitter, user, msgAlert, triggerRefresh } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
+    const [deleted, setDeleted] = useState(false)
 
 
     const handleDeleteReview = () => {
         // removed the _ from _.id
         reviewDelete(user, petSitter.owner, review.id)
-// check if review id needs an underscore
+        // const navigate = useNavigate()
             .then(() => {
+                setDeleted(true)
                 msgAlert({
                     heading: 'Success: Review Deleted',
                     message: "We'll never speak of it again",
