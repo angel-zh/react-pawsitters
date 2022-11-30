@@ -22,7 +22,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [reviews, setReviews] = useState([])
-
+    const [allReviews, setAllReviews] = useState([])
+    
     // scroll to top on page load
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -67,10 +68,12 @@ const PetSitterShow = ({ user, msgAlert }) => {
     useEffect(() => {
         reviewIndex(user)
             .then((res) => {
-                console.log('this is res.dat', res.data)
+                console.log('this is res.data', res.data)
                 setReviews(res.data.reviews)
             })
     }, [])
+
+    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
     const reviewCards = () => {
         // if (reviews.id) {
         console.log('reviews', reviews)
@@ -88,6 +91,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
         ))
     }
 
+         
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
     }
