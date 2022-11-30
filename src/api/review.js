@@ -22,6 +22,7 @@ export const reviewCreate = (user, petsitterOwner, petownerId, reviewCreate) => 
 
 // INDEX reviews - no token
 export const reviewIndex = (user) => {
+	
     // console.log(user.token)
 	return axios({
 		url: apiUrl + `/reviews/`,
@@ -33,24 +34,28 @@ export const reviewIndex = (user) => {
 }
 
 // INDEX reviews - no token
-export const reviewCards = (user) => {
-    // console.log(user.token)
-	return axios({
-		url: apiUrl + `/reviews/`,
-		method: 'GET',
-        headers: {
-			Authorization: `Token ${user.token}`,
-		},
-	})
-}
+// export const reviewCards = (user, petsitterOwner, reviewIndex) => {
+// 	// const reviews = {...reviewIndex, ...petsitterOwner}
+//     // console.log(user.token)
+// 	return axios({
+// 		url: apiUrl + `/reviews/`,
+// 		method: 'GET',
+//         // headers: {
+// 		// 	Authorization: `Token ${user.token}`,
+// 		// },
+// 		// data: {reviews: reviews}
+// 	})
+// }
+
 
 // UPDATE a review - token Required
-export const reviewUpdate = (user, petsitterId, updatedReview) => {
+export const reviewUpdate = (user, petsitterOwner, updatedReview) => {
 	const ownerId = { owner: user._id }
-	const review = {...updatedReview, ...ownerId}
+	const review = {...updatedReview, ...petsitterOwner, ...ownerId}
 
 	return axios({
-		url: `${apiUrl}/reviews/${petsitterId}/${review.id}/`,
+		// url: `${apiUrl}/reviews/${petsitterId}/${review.id}/`,
+		url: `${apiUrl}/reviews/${review.id}/`,
 		method: 'PATCH',
 		headers: {
 			Authorization: `Token ${user.token}`,
@@ -62,7 +67,7 @@ export const reviewUpdate = (user, petsitterId, updatedReview) => {
 // DELETE review - token required
 export const reviewDelete = (user, petsitterId, reviewId) => {
 	return axios({
-		url: `${apiUrl}/reviews/${petsitterId}/${reviewId}/`,
+		url: `${apiUrl}/reviews/${reviewId}/`,
 		method: 'DELETE',
 		headers: {
 			Authorization: `Token ${user.token}`,

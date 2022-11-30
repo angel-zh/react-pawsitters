@@ -22,6 +22,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [reviews, setReviews] = useState([])
+    const [allReviews, setAllReviews] = useState([])
     
     // scroll to top on page load
     useEffect(() => {
@@ -63,57 +64,35 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }
 
-   
-    
-
-    // let reviewCards
-    // if (petSitter) {
-    //     if (petSitter.reviews.length > 0) {
-    //         reviewCards = petSitter.reviews.map(review => (
-    //             <div>
-    //                 <ReviewShow
-    //                     key={review._id}
-    //                     review={review}
-    //                     petSitter={petSitter}
-    //                     user={user}
-    //                     msgAlert={msgAlert}
-    //                     triggerRefresh={() => setUpdated(prev => !prev)}
-    //                 />
-    //             </div>
-    //         ))
-    //     }
-    // }
-
-    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
-   
-
-    
-
     useEffect(() => {
         reviewIndex(user)
             .then((res) => {
-                console.log('this is res.dat', res.data) 
+                console.log('this is res.data', res.data) 
                 setReviews(res.data.reviews)
             })
     }, [])
+
+    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
     const reviewCards = () => {
-    // if (reviews.id) {
-        console.log('reviews', reviews)
-        return   reviews.map(review => (
-            <div>
-                <ReviewShow
-                    key={review.id}
-                    review={review}
-                    petSitter={petSitter}
-                    user={user}
-                    msgAlert={msgAlert}
-                    triggerRefresh={() => setUpdated(prev => !prev)}
-                />
-            </div>
-        ))
-        console.log(reviewCards)
+        // if (petSitter) {
+        //     if (petSitter.reviews.length > 0) { 
+            console.log('This is the reviews from petsitterShow', reviews)
+            return   reviews.map(review => (
+                <div>
+                    <ReviewShow
+                        key={review.id}
+                        review={review}
+                        petSitter={petSitter}
+                        user={user}
+                        msgAlert={msgAlert}
+                        triggerRefresh={() => setUpdated(prev => !prev)}
+                    />
+                </div>
+            ))
+            // }
         // } 
-    }       
+    } 
+          
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
     const formatString = string => {
