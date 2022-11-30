@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
-import moment from 'moment'
+import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
     const { booking, user, msgAlert, triggerRefresh, petSitter } = props
@@ -60,16 +61,16 @@ const BookingShow = (props) => {
             <Card className="m-2" style={{ backgroundColor: '#56596e' }}>
                 <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                     <div>
-                        <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
-                        <small className='float-end'>Booked: {date}</small>
+                        <img src='https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492__340.jpg'/>
                     </div>
                 </Card.Header>
                 <Card.Body>
+                    <small className='float-end'>Booked: {date}</small><br/>
+                    <br/>
+                    <p>{booking.pet_owner} has booked {booking.pet_sitter}</p>
                     <small>Note: </small>
                     <p>{booking.note}</p>
-                    <small>Days: </small>
                     <p>{dateStart} - {dateEnd}</p>
-                    <small>Time: </small>
                     <p>{timeStart} - {timeEnd}</p>
                 </Card.Body>
                 <Card.Footer className='mb-3'>
