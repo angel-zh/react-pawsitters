@@ -72,11 +72,9 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }, [])
 
-    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
-    const reviewCards = () => {
-        // if (reviews.id) {
+    const allReviews = reviews.filter(review => review.pet_sitter.owner === petSitter.owner)
         console.log('reviews', reviews)
-        return reviews.map(review => (
+        const reviewCards = allReviews.map(review => (
             <div>
                 <ReviewShow
                     key={review.id}
@@ -88,7 +86,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 />
             </div>
         ))
-    }
 
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
@@ -257,7 +254,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                 reviews.length > 0
                                     ?
                                     <>
-                                        {reviewCards()}
+                                        {reviewCards}
                                     </>
                                     :
                                     <>
