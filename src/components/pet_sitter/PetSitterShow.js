@@ -67,7 +67,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
     useEffect(() => {
         reviewIndex(user)
             .then((res) => {
-                console.log('this is res.dat', res.data)
+                console.log('this is res.data', res.data)
                 setReviews(res.data.reviews)
             })
     }, [])
