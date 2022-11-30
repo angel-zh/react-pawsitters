@@ -64,6 +64,10 @@ body {
   background-color: #56596e;
 }
 
+.pet-sitter-form {
+  height: 95vh;
+}
+
 .pet-sitter-show {
   border: 1px solid #8baafa;
   height: 100vh;

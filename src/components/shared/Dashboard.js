@@ -44,9 +44,11 @@ const Dashboard = ({ user, msgAlert }) => {
 
     const formatDate = date => { return moment(date).format("MMM Do YY") }
 
-    const allReviewsJSX = allReviews.map(review => (
-        <div>
-            <p><b>Pet Sitter: </b> {review.pet_sitter} <br />
+    let ownerReviews = allReviews.filter(review => review.owner === user.id)
+
+    const ownerReviewsJSX = ownerReviews.map(review => (
+        <div className='recent-review'>
+            <p><b>Pet Sitter: </b> {review.pet_sitter.first_name} {review.pet_sitter.last_name}<br />
                 <b>Comment: </b> {review.comment} <br />
                 <b>Rating: </b>
                 <StarRating
@@ -124,11 +126,12 @@ const Dashboard = ({ user, msgAlert }) => {
                     <Link className='link' to='/change-password'><FontAwesomeIcon icon={faBone} size='md' className='icon' />Change My Password</Link>
                 </div>
                 <div className='col db-div-1'>
-                    <h5 className='container-fluid mb-3 mt-2'><Link to='/reviews' className='link'><FontAwesomeIcon icon={faStar} size='md' className='icon' /><b>Most Recent Review Made</b></Link></h5>
+                    <p className='float-end mt-2'>(as pet owner)</p>
+                    <h5 className='container-fluid mb-3 mt-2'><Link to='/reviews' className='link'><FontAwesomeIcon icon={faStar} size='md' className='icon' /><b>Reviews Made</b></Link></h5>
                     {
-                        allReviewsJSX.length > 0 ?
-                            <div className='recent-review'>
-                                {allReviewsJSX[allReviewsJSX.length - 1]}
+                        ownerReviewsJSX.length > 0 ?
+                            <div>
+                                {ownerReviewsJSX}
                             </div>
                             :
                             <div className='recent-review pb-2'>No Reviews Yet</div>

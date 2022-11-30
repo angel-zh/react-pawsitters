@@ -28,6 +28,9 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     }
 
     const [petSitter, setPetSitter] = useState(defaultPetSitter)
+    const [picture, setPicture] = useState('')
+    const [imageSelected, setImageSelected] = useState('')
+
 
     const dayOptions = [
         { value: 'monday', label: 'Monday' },
@@ -67,18 +70,30 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         })
     }
 
+    const handleImageChange = (images) => {
+        setPetSitter(prevPetSitter => {
+            const name = 'images'
+            const updatedPetSitter = {[name]: images}
+            return {
+                ...prevPetSitter, ...updatedPetSitter
+            }
+        })
+    } 
     const handleCreatePetSitter = event => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
             .then(res => console.log('Created Pet Sitter:', res.data))
-            // .then(res => { navigate(`/petsitters/${res.data.petSitter.id}`) })
-            .then(res => { navigate(`/petsitters`) })
+            .then(res => { navigate(`/dashboard`) })
             .then(() => {
                 msgAlert({
                     heading: 'Success',
                     message: 'Created Pet Sitter Profile',
                     variant: 'success'
                 })
+            })
+            .then(() => {
+                setPicture('')
+                setImageSelected('')
             })
             .catch(error => {
                 msgAlert({
@@ -92,10 +107,15 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     return (
 
         <PetSitterForm
+            imageSelected={imageSelected}
+            setImageSelected={setImageSelected}
+            picture={picture}
+            setPicture={setPicture}    
             petSitter={petSitter}
             handleChange={handleChange}
             heading="Sign Up to be a Pet Sitter"
             handleSubmit={handleCreatePetSitter}
+            handleImageChange={handleImageChange}
             handleSelect={handleSelect}
             dayOptions={dayOptions}
         />

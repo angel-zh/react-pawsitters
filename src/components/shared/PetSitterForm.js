@@ -2,9 +2,10 @@ import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const PetSitterForm = (props) => {
-    const { petSitter, handleChange, heading, handleSubmit, handleSelect, dayOptions, availability } = props
+    const { petSitter, handleChange, heading, handleSubmit, handleSelect, dayOptions, availability, handleImageChange, picture, setPicture, imageSelected, setImageSelected } = props
 
     const animatedComponents = makeAnimated()
     return (
@@ -46,6 +47,16 @@ const PetSitterForm = (props) => {
                             onChange={handleChange}
                         />
                     </Col>
+                    <>
+                    <Form.Label>Upload an Image:</Form.Label>
+                    <CloudinaryUploadWidget
+                        handleImageChange={handleImageChange}
+                        picture={picture}
+                        setPicture={setPicture}
+                        imageSelected={imageSelected}
+                        setImageSelected={setImageSelected}
+                    />
+                </>
                 </Row>
                 <Form.Label>Please check the services you would like to provide:</Form.Label>
                 <Row>
