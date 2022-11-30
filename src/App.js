@@ -23,6 +23,7 @@ import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
 import Dashboard from './components/shared/Dashboard'
 // import ReviewCreate from './components/reviews/ReviewCreate'
+import ReviewShow from './components/reviews/ReviewShow'
 
 const App = () => {
 
@@ -149,6 +150,14 @@ const App = () => {
 						element={
 						<RequireAuth user={user}>
 							<ReviewIndex msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/>
+								<Route
+						path='/reviews/:id'
+						element={
+						<RequireAuth user={user}>
+							<ReviewShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 						}
 				/>

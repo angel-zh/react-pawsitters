@@ -10,6 +10,8 @@ const PetOwnerUpdate = (props) => {
     } = props
 
     const [petOwner, setPetOwner] = useState(props.petOwner)
+    const [picture, setPicture] = useState(props.petOwner.images)
+    const [imageSelected, setImageSelected] = useState(props.imageSelected)
 
     const handleChange = event => {
         setPetOwner(prevPetOwner => {
@@ -22,6 +24,16 @@ const PetOwnerUpdate = (props) => {
             return { ...prevPetOwner, ...updatedPetOwner }
         })
     }
+
+    const handleImageChange = (images) => {
+        setPetOwner(prevPetOwner => {
+            const name = 'images'
+            const updatedPetOwner = {[name]: images}
+            return {
+                ...prevPetOwner, ...updatedPetOwner
+            }
+        })
+    } 
     const handleSelect = event => {
         setPetOwner(prevPetOwner => {
             console.log(event)
@@ -39,7 +51,7 @@ const PetOwnerUpdate = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-
+        console.log( user.id)
         petOwnerUpdate(petOwner, user, props.petOwner._id)
             .then(() => handleClose())
             .then(() => {
@@ -64,10 +76,16 @@ const PetOwnerUpdate = (props) => {
             <Modal.Header closeButton className='head-modal'   />
             <Modal.Body className='body-modal'>
                 <PetOwnerForm
+                    imageSelected={imageSelected}
+                    setImageSelected={setImageSelected}
+                    picture={picture}
+                    setPicture={setPicture}
                     petOwner={petOwner}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     handleSelect={handleSelect}
+                    triggerRefresh={() => setPicture(prev => !prev)}
+                    handleImageChange={handleImageChange}
                     heading="Update Your Pet Owner Profile"
                 />
             </Modal.Body>

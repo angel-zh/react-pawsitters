@@ -4,11 +4,14 @@ import { petSitterShow, petSitterDelete } from '../../api/petSitter'
 import { Container, Button, Image } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
-// import ReviewShow from '../reviews/ReviewShow'
+import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
+import  { reviewIndex }  from '../../api/review'
+
+
 
 
 const PetSitterShow = ({ user, msgAlert }) => {
@@ -18,6 +21,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
+    const [reviews, setReviews] = useState([])
+    
     // scroll to top on page load
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -58,6 +63,9 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }
 
+   
+    
+
     // let reviewCards
     // if (petSitter) {
     //     if (petSitter.reviews.length > 0) {
@@ -76,6 +84,36 @@ const PetSitterShow = ({ user, msgAlert }) => {
     //     }
     // }
 
+    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
+   
+
+    
+
+    useEffect(() => {
+        reviewIndex(user)
+            .then((res) => {
+                console.log('this is res.dat', res.data) 
+                setReviews(res.data.reviews)
+            })
+    }, [])
+    const reviewCards = () => {
+    // if (reviews.id) {
+        console.log('reviews', reviews)
+        return   reviews.map(review => (
+            <div>
+                <ReviewShow
+                    key={review.id}
+                    review={review}
+                    petSitter={petSitter}
+                    user={user}
+                    msgAlert={msgAlert}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                />
+            </div>
+        ))
+        console.log(reviewCards)
+        // } 
+    }       
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
     const formatString = string => {
@@ -227,6 +265,22 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     :
                     <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
                 }
+                <Container>
+                    <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
+                    {
+                        reviews.length > 0
+                            ?
+                            <>
+                                {reviewCards()}
+                            </>
+                            :
+                            <>
+                                <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
+                            </>
+                    }
+ 
+            
+                </Container>
             </div>
 
             {
