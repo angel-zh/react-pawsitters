@@ -9,9 +9,7 @@ import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
-import apiUrl from '../../apiConfig'
-import  { reviewCards }  from '../../api/review'
+import  { reviewIndex }  from '../../api/review'
 
 
 
@@ -23,8 +21,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
-    // const [allReviews, setAllReviews] = useState([])
-    const [reviews, setReviews] = useState()
+    const [reviews, setReviews] = useState([])
     
     // scroll to top on page load
     useEffect(() => {
@@ -88,54 +85,35 @@ const PetSitterShow = ({ user, msgAlert }) => {
     // }
 
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
-    const reviewCards = (reviewCards => {
-        if (reviewCards) {
+   
 
-            reviewCards = reviewCards.map(review => (
-                <div>
-                    <ReviewShow
-                        key={review.id}
-                        review={review}
-                        petSitter={petSitter}
-                        user={user}
-                        msgAlert={msgAlert}
-                        triggerRefresh={() => setUpdated(prev => !prev)}
-                    />
-                </div>
-            ))
-        } 
+    
+
+    useEffect(() => {
+        reviewIndex(user)
+            .then((res) => {
+                console.log('this is res.dat', res.data) 
+                setReviews(res.data.reviews)
+            })
+    }, [])
+    const reviewCards = () => {
+    // if (reviews.id) {
+        console.log('reviews', reviews)
+        return   reviews.map(review => (
+            <div>
+                <ReviewShow
+                    key={review.id}
+                    review={review}
+                    petSitter={petSitter}
+                    user={user}
+                    msgAlert={msgAlert}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                />
+            </div>
+        ))
         console.log(reviewCards)
-
-    })
-    
-
-    
-    // let reviewCards 
-    // console.log('reviewCards', reviewCards)
-    // useEffect(() => {
-    //     axios.get({url: apiUrl + `/reviews/`})
-    //         .then(response => {
-    //             setReviews(response.data)
-    //         })
-    //     console.log('reviews.data', reviews)
-    // }, [])
-
-    // if (reviewCards) {
-
-    //     reviewCards = reviewCards.map(review => (
-    //                 <div>
-    //                     <ReviewShow
-    //                         key={review.id}
-    //                         review={review}
-    //                         petSitter={petSitter}
-    //                         user={user}
-    //                         msgAlert={msgAlert}
-    //                         triggerRefresh={() => setUpdated(prev => !prev)}
-    //                     />
-    //                 </div>
-    //             ))
-    //             console.log(reviewCards)
-        // }    
+        // } 
+    }       
     // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
 
     const formatString = string => {
@@ -290,17 +268,18 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 <Container>
                     <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
                     {
-                        petSitter.reviews
+                        reviews.length > 0
                             ?
                             <>
-                                {reviewCards}
+                                {reviewCards()}
                             </>
                             :
                             <>
                                 <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
                             </>
                     }
-
+ 
+            
                 </Container>
             </div>
 
