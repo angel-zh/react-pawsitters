@@ -12,8 +12,6 @@ import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } fro
 import { reviewIndex } from '../../api/review'
 
 
-
-
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
@@ -23,11 +21,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const navigate = useNavigate()
     const [reviews, setReviews] = useState([])
     const [allReviews, setAllReviews] = useState([])
-    
-    // scroll to top on page load
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, []);
 
 
     useEffect(() => {
@@ -73,9 +66,11 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }, [])
 
-    const allReviews = reviews.filter(review => review.pet_sitter.owner === petSitter.owner)
+    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
+    const reviewCards = () => {
+        // if (reviews.id) {
         console.log('reviews', reviews)
-        const reviewCards = allReviews.map(review => (
+        return reviews.filter(review => review.pet_sitter.owner === petSitter.owner).map(review => (
             <div>
                 <ReviewShow
                     key={review.id}
@@ -87,8 +82,9 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 />
             </div>
         ))
+    }
 
-         
+
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
     }
@@ -110,16 +106,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 </div>
             )
         } else {
-            const formatString = string => {
-                return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
-            }
-
-            const formatDate = string => {
-                return string.slice(0, -3)
-            }
-
-
-
             return (
                 <div className='pet-sitter-show container-md text-center d-flex'>
                     <div className='bio-container container-fluid'>
@@ -228,7 +214,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         </Container>
 
 
-
                         <PetSitterUpdate
                             user={user}
                             petSitter={petSitter}
@@ -238,7 +223,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                             handleClose={() => setEditModalShow(false)}
                         />
                         {
-                            user ?
+                            user && user.id !== petSitter.owner ?
                                 <Container style={{ width: '40rem' }}>
                                     <ReviewCreate
                                         user={user}
@@ -248,7 +233,10 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                     />
                                 </Container>
                                 :
-                                <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
+                                user && user.id === petSitter.owner ?
+                                    <h5 className='text-center'><i>Silly! You cannot leave a review for yourself!</i></h5>
+                                    :
+                                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
                         }
                         <Container>
                             <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
@@ -256,7 +244,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                 reviews.length > 0
                                     ?
                                     <>
-                                        {reviewCards}
+                                        {reviewCards()}
                                     </>
                                     :
                                     <>
@@ -269,7 +257,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     </div>
 
                     {
-                        user
+                        user && user.id !== petSitter.owner
                             ?
                             <div className='booking-container'>
                                 {/* This is one way to show the Booking request */}
