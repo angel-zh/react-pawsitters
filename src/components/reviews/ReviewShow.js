@@ -39,7 +39,7 @@ const ReviewShow = (props) => {
         <>
             <Card className="m-2" style={{ backgroundColor: '#f2f6ec'  }}>
                 <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee'  }}>
-                    <p>{review.username} said:</p>
+                    <p style= {{color: '#3f4257'}}>{review.owner_email} said:</p>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
@@ -56,7 +56,7 @@ const ReviewShow = (props) => {
                 </Card.Body>
                 <Card.Footer>
                     {
-                        user && user.email === review.ownerEmail
+                        user && user.email === review.owner_email
                             ?
                             <>
                                 <Button
@@ -76,7 +76,7 @@ const ReviewShow = (props) => {
                             :
                             <></>
                     }
-                    <div className='float-end'>{date}</div>
+                    <div className='float-end' style= {{color: '#3f4257'}}>{date}</div>
                 </Card.Footer>
             </Card>
             <ReviewEdit

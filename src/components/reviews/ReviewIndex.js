@@ -17,8 +17,7 @@ const ReviewIndex = ({ user, msgAlert, reviews }) => {
     useEffect(() => {
         reviewIndex(user)
         .then(res => {
-            // console.log(res.data)
-            console.log('review index', reviews)    
+            console.log('this is res.data from indexReviews', res.data)
             setAllReviews(res.data.reviews)
         })
         .catch((error) => {
@@ -28,6 +27,8 @@ const ReviewIndex = ({ user, msgAlert, reviews }) => {
                 variant: 'danger'
             })
         })
+        console.log('reviewIndex console log for reviews', reviews)    
+        console.log('reviewIndex console log for all reviews', allReviews) 
     }, [])
 
     const usersReviews = allReviews.filter(review => review.owner === user.id)
