@@ -12,8 +12,6 @@ import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } fro
 import { reviewIndex } from '../../api/review'
 
 
-
-
 const PetSitterShow = ({ user, msgAlert }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
@@ -111,16 +109,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 </div>
             )
         } else {
-            const formatString = string => {
-                return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
-            }
-
-            const formatDate = string => {
-                return string.slice(0, -3)
-            }
-
-
-
             return (
                 <div className='pet-sitter-show container-md text-center d-flex'>
                     <div className='bio-container container-fluid'>

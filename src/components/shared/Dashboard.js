@@ -46,7 +46,7 @@ const Dashboard = ({ user, msgAlert }) => {
 
     const allReviewsJSX = allReviews.map(review => (
         <div>
-            <p><b>Pet Sitter: </b> {review.pet_sitter} <br />
+            <p><b>Pet Sitter: </b> {review.pet_sitter.first_name} {review.pet_sitter.last_name}<br />
                 <b>Comment: </b> {review.comment} <br />
                 <b>Rating: </b>
                 <StarRating
