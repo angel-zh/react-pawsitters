@@ -77,7 +77,7 @@ const PetOwnerForm = (props) => {
                     />
                 </Form.Group>
                 <>
-                    <Form.Label>Upload an Image:</Form.Label>
+                    <Form.Label className='mt-2'>Upload an Image of you and your pet (or just your pet):</Form.Label>
                     <CloudinaryUploadWidget
                         handleImageChange={handleImageChange}
                         picture={picture}
