@@ -4,8 +4,8 @@ import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
 import { Image, Card, Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
 import ReviewCreate from '../reviews/ReviewCreate'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 const PetOwnerShow = ({ user, msgAlert }) => {
     const [petOwner, setPetOwner] = useState({
         first_name: '',
@@ -24,67 +24,30 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         if (user){ 
             petOwnerShow(user, id)
                 .then((res) => {
-                    console.log("petOwner", res.data)
+                    
                     setPetOwner(res.data.pet_owner)
                 })
             .catch((error) => {
-                console.log("error", error)
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Show Pet Owner Failure' + error,
-                    variant: 'danger'
-                })
+                navigate('/error')
+              
             })
         }
     }, [updated])
 
-    // const toggleShowUpdate = () => {
-        // setIsUpdateShown(prevUpdateShown => !prevUpdateShown)
-    // const handleChange = (event) => {
-    //     // to keep the values as users input info 
-    //     // first spread the current petowner
-    //     // then comma and modify the key to the value you need
-    //     setPetOwner({...petOwner, [event.target.name]: event.target.value})
-    // }
 
-    // const handleUpdatePetOwner = (res) => {
-    //     if (user) {petOwnerUpdate(res.data.pet_owner)
-    //     .then(() => {
-    //         msgAlert({
-    //             heading: 'Success',
-    //             message: 'Updating Pet Owner',
-    //             variant: 'success'
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         msgAlert({
-    //             heading: 'Failure',
-    //             message: 'Update Pet Owner Failure' + error,
-    //             variant: 'danger'
-    //         })
-    //     })}
-    // }
     const handleDeletePetOwner = () => {
         petOwnerDelete(user, id)
         .then(() => {
             setDeleted(true)
-            msgAlert({
-                heading: 'Success',
-                message: 'Pet Owner Deleted',
-                variant: 'success'
-            })
         })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'deleted Pet Owner Failure' + error,
-                variant: 'danger'
-            })
+      
+        .catch(() => {
+            navigate('/error')
         })
 }
 
     if (deleted) navigate('/')
-    // if (!petOwner) navigate ('/petowners/create/')
+    
    
     return (
         <>
@@ -107,19 +70,10 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                     <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
                     <h3>Pet's Name: {petOwner.pet_name} </h3>
                     <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
-                        {/* <div className='d-flex'>
-                            {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
-                            {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
-                            {petOwner.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
-                            {petOwner.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
-                            {petOwner.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
-                        </div> */}
                     
                 </Card.Text>
             </Card.Body>
             <Card.Body>
-                    {/* <small>Comments: </small>
-                    <p></p> */}
                     <img
                         style={{ width: 600 }}
                         src={petOwner.images}
@@ -147,7 +101,6 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                         </Button>
                         <Button onClick={() => handleDeletePetOwner()}
                             className='btn btn-outline-info mx-1'
-                            /* variant="danger" */
                         >
                             Delete Profile
                         </Button>
@@ -165,7 +118,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 handleClose={() => setEditModalShow(false)}
             />
     
-           
+
                 </div>
             </div>
          </div>
