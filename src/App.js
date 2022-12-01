@@ -24,6 +24,7 @@ import SideNav from './components/shared/SideNav'
 import Dashboard from './components/shared/Dashboard'
 // import ReviewCreate from './components/reviews/ReviewCreate'
 import ReviewShow from './components/reviews/ReviewShow'
+import Error from './components/shared/Error'
 
 const App = () => {
 
@@ -167,6 +168,12 @@ const App = () => {
 						<RequireAuth user={user}>
 							<Dashboard msgAlert={msgAlert} user={user} />
 						</RequireAuth>
+						}
+				/>
+				<Route
+						path='/error'
+						element={
+							<Error msgAlert={msgAlert} user={user} />
 						}
 				/>
 			</Routes>
