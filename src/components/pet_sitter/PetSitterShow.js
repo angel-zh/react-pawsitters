@@ -96,11 +96,11 @@ const PetSitterShow = ({ user, msgAlert }) => {
     if (deleted) navigate('/petsitters')
 
     if (petSitter) {
-        if (petSitter.first_name == '') {
+        if (petSitter.owner === null) {
             return (
                 <div className='container-fluid text-center mt-5'>
-                    <h5>Oh No! There is not yet a profile created for this PawSitter.</h5>
-                    <p>Register to be a PawSitter with us!</p>
+                    <h5>Oh No! You don't have a PawSitter profile with us.</h5>
+                    <p>You can register to be a PawSitter anytime.</p>
 
                     <Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a PawSitter</Link>
                 </div>
@@ -234,7 +234,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                 </Container>
                                 :
                                 user && user.id === petSitter.owner ?
-                                    <h5 className='text-center'><i>Silly! You cannot leave a review for yourself!</i></h5>
+                                    null
                                     :
                                     <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
                         }
