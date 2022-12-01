@@ -3,6 +3,7 @@ import { reviewIndex } from '../../api/review'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ReviewShow from './ReviewShow'
+import StarRating from '../shared/StarRating'
 
 const cardContainerLayout = {
     display: 'flex',
@@ -32,25 +33,30 @@ const ReviewIndex = ({ user, msgAlert, reviews }) => {
         console.log('reviewIndex console log for all reviews', allReviews) 
     }, [])
 
-    // const usersReviews = allReviews.filter(review => review.owner === user.id)
+    const userReviews = allReviews.filter(review => review.owner === user.id)
     // const reviewCards = usersReviews.map(review => (
-    const allReviewsJSX = allReviews.map(review => (
+    const allReviewsJSX = userReviews.map(review => (
 
         <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
-            <Card.Img variant="top" style={{height: '10rem'}}src="https://i.imgur.com/dujfkLL.jpg" />
-            <Card.Header>
+            <Card.Img variant="top" style={{height: '10rem'}} src="https://i.imgur.com/dujfkLL.jpg" />
+            <Card.Header className='d-flex justify-content-between'>
                 <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
                 // link is not functioning fully
-                >View { review.pet_sitter.first_name } { review.pet_sitter.last_name } </Link>
+                >View { review.pet_sitter.first_name } { review.pet_sitter.last_name }'s Profile       
+                
+                <StarRating
+                value={review.rating}
+                style={{ fontSize: 15, display: 'right'}}
+            /></Link>
             </Card.Header>
-            <Card.Body>
-                <Card.Text style= {{color: '#3f4257'}}>
+            <Card.Body style= {{ textAlign: 'center'}}>
+                <Card.Text style={{ color: '#3f4257' }}>
                     
-                    <small>Comments: {review.comment}</small><br/>
-                    <small>Rating: {review.rating}</small><br/>
-                    {/* <small>{review.pet_sitter}</small><br/> */}
-                    <small>Owner: {review.pet_owner}</small><br/>
-                    <small>Image: {review.image}</small><br/>
+                    <small>My Review:<br/>{review.comment}</small><br/>
+                    <img style={{ width: 200 }}
+                        src={review.image}
+                        alt={""}/>
+                    <br/>
                 </Card.Text>
             </Card.Body>
         </Card>
@@ -58,9 +64,10 @@ const ReviewIndex = ({ user, msgAlert, reviews }) => {
 
     return (
         <>
-            <h1 > All of my reviews:</h1>  
-              
-            <ul>{allReviewsJSX}</ul>
+            <div>
+            <h1 style= {{ textAlign: 'center'}}> All of my reviews:</h1>  
+                <ul>{allReviewsJSX}</ul>
+            </div>
         </>
     )
 }
