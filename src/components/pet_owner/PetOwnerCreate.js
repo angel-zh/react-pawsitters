@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { petOwnerCreate } from '../../api/petOwner'
+import { petOwnerCreate, petOwnerShow } from '../../api/petOwner'
 import PetOwnerForm from '../shared/PetOwnerForm'
 import { Link } from 'react-router-dom'
+
 const PetOwnerCreate = (props) => {
     const {user, msgAlert, triggerRefresh,  } = props
 
@@ -21,6 +22,22 @@ const PetOwnerCreate = (props) => {
     const [petOwner, setPetOwner] = useState(defaultPetOwner)
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
+    const [exists, setExists] = useState(false)
+
+    useEffect(() => {
+        petOwnerShow(user, user.id)
+            .then(res => {
+                if (res.data.pet_owner.owner !== null)
+                setExists(true)
+            })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Show Pet Sitter Failed' + error,
+                    variant: 'danger'
+                })
+            })
+    }, [])
 
     const handleChange = event => {
         setPetOwner(prevPetOwner => {
@@ -66,45 +83,33 @@ const PetOwnerCreate = (props) => {
                     variant: 'danger'
                 })
             })
-            
-     
     }
-    console.log(petOwner.pet_owner, 'hello')
+    
     return (
-        
         <>
-        {petOwner == petOwner.id
-        // &&
-        // petOwner.first_name == 'str'
-        // petOwner.last_name !== '' &&
-        // petOwner.pet_type!=='' &&
-        // petOwner.pet_bio == '' &&
-        // petOwner.images 
-        ? 
-        <>
-        <h5>view pet owner account</h5>
-        <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petowners/` }
-            >View {} </Link>
+            {
+                exists
+                     ? 
+                <>
+                     <h5>view pet owner account</h5>
+                    <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petowners/` }
+                    >View {} </Link>
 
-        </>:
-
-            
-            
-            // <h5 className='text-center'><i></i></h5>
-             <PetOwnerForm
-            imageSelected={imageSelected}
-            setImageSelected={setImageSelected}
-            picture={picture}
-            setPicture={setPicture}
-            petOwner={petOwner}
-            handleChange={handleChange}
-            handleSubmit={handleCreatePetOwner}
-            triggerRefresh={() => setPicture(prev => !prev)}
-            handleImageChange={handleImageChange}
-            heading="Sign Up to be a Pet Owner"
-            />
-        }
-        
+                </>
+                :
+                <PetOwnerForm
+                    imageSelected={imageSelected}
+                    setImageSelected={setImageSelected}
+                    picture={picture}
+                    setPicture={setPicture}
+                    petOwner={petOwner}
+                    handleChange={handleChange}
+                    handleSubmit={handleCreatePetOwner}
+                    triggerRefresh={() => setPicture(prev => !prev)}
+                    handleImageChange={handleImageChange}
+                    heading="Sign Up to be a Pet Owner"
+                />
+            }
         </>
 
     )
