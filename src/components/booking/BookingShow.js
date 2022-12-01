@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
-import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
     const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner, deleted, setDeleted } = props
@@ -41,14 +40,7 @@ const BookingShow = (props) => {
     let timeStart = moment(booking.start_time, 'HH:mm:ss').format('hh:mm A')
     let timeEnd = moment(booking.end_time, 'HH:mm:ss').format('hh:mm A')
 
-    // adding the pet image here - if none, default image will be provided
-    // let petImage = booking.pet_owner.images
-    // if (petImage = null)
-    //     return {
-    //         petImage = {PetImages[`{booking.pet_owner.pet_type}`]}
-    //         // <Card.Img variant="top" src={FoodImages[`${restaurant.type}`]} style={{ height: '300px' }} alt={restaurant.type} />
-    //     }
-
+    // if there is no booking, return this
     if(!booking){
         return (
             <>
@@ -57,14 +49,20 @@ const BookingShow = (props) => {
         )
     }
 
-
     return (
 
         <>
             <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                 <Card.Header>
                     <div className='booking-img'>
-                        <img className='fluid rounded' style={{ width: 500 }} src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/>
+                        {
+                        booking.pet_owner.images !== '' 
+                        ?
+                        <img src={booking.pet_owner.images} alt='pet owner profile pic' className='fluid rounded' style={{ width: 500 }} />
+                        :
+                        <img src='/defaultProfilePic3.jpg' alt="a cozy puppy being cradled in a person's arms" className='fluid rounded' style={{ width: 500 }} />
+                        }
+
                     </div>
                 </Card.Header>
                 <Card.Body>
