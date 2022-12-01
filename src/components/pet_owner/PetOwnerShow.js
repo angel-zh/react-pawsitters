@@ -4,8 +4,11 @@ import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
 import { Image, Card, Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
 import ReviewCreate from '../reviews/ReviewCreate'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
+
+
 const PetOwnerShow = ({ user, msgAlert }) => {
     const [petOwner, setPetOwner] = useState({
         first_name: '',
@@ -47,6 +50,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 }
 
     if (deleted) navigate('/')
+
+    console.log('petOwner info', petOwner)
     
    
     return (
@@ -60,47 +65,81 @@ const PetOwnerShow = ({ user, msgAlert }) => {
      <h5 className='text-center'><i></i></h5>
      </>:
        
-        <div className= 'container-md' >
-            <div style= {{border:'2px rounded black'}}>
-        <Card key={petOwner.owner} style={{ width: '48em', margin: 10, backgroundColor: '#afc2f2'}} >
-            <Card.Body>
-                <Image src='https://i.imgur.com/2y0Ysu1.jpg' className='profile-pic float-start border'></Image>
-                <Card.Text>
-                    <h3 className='mb-2'>Pet Owner Profile</h3>
-                    <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
-                    <h3>Pet's Name: {petOwner.pet_name} </h3>
-                    <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
+        <div className='pet-owner-show container-md text-center d-flex'>
+            <div className='bio-container container-fluid'>
+                <div>
+                    {
+                        petOwner.images !== '' 
+                        ?
+                        <Image src={petOwner.images} alt='profile pic' className='profile-pic-show border mt-2' />
+                        :
+                        <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                    }
                     
-                </Card.Text>
-            </Card.Body>
-            <Card.Body>
-                    <img
-                        style={{ width: 600 }}
-                        src={petOwner.images}
-                        alt={""}
-                    />
-                </Card.Body>
-        </Card>
+                    <h2 className='page-heading mt-2'>{petOwner.first_name} {petOwner.last_name}</h2>
+                    <p>Has been a working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
+                </div>
+
+                <div className='mb-4 border-bottom'>
+                    <h5>The Pet Info</h5>
+                    {
+                        petOwner.pet_type === 'Dog'
+                            ?
+                            <FontAwesomeIcon icon={faDog} size='md' className='icon' />
+                            :
+                            null
+                    }
+                    {
+                        petOwner.pet_type === 'Cat'
+                            ?
+                            <FontAwesomeIcon icon={faCat} size='md' className='icon' />
+                            :
+                            null
+                    }
+                    {
+                        petOwner.pet_type === 'Small_Animal'
+                            ?
+                            <FontAwesomeIcon icon={faFish} size='md' className='icon' />
+                            :
+                            null
+                    }
+                    {
+                        petOwner.pet_type === 'Reptile'
+                            ?
+                            <FontAwesomeIcon icon={faWorm} size='md' className='icon' />
+                            :
+                            null
+                    }
+                    {
+                        petOwner.pet_type === 'Bird'
+                            ?
+                            <FontAwesomeIcon icon={faDove} size='md' className='icon' />
+                            :
+                            null
+                    }
+
+                    <h6>{petOwner.pet_name} the {petOwner.pet_type} </h6>
+                    <h5>Biography</h5>
+                    <p>{petOwner.pet_bio}</p>
+                </div>
         
         <div className='container-md text-center'>
-             <div className='="container-md' style= {{border: '2px solid black'}}>
-             
-            
-
-</div>
-<br/>
-        <Container className='mb-5'>
+        <br/>
+        <Container className='mb-3'>
             {
                 user && petOwner.owner === user.id
                     ?
                     <>
-                        <Button onClick={() => setEditModalShow(true)} className='btn btn-outline-info mx-1'
-                            // variant="success"
+                        <Button 
+                            onClick={() => setEditModalShow(true)} className='m-2'
+                            variant="info"
                         >
                             Edit Profile
                         </Button>
-                        <Button onClick={() => handleDeletePetOwner()}
-                            className='btn btn-outline-info mx-1'
+                        <Button 
+                            onClick={() => handleDeletePetOwner()}
+                            className='m-2'
+                            variant="outline-info"
                         >
                             Delete Profile
                         </Button>

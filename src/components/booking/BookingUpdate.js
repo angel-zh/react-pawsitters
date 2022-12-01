@@ -8,12 +8,11 @@ import messages from '../shared/AutoDismissAlert/messages'
 
 const BookingUpdate = (props) => {
     const { 
-        user, show, handleClose, 
-        msgAlert, updated, setUpdated
+        user, show, handleClose
     } = props
 
     const [booking, setBooking] = useState(props.booking)
-    // const [updated, setUpdated] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -34,24 +33,15 @@ const BookingUpdate = (props) => {
         bookingUpdate(user, booking)
             .then(() => handleClose())
             .then(() => {
-                setUpdated(!updated)
-                msgAlert({
-                    heading: 'Success',
-                    message: messages.updateBookingSuccess,
-                    variant: 'success'
-                })
+                setUpdated(true)
             })
-            // .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: messages.updateBookingFailure + error,
-                    variant: 'danger'
-                })
+            .then(() => navigate('/dashboard'))
+            .catch(() => {
+                navigate('/error')
             })
     }
 
-    // if (updated) navigate('/')
+    if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >
