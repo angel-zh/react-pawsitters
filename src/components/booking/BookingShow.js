@@ -16,9 +16,6 @@ const BookingShow = (props) => {
 
         bookingDelete(user, booking)
             .then(() => {
-                // console.log('BookingShow.js booking', booking)
-                // console.log('BookingShow.js user', booking)
-
                 // "like light switch" - John
                 setDeleted(!deleted)
                 msgAlert({
@@ -27,7 +24,6 @@ const BookingShow = (props) => {
                     variant: 'success'
                 })
             })
-            // .then(() => triggerRefresh())
             // on success redirect/make new index
             .catch((error) => {
                 msgAlert({
@@ -37,15 +33,6 @@ const BookingShow = (props) => {
                 })
             })
     }
-
-    if(!booking){
-        return (
-            <>
-                "No Bookings scheduled yet"
-            </>
-        )
-    }
-
 
     // Formating Dates and times
     let date = moment(booking.created_at).format('MMMM Do YYYY, h:mm a')
@@ -61,6 +48,15 @@ const BookingShow = (props) => {
     //         petImage = {PetImages[`{booking.pet_owner.pet_type}`]}
     //         // <Card.Img variant="top" src={FoodImages[`${restaurant.type}`]} style={{ height: '300px' }} alt={restaurant.type} />
     //     }
+
+    if(!booking){
+        return (
+            <>
+                "No Bookings scheduled yet"
+            </>
+        )
+    }
+
 
     return (
 

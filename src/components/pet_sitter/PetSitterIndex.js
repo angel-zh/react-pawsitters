@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { petSitterIndex } from '../../api/petSitter'
 import PetSitterFilter from './PetSitterFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm, faPaw } from '@fortawesome/free-solid-svg-icons'
 
 const linkStyle = {
     color: 'black',
@@ -42,34 +42,45 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Link to={`/petsitters/${petSitter.owner}`} style={linkStyle}>
                 <Card key={petSitter.Owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
                     <Card.Body>
-                        <div>
-                            {
-                                petSitter.image !== ''
-                                    ?
-                                    <Image src={petSitter.image} alt='profile pic' className='profile-pic floatborder mt-2' />
-                                    :
-                                    <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic border mt-2' />
-                            }
-                        </div>
-                        {/* <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image> */}
-                        <Card.Text>
-                            <h3 className='mb-2'>{petSitter.first_name} {petSitter.last_name}</h3>
-                            <div className='row'>
-                                <div className='col'>
-                                    {petSitter.pet_sitting ? <p>Pet Sitter</p> : null}
-                                </div>
-                                <div className='col'>
-                                    {petSitter.dog_walking ? <p>Dog Walker </p> : null}
-                                </div>
-                                <div className='d-flex'>
-                                    {petSitter.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
-                                    {petSitter.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
-                                    {petSitter.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
-                                    {petSitter.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
-                                    {petSitter.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                        <div className='row'>
+                            <div className='col-4 text-center'>
+                                {
+                                    petSitter.image !== ''
+                                        ?
+                                        <Image src={petSitter.image} alt='profile pic' className='profile-pic border mt-2' />
+                                        :
+                                        <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic border mt-2' />
+                                }
+                            </div>
+                            {/* <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image> */}
+                            <div className='col mt-3'>
+                                <h3 className=''> {petSitter.first_name} {petSitter.last_name}</h3>
+                                <div className='row'>
+                                    <div className='col-4'>
+                                        <div>
+                                            {petSitter.pet_sitting ? <p>Pet Sitter</p> : null}
+                                        </div>
+                                        <div>
+                                            {petSitter.dog_walking ? <p>Dog Walker </p> : null}
+                                        </div>
+                                    </div>
+                                    <div className='col'>
+                                        <div>
+                                            {petSitter.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
+                                            {petSitter.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
+                                            {petSitter.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
+                                            {petSitter.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
+                                            {petSitter.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                                        </div>
+
+                                        <div className='mt-3'>
+                                            {petSitter.dog_walking ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </Card.Text>
+                        </div>
                     </Card.Body>
                 </Card>
             </Link>

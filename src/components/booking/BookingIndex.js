@@ -24,7 +24,6 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
     useEffect(() => {
         bookingIndex(user)
             .then(res => {
-                // console.log(res.data)
                 setAllBookings(res.data.bookings)
 
             })
