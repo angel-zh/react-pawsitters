@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react' 
 import { useParams, useNavigate } from 'react-router-dom'
 import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
-import { Image, Card, Container, Button } from 'react-bootstrap'
+import { Image, Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
-import ReviewCreate from '../reviews/ReviewCreate'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+import {faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 
 
