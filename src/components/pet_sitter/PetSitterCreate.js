@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { petSitterCreate } from '../../api/petSitter'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { petSitterCreate, petSitterShow } from '../../api/petSitter'
 import PetSitterForm from '../shared/PetSitterForm'
 
 
@@ -26,11 +26,26 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         bio: '',
         image: '',
     }
+    const petSitterLink = `/petsitters/${user.id}`
 
     const [petSitter, setPetSitter] = useState(defaultPetSitter)
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
+    const [exists, setExists] = useState(false)
 
+    useEffect(() => {
+        petSitterShow(user, user.id)
+            .then(res => {
+                if (res.data.pet_sitter.owner !== null) setExists(true)
+            })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Show Pet Sitter Failed' + error,
+                    variant: 'danger'
+                })
+            })
+    }, [])
 
     const dayOptions = [
         { value: 'monday', label: 'Monday' },
@@ -73,12 +88,12 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     const handleImageChange = (images) => {
         setPetSitter(prevPetSitter => {
             const name = 'images'
-            const updatedPetSitter = {[name]: images}
+            const updatedPetSitter = { [name]: images }
             return {
                 ...prevPetSitter, ...updatedPetSitter
             }
         })
-    } 
+    }
     const handleCreatePetSitter = event => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
@@ -105,20 +120,30 @@ const PetSitterCreate = ({ user, msgAlert }) => {
     }
 
     return (
-
-        <PetSitterForm
-            imageSelected={imageSelected}
-            setImageSelected={setImageSelected}
-            picture={picture}
-            setPicture={setPicture}    
-            petSitter={petSitter}
-            handleChange={handleChange}
-            heading="Sign Up to be a Pet Sitter"
-            handleSubmit={handleCreatePetSitter}
-            handleImageChange={handleImageChange}
-            handleSelect={handleSelect}
-            dayOptions={dayOptions}
-        />
+        <>
+            {
+                exists
+                    ? 
+                    <div className='container-fluid text-center mt-5'>
+                    <h5>You already have an existing PawSitter profile with us.</h5>
+                    <Link to={petSitterLink} className='btn btn-outline-info mx-1'>My PawSitter Profile</Link>
+                </div>
+                    : 
+                    <PetSitterForm
+                        imageSelected={imageSelected}
+                        setImageSelected={setImageSelected}
+                        picture={picture}
+                        setPicture={setPicture}
+                        petSitter={petSitter}
+                        handleChange={handleChange}
+                        heading="Sign Up to be a Pet Sitter"
+                        handleSubmit={handleCreatePetSitter}
+                        handleImageChange={handleImageChange}
+                        handleSelect={handleSelect}
+                        dayOptions={dayOptions}
+                    />
+            }
+        </>
     )
 }
 

@@ -15,17 +15,12 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     const [allPetSitters, setAllPetSitters] = useState([])
     const [filterParam, setFilterParam] = useState('all')
-    // const [profileExists, setProfileExists] = useState(false)
 
 
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
-                // console.log(res.data)
-                setAllPetSitters(res.data.pet_sitters)
-                // if (user) {
-                //    setProfileExists(res.data.pet_sitters.includes(res.data.pet_sitters.owner === user.id)) 
-                // }   
+                setAllPetSitters(res.data.pet_sitters) 
             })
             .catch((error) => {
                 msgAlert({
@@ -78,14 +73,10 @@ const PetSitterIndex = ({ user, msgAlert }) => {
         <div className='container-md'>
             <h3 className='text-center my-3 page-heading'>Find the Perfect Sitter for Your Pet</h3>
             <div className='d-flex justify-content-around'>
-                {/* {
-                    user && { profileExists } ?
-                        null
-                        : */}
                 <Link className='link' to='create'>
-                    <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Become a Pet Sitter
+                    <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Become a PawSitter
                 </Link>
-                {/* } */}
+
                 <div style={{ width: '300px' }}>
                     <PetSitterFilter
                         filterParam={filterParam}
