@@ -1,23 +1,12 @@
-// import React, { Component } from 'react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { signUp, signIn } from '../../api/auth'
 import messages from '../shared/AutoDismissAlert/messages'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const SignUp = (props) => {
-	// constructor(props) {
-	// 	super(props)
-
-	// 	this.state = {
-	// 		email: '',
-	// 		password: '',
-	// 		passwordConfirmation: '',
-	// 	}
-	// }    
+  
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -34,13 +23,7 @@ const SignUp = (props) => {
 		signUp(credentials)
 			.then(() => signIn(credentials))
 			.then((res) => setUser(res.data.user))
-			.then(() =>
-				msgAlert({
-					heading: 'Sign Up Success',
-					message: messages.signUpSuccess,
-					variant: 'success',
-				})
-			)
+			
 			.then(() => navigate('/'))
 			.catch((error) => {
                 setEmail('')
@@ -57,7 +40,6 @@ const SignUp = (props) => {
 
     return (
         <div className='container-fluid w-50 mt-5'>
-            {/* <div className='col-sm-10 col-md-8 mx-auto mt-5'> */}
                 <h3>Sign Up</h3>
                 <Form onSubmit={onSignUp}>
                     <Form.Group controlId='email'>
@@ -98,7 +80,6 @@ const SignUp = (props) => {
                     </Button>
                 </Form>
             </div>
-        // </div>
     )
 
 }

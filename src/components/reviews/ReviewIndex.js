@@ -26,8 +26,8 @@ const ReviewIndex = ({ user }) => {
 
     const allReviewsJSX = userReviews.map(review => (
 
-        <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#56596e' }}>      
-            <Card.Img variant="top" style={{height: '10rem'}} src="https://i.imgur.com/dujfkLL.jpg" />
+        <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#56596e', borderRadius: '10px', border: '2px solid #757d90'  }}>      
+            <Card.Img variant="top" style={{height: '8rem'}} src="https://i.imgur.com/8sFqoTk.png" />
             <Card.Header className='d-flex justify-content-between'>
                 <Link style={{color: 'white', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
                 >View { review.pet_sitter.first_name } { review.pet_sitter.last_name }'s Profile       
