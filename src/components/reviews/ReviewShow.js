@@ -53,6 +53,7 @@ const ReviewShow = (props) => {
                     
                 </Card.Body>
                 <Card.Footer className='mb-3'>
+                    {/* this verifies that the user can access edit and delete options */}
                     {
                         user && user.email === review.owner_email
                             ?

@@ -22,8 +22,8 @@ const ReviewIndex = ({ user }) => {
 
     }, [])
 
+    // Filter and map through the reviews by owner of the review to produce cards to display
     const userReviews = allReviews.filter(review => review.owner === user.id)
-
     const allReviewsJSX = userReviews.map(review => (
 
         <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#56596e', borderRadius: '10px', border: '2px solid #757d90'  }}>      
