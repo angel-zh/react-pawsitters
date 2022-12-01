@@ -45,7 +45,7 @@ const ReviewEdit = (props) => {
         reviewUpdate(user, petSitter.owner, review)
         .then(() => handleClose())
         .then(() => triggerRefresh())
-        .then(() => navigate('/reviews/'))
+        .then(() => navigate( '/reviews/' ))
         .catch(() => {
             navigate('/error')
         })

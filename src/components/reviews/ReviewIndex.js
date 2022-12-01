@@ -3,56 +3,45 @@ import { reviewIndex } from '../../api/review'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import StarRating from '../shared/StarRating'
-
-const cardContainerLayout = {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'center'
-}
+import { useNavigate } from 'react-router-dom'
 
 
-const ReviewIndex = ({ user, msgAlert, reviews }) => {
+const ReviewIndex = ({ user }) => {
 
     const [allReviews, setAllReviews] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         reviewIndex(user)
         .then(res => {
-            console.log('this is res.data from indexReviews', res.data)
             setAllReviews(res.data.reviews)
         })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Index Reviews Failure' + error,
-                variant: 'danger'
-            })
+        .catch(() => {
+            navigate('/error')
         })
-        console.log('reviewIndex console log for reviews', reviews)    
-        console.log('reviewIndex console log for all reviews', allReviews) 
+
     }, [])
 
     const userReviews = allReviews.filter(review => review.owner === user.id)
-    // const reviewCards = usersReviews.map(review => (
+
     const allReviewsJSX = userReviews.map(review => (
 
-        <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
+        <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#56596e' }}>      
             <Card.Img variant="top" style={{height: '10rem'}} src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header className='d-flex justify-content-between'>
-                <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
-                // link is not functioning fully
+                <Link style={{color: 'white', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
                 >View { review.pet_sitter.first_name } { review.pet_sitter.last_name }'s Profile       
-                
+                <br></br>
                 <StarRating
                 value={review.rating}
                 style={{ fontSize: 15, display: 'right'}}
             /></Link>
             </Card.Header>
-            <Card.Body style= {{ textAlign: 'center'}}>
-                <Card.Text style={{ color: '#3f4257' }}>
+            <Card.Body style= {{ textAlign: 'center', }}>
+                <Card.Text>
                     
                     <small>My Review:<br/>{review.comment}</small><br/>
-                    <img style={{ width: 200 }}
+                    <img style={{ width: 200, borderRadius: '10px', border: '2px solid #757d90'  }}
                         src={review.image}
                         alt={""}/>
                     <br/>
