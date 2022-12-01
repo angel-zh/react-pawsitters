@@ -8,7 +8,7 @@ const PetOwnerCreate = (props) => {
     const {user, msgAlert, triggerRefresh,  } = props
 
     const navigate = useNavigate()
-    
+    //navigate to other pages after creating a profile
     const defaultPetOwner = {
         first_name: '',
         last_name: '',
@@ -18,12 +18,15 @@ const PetOwnerCreate = (props) => {
         pet_bio: '',
         images: '',
     }
+    //default pet owner is then turned into the created pet owner
 
     const [petOwner, setPetOwner] = useState(defaultPetOwner)
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
-    const [exists, setExists] = useState(false)
 
+    // exists to run axios call to backend to see if there is an owner created to display form or not
+    const [exists, setExists] = useState(false)
+    //use effect for backend reference
     useEffect(() => {
         petOwnerShow(user, user.id)
             .then(res => {
@@ -36,6 +39,7 @@ const PetOwnerCreate = (props) => {
             })
     }, [])
 
+    //update
     const handleChange = event => {
         setPetOwner(prevPetOwner => {
             const updatedName = event.target.name
@@ -47,6 +51,7 @@ const PetOwnerCreate = (props) => {
             return { ...prevPetOwner, ...updatedPetOwner }
         })
     }
+    //image change
     const handleImageChange = (images) => {
         setPetOwner(prevPetOwner => {
             const name = 'images'
@@ -56,7 +61,7 @@ const PetOwnerCreate = (props) => {
             }
         })
     } 
-
+    //create pet owner
     const handleCreatePetOwner = event => {
         event.preventDefault()
         
@@ -74,6 +79,7 @@ const PetOwnerCreate = (props) => {
     }
     
     return (
+        //ternary operator to display form or link to profile page if user has created a profile
         <>
             {
                 exists
@@ -83,11 +89,9 @@ const PetOwnerCreate = (props) => {
                         <Link to={ `/petowners/` } className='btn btn-outline-info mx-1'>My Pet Owner Profile</Link>
 
                     </div> 
-                
-                    
 
-                
                 :
+                //brings in pet owner form if user needs to create owner profile
                 <PetOwnerForm
                     imageSelected={imageSelected}
                     setImageSelected={setImageSelected}

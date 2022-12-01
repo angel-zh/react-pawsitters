@@ -17,6 +17,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         pet_type:'',
         images:'',
          })
+         //default pet owner is turned into created pet owner
+
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
     const [editModalShow, setEditModalShow] = useState(false)
@@ -32,12 +34,12 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 })
             .catch((error) => {
                 navigate('/error')
-              
+              //navigate to error page instead of msg alert
             })
         }
     }, [updated])
 
-
+    //deletes pet owner then navigates to home page
     const handleDeletePetOwner = () => {
         petOwnerDelete(user, id)
         .then(() => {
@@ -51,10 +53,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 
     if (deleted) navigate('/')
 
-    console.log('petOwner info', petOwner)
-    
-   
     return (
+        //pet owner ternary operator to render different pages based on account status
         <>
        {petOwner.first_name == '' ? 
          <>
@@ -129,6 +129,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
             {
                 user && petOwner.owner === user.id
                     ?
+                    //display edit and delete buttons
                     <>
                         <Button 
                             onClick={() => setEditModalShow(true)} className='m-2'
@@ -148,6 +149,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                     null    
             }
         </Container>
+        
         <PetOwnerUpdate
                 user={user}
                 petOwner={petOwner}
@@ -156,7 +158,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 handleClose={() => setEditModalShow(false)}
             />
-    
+            
 
                 </div>
             </div>
