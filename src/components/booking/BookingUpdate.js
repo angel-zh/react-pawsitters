@@ -12,7 +12,7 @@ const BookingUpdate = (props) => {
     } = props
 
     const [booking, setBooking] = useState(props.booking)
-    // const [updated, setUpdated] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -34,11 +34,6 @@ const BookingUpdate = (props) => {
             .then(() => handleClose())
             .then(() => {
                 setUpdated(true)
-                msgAlert({
-                    heading: 'Success',
-                    message: messages.updateBookingSuccess,
-                    variant: 'success'
-                })
             })
             .then(() => navigate('/dashboard'))
             .catch(() => {
