@@ -1,12 +1,10 @@
 import React from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated'
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const PetOwnerForm = (props) => {
-    const { petOwner, handleChange, heading, handleSubmit, handleSelect, handleImageChange, picture, setPicture, imageSelected, setImageSelected } = props
-    const animatedComponents = makeAnimated() 
+    const { petOwner, handleChange, heading, handleSubmit, handleImageChange, picture, setPicture, imageSelected, setImageSelected } = props
+
     return (
         <Container className= "justify-content-center rest-form" style={{ width: '48em', padding: '2rem', backgroundColor: '#56596e' }} >
             <h3 className='mt-3'>{heading}</h3>
