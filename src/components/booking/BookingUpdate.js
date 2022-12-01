@@ -8,8 +8,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 
 const BookingUpdate = (props) => {
     const { 
-        user, show, handleClose, 
-        msgAlert
+        user, show, handleClose
     } = props
 
     // triggerRefresh was not working as a prop - not sure why --> returns error: not a function
@@ -37,9 +36,8 @@ const BookingUpdate = (props) => {
             .then(() => handleClose())
             .then(() => {
                 setUpdated(true)
-                navigate('/bookings')
             })
-            // .then(() => triggerRefresh())
+            .then(() => navigate('/bookings'))
             .catch(() => {
                 navigate('/error')
             })
