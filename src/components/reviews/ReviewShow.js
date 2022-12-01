@@ -44,8 +44,7 @@ const ReviewShow = (props) => {
                     <b>"{review.comment}"</b><br/>
                     <div className='review-img fluid rounded'>
                         <img
-                            // styling inline so that the border only appears when the image does
-                            style={{ width: 500, borderRadius: '10px', border: '2px solid #757d90' }}
+                            style={{ width: 170, borderRadius: '10px' }}
                             src={review.image}
                             alt={""}
                         />
