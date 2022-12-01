@@ -1,7 +1,7 @@
 import React from "react"
 import Select from 'react-select'
 
-// work in progress
+// THIS IS FOR VERSION TWO - it will filter by date
 
 const BookingFilter = ({ msgAlert, filterParam, setFilterParam }) => {
     const filterOptions = [

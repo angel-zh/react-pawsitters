@@ -5,7 +5,7 @@ import { bookingCreate } from '../../api/booking'
 
 const BookingCreate = (props) => {
     const {
-        user, petSitter, msgAlert, triggerRefresh
+        user, petSitter, triggerRefresh
     } = props
 
     const [booking, setBooking] = useState({

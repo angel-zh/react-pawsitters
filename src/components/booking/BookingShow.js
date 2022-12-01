@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Image } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { bookingDelete } from '../../api/booking'
@@ -65,6 +65,13 @@ const BookingShow = (props) => {
                 <Card.Header>
                     <div className='booking-img'>
                         <img className='fluid rounded' style={{ width: 500 }} src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/>
+                        {
+                        booking.petOwner.images !== '' 
+                        ?
+                        <Image src={booking.petOwner.images} alt='profile pic' className='profile-pic-show border mt-2' />
+                        :
+                        <Image src='/defaultProfilePic2.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                        }
                     </div>
                 </Card.Header>
                 <Card.Body>
