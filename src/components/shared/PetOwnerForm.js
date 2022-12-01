@@ -92,7 +92,7 @@ const PetOwnerForm = (props) => {
                 <Row>
                 
                 </Row>
-                <Button className='btn btn-light text-light mt-3' type="submit" style={{ backgroundColor: '#ba7a5f' }}>Submit</Button>
+                <Button variant='outline-info' className='mt-3' type="submit">Submit</Button>
 
             </Form>
         </Container>
