@@ -4,33 +4,27 @@ import { reviewDelete } from '../../api/review'
 import ReviewEdit from '../reviews/ReviewEdit'
 import moment from 'moment'
 import StarRating from '../shared/StarRating'
+import { useNavigate } from 'react-router-dom'
 
 const ReviewShow = (props) => {
 
-    const { review, petSitter, user, msgAlert, triggerRefresh } = props
+    const { review, petSitter, user, triggerRefresh } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
     const [deleted, setDeleted] = useState(false)
-
+    const navigate = useNavigate()
 
     const handleDeleteReview = () => {
         reviewDelete(user, petSitter.owner, review.id)
-        // const navigate = useNavigate()
+
             .then(() => {
                 setDeleted(true)
-                msgAlert({
-                    heading: 'Success: Review Deleted',
-                    message: "We'll never speak of it again",
-                    variant: 'success'
-                })
+                
             })
             .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Oops',
-                    message: 'Delete Review Fail: ' + error,
-                    variant: 'danger'
-                })
+            .then(() => navigate( '/reviews/'))
+            .catch(() => {
+                navigate('/error')    
             })
     }
     let date = moment(review.created_at).format('MMMM Do YYYY, h:mm a')
@@ -40,7 +34,7 @@ const ReviewShow = (props) => {
         <>
             <Card className="d-flex justify-content-between" style={{ backgroundColor: '#56596e' }}>
                 <Card.Header className='d-flex justify-content-between'>
-                    <p>{review.owner_email} said:</p>
+                    <p>{review.pet_owner} said:</p>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
@@ -88,7 +82,6 @@ const ReviewShow = (props) => {
                 user={user}
                 petSitter={petSitter}
                 review={review}
-                msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}

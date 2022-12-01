@@ -21,6 +21,8 @@ const PetSitterUpdate = (props) => {
 
 
     const [petSitter, setPetSitter] = useState(props.petSitter)
+    const [picture, setPicture] = useState(props.petSitter.image)
+    const [imageSelected, setImageSelected] = useState(props.imageSelected)
 
     const handleChange = event => {
         setPetSitter(prevPetSitter => {
@@ -48,6 +50,16 @@ const PetSitterUpdate = (props) => {
             return { ...prevPetSitter, availability: updatedValue }
         })
     }
+
+    const handleImageChange = (image) => {
+        setPetSitter(prevPetSitter => {
+            const name = 'image'
+            const updatedPetSitter = {[name]: image}
+            return {
+                ...prevPetSitter, ...updatedPetSitter
+            }
+        })
+    } 
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -94,6 +106,12 @@ const PetSitterUpdate = (props) => {
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     handleSelect={handleSelect}
+                    imageSelected={imageSelected}
+                    setImageSelected={setImageSelected}
+                    picture={picture}
+                    triggerRefresh={() => setPicture(prev => !prev)}
+                    handleImageChange={handleImageChange}
+                    setPicture={setPicture}
                     dayOptions={dayOptions}
                     availability={availability}
                     heading="Update Your Pet Sitter Profile"
