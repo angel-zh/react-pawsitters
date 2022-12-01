@@ -47,21 +47,10 @@ const BookingCreate = (props) => {
         // console.log('new booking', booking)
         
         bookingCreate(user, petSitter.owner, updatedBooking)
-            .then(() => {
-                msgAlert({
-                    heading: 'Thanks!',
-                    message: 'Pawsitter booked!',
-                    variant: 'success'
-                })
-            })
             .then(() => triggerRefresh())
             .then(() => navigate('/bookings/'))
             .catch((error) => {
-                msgAlert({
-                    heading: 'Oh No!',
-                    message: 'Something went wrong! Please try again' + error,
-                    variant: 'danger'
-                })
+                navigate('/error')
             })
     }
 

@@ -73,7 +73,7 @@ const PetOwnerUpdate = (props) => {
 
     return (
         <Modal size='lg' show={show} onHide={handleClose} >
-            <Modal.Header closeButton className='head-modal'   />
+            <Modal.Header closeButton className='head-modal' />
             <Modal.Body className='body-modal'>
                 <PetOwnerForm
                     imageSelected={imageSelected}
