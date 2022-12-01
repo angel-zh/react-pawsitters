@@ -4,8 +4,8 @@ import { petOwnerDelete, petOwnerShow } from '../../api/petOwner'
 import { Image, Card, Container, Button } from 'react-bootstrap'
 import PetOwnerUpdate from './PetOwnerUpdate'
 import ReviewCreate from '../reviews/ReviewCreate'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 const PetOwnerShow = ({ user, msgAlert }) => {
     const [petOwner, setPetOwner] = useState({
         first_name: '',
@@ -24,65 +24,23 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         if (user){ 
             petOwnerShow(user, id)
                 .then((res) => {
-                    // console.log("petOwner", res.data)
+                    
                     setPetOwner(res.data.pet_owner)
                 })
             .catch((error) => {
                 navigate('/error')
-                // console.log("error", error)
-                // msgAlert({
-                //     heading: 'Failure',
-                //     message: 'Show Pet Owner Failure' + error,
-                //     variant: 'danger'
-                // })
+              
             })
         }
     }, [updated])
 
-    // const toggleShowUpdate = () => {
-        // setIsUpdateShown(prevUpdateShown => !prevUpdateShown)
-    // const handleChange = (event) => {
-    //     // to keep the values as users input info 
-    //     // first spread the current petowner
-    //     // then comma and modify the key to the value you need
-    //     setPetOwner({...petOwner, [event.target.name]: event.target.value})
-    // }
 
-    // const handleUpdatePetOwner = (res) => {
-    //     if (user) {petOwnerUpdate(res.data.pet_owner)
-    //     .then(() => {
-    //         msgAlert({
-    //             heading: 'Success',
-    //             message: 'Updating Pet Owner',
-    //             variant: 'success'
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         msgAlert({
-    //             heading: 'Failure',
-    //             message: 'Update Pet Owner Failure' + error,
-    //             variant: 'danger'
-    //         })
-    //     })}
-    // }
     const handleDeletePetOwner = () => {
         petOwnerDelete(user, id)
         .then(() => {
             setDeleted(true)
-        
-            // msgAlert({
-            //     heading: 'Success',
-            //     message: 'Pet Owner Deleted',
-            //     variant: 'success'
-            // })
         })
-        // .catch((error) => {
-        //     msgAlert({
-        //         heading: 'Failure',
-        //         message: 'deleted Pet Owner Failure' + error,
-        //         variant: 'danger'
-        //     })
-        // })
+      
         .catch(() => {
             navigate('/error')
         })
