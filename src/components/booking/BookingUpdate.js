@@ -35,23 +35,15 @@ const BookingUpdate = (props) => {
             .then(() => handleClose())
             .then(() => {
                 setUpdated(true)
-                msgAlert({
-                    heading: 'Success',
-                    message: messages.updateBookingSuccess,
-                    variant: 'success'
-                })
+                navigate('/bookings')
             })
             // .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: messages.updateBookingFailure + error,
-                    variant: 'danger'
-                })
+            .catch(() => {
+                navigate('/error')
             })
     }
 
-    if (updated) navigate('/')
+    // if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >
