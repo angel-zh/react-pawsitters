@@ -2,9 +2,9 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a review- token required
+//  these parameters are required in order for django to accept the request
 export const reviewCreate = (user, petsitterOwner, petownerId, reviewCreate) => {
 
-    console.log('review', reviewCreate)
 	const ownerId = { owner: user.id }
 	const review = {...reviewCreate, ...ownerId, ...petsitterOwner, ...petownerId}
 
