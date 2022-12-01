@@ -4,6 +4,11 @@
 Our application is designed to allow pet pawrents to easily and conveniently find pet sitting and dog walking services for their beloved furry (or scaly) friends. 
 Additionally, users can also sign up to be a pet sitter or dog walker on our app, set their own schedule, rates, and preferences to make their experience as smooth and delightful as possible. Users are able to leave reviews for the sitters they hire on our platform to help other users find their perfect sitter!
 
+## Landing Page
+![pawSitters](https://i.imgur.com/XhDxiYe.png)
+
+
+
 ### Link
 -In Development- 
 
