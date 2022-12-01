@@ -99,9 +99,9 @@ const ReviewCreate = (props) => {
     return (
 
         <Accordion>
-            <Accordion.Item style={{ backgroundColor: '#f2f6ec' }} eventKey="0">
+            <Accordion.Item style={{ backgroundColor: '56596e' }} eventKey="0">
                 <Accordion.Header>Add a Review</Accordion.Header>
-                <Accordion.Body style={{ backgroundColor: '#f2f6ec' }}>
+                <Accordion.Body style={{ backgroundColor: '#56596e', color: 'white' }}>
                     <ReviewForm
                         imageSelected={imageSelected}
                         setImageSelected={setImageSelected}
