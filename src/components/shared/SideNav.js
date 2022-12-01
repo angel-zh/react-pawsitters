@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-import { faSquarePlus, faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns, faBone, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns, faBone, faStar } from '@fortawesome/free-solid-svg-icons'
 
-const playIcon = <FontAwesomeIcon icon={faPlay} size='xl' className='icon' />
 
 const linkStyle = {
     color: 'white',
