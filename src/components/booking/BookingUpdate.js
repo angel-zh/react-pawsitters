@@ -11,10 +11,8 @@ const BookingUpdate = (props) => {
         user, show, handleClose
     } = props
 
-    // triggerRefresh was not working as a prop - not sure why --> returns error: not a function
-
     const [booking, setBooking] = useState(props.booking)
-    const [updated, setUpdated] = useState(false)
+    // const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -36,6 +34,11 @@ const BookingUpdate = (props) => {
             .then(() => handleClose())
             .then(() => {
                 setUpdated(true)
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.updateBookingSuccess,
+                    variant: 'success'
+                })
             })
             .then(() => navigate('/dashboard'))
             .catch(() => {
@@ -43,7 +46,7 @@ const BookingUpdate = (props) => {
             })
     }
 
-    // if (updated) navigate('/')
+    if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >
