@@ -54,7 +54,7 @@ const ReviewIndex = ({ user }) => {
 
     return (
         <div className='container-md'>
-            <h1 className='text-center my-3 page-heading'> My Posted Reviews</h1>
+            <h2 className='text-center my-3 page-heading'> My Posted Reviews</h2>
 
             <div className='container-md mt-2 index-review d-flex justify-content-center'>
                 {allReviewsJSX}
