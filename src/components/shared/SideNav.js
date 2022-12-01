@@ -1,12 +1,12 @@
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
+import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-import { faSquarePlus, faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns } from '@fortawesome/free-solid-svg-icons'
+import { faSquarePlus, faUser, faPaw, faDog, faPlay, faPenToSquare, faRightToBracket, faLock, faCalendarAlt, faBars, faTableColumns, faBone, faStar } from '@fortawesome/free-solid-svg-icons'
 
-
+const playIcon = <FontAwesomeIcon icon={faPlay} size='xl' className='icon' />
 
 const linkStyle = {
     color: 'white',
@@ -17,21 +17,21 @@ const SideNav = ({ user }) => {
 
     const authenticatedOptions = (
         <>
-            <MenuItem routerLink={<Link to='dashboard' />}>
-                <FontAwesomeIcon icon={faTableColumns} size='xl' className='icon' />My Dashboard
-            </MenuItem>
-            <MenuItem routerLink={<Link to='petowners/' />}> 
-            <FontAwesomeIcon icon={faUser} size='xl' className='icon' /> Pet Owner </MenuItem>
-            <MenuItem routerLink={<Link to='petowners/create' />}> 
-            <FontAwesomeIcon icon={faSquarePlus} size='xl' className='icon' />Create Pet Owner </MenuItem>
-            <MenuItem routerLink={<Link to='bookings' />}>
-                <FontAwesomeIcon icon={faCalendarAlt} size='xl' className='icon' /> My Bookings
-            </MenuItem>
-            <MenuItem routerLink={<Link to='reviews' />}> My Reviews </MenuItem>
-            <div className='mt-5'>
-                <MenuItem routerLink={<Link to='change-password' />}>
-                    <FontAwesomeIcon icon={faLock} size='xl' className='icon' />Change Password
+            <SubMenu icon={<FontAwesomeIcon icon={faUser} size='xl' className='icon' />} label="My Account">
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='dashboard' />}>
+                    <FontAwesomeIcon icon={faTableColumns} size='lg' className='icon' />My Dashboard
                 </MenuItem>
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='bookings' />}>
+                    <FontAwesomeIcon icon={faCalendarAlt} size='lg' className='icon' /> My Bookings
+                </MenuItem>
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='reviews' />}>
+                    <FontAwesomeIcon icon={faStar} size='lg' className='icon' /> My Reviews
+                </MenuItem>
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='change-password' />}>
+                    <FontAwesomeIcon icon={faLock} size='lg' className='icon' />Change Password
+                </MenuItem>
+            </SubMenu>
+            <div className='mt-5'>
                 <MenuItem routerLink={<Link to='sign-out' />}>
                     <FontAwesomeIcon icon={faRightToBracket} size='xl' className='icon' /> Sign Out
                 </MenuItem>
@@ -50,13 +50,23 @@ const SideNav = ({ user }) => {
         </div>
     )
     const alwaysOptions = (
+
+
         <>
-            <MenuItem routerLink={<Link to='/' />}>
-                <FontAwesomeIcon icon={faPlay} size='xl' className='icon' /> Getting Started
-            </MenuItem>
             <MenuItem routerLink={<Link to='petsitters' />}>
                 <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Find PawSitters
             </MenuItem>
+            <SubMenu icon={<FontAwesomeIcon icon={faPlay} size='xl' className='icon' />} label="Getting Started">
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='petsitters/create' />}>
+                    <FontAwesomeIcon icon={faPaw} size='lg' className='icon' /> Become a PawSitter
+                </MenuItem>
+                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='petowners/create' />}>
+                    <FontAwesomeIcon icon={faBone} size='lg' className='icon' /> Register Pet Owner
+                </MenuItem>
+            </SubMenu>
+
+
+
         </>
     )
 
@@ -93,8 +103,8 @@ const SideNav = ({ user }) => {
                         )}
                     </div>
                     <div className='mt-3'>
-                    {alwaysOptions}
-                    {user ? authenticatedOptions : unauthenticatedOptions}
+                        {alwaysOptions}
+                        {user ? authenticatedOptions : unauthenticatedOptions}
                     </div>
                 </Menu>
             </Sidebar>
