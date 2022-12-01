@@ -24,16 +24,17 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         if (user){ 
             petOwnerShow(user, id)
                 .then((res) => {
-                    console.log("petOwner", res.data)
+                    // console.log("petOwner", res.data)
                     setPetOwner(res.data.pet_owner)
                 })
             .catch((error) => {
-                console.log("error", error)
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Show Pet Owner Failure' + error,
-                    variant: 'danger'
-                })
+                navigate('/error')
+                // console.log("error", error)
+                // msgAlert({
+                //     heading: 'Failure',
+                //     message: 'Show Pet Owner Failure' + error,
+                //     variant: 'danger'
+                // })
             })
         }
     }, [updated])
@@ -68,18 +69,22 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         petOwnerDelete(user, id)
         .then(() => {
             setDeleted(true)
-            msgAlert({
-                heading: 'Success',
-                message: 'Pet Owner Deleted',
-                variant: 'success'
-            })
+        
+            // msgAlert({
+            //     heading: 'Success',
+            //     message: 'Pet Owner Deleted',
+            //     variant: 'success'
+            // })
         })
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'deleted Pet Owner Failure' + error,
-                variant: 'danger'
-            })
+        // .catch((error) => {
+        //     msgAlert({
+        //         heading: 'Failure',
+        //         message: 'deleted Pet Owner Failure' + error,
+        //         variant: 'danger'
+        //     })
+        // })
+        .catch(() => {
+            navigate('/error')
         })
 }
 
