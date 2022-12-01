@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const Home = ({ user }) => {
 
 	return (
-		<>
 			<div className="homepage">
 				<h1 className="page-heading">Welcome to the PawSitters!</h1>
 				<h3>We are dedicated to making sure pawrents can easily and conveniently connect with our PawSitters to find care for their beloved pets of all shapes and sizes.</h3>
@@ -24,9 +23,9 @@ const Home = ({ user }) => {
 				{
 					user ?
 						<div className='mx-4'>
-							<Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a Pet Sitter</Link>
+							<Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a PawSitter</Link>
 							<Link to='/petowners/create' className='btn btn-outline-info mx-1'>Create a Pet Owner Profile</Link>
-							<Link to='/petsitters' className='btn btn-outline-info mx-1'>Find Pet Sitters</Link>
+							<Link to='/petsitters' className='btn btn-outline-info mx-1'>Find PawSitters</Link>
 						</div>
 						:
 						<div className='mx-4'>
@@ -36,8 +35,6 @@ const Home = ({ user }) => {
 						</div>
 				}
 			</div>
-
-		</>
 	)
 }
 

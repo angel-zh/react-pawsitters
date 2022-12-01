@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { petOwnerCreate } from '../../api/petOwner'
 import PetOwnerForm from '../shared/PetOwnerForm'
-
+import { Link } from 'react-router-dom'
 const PetOwnerCreate = (props) => {
-    const {user, msgAlert, triggerRefresh  } = props
+    const {user, msgAlert, triggerRefresh,  } = props
 
     const navigate = useNavigate()
-    // const triggerRefresh = triggerRefresh()
+    
     const defaultPetOwner = {
         first_name: '',
         last_name: '',
@@ -43,21 +43,6 @@ const PetOwnerCreate = (props) => {
         })
     } 
 
-    // const handleSelect = event => {
-    //     setPetOwner(prevPetOwner => {
-    //         console.log(event)
-    //         let updatedValue = ''
-    //         event.map((e, index) => {
-    //             if (index === 0) {
-    //                 updatedValue += e.value
-    //             } else {
-    //                 updatedValue += ` ${e.value}`
-    //             }
-    //         })
-    //         return { ...prevPetOwner, availability: updatedValue }
-    //     })
-    // }
-
     const handleCreatePetOwner = event => {
         event.preventDefault()
         console.log(petOwner, user)
@@ -75,18 +60,38 @@ const PetOwnerCreate = (props) => {
                 setPicture('')
                 setImageSelected('')
             })
-            // .then(() => triggerRefresh())
-            // .catch(error => {
-            //     msgAlert({
-            //         heading: 'Failure',
-            //         message: 'Create Pet Owner Profile Failure' + error,
-            //         variant: 'danger'
-            //     })
-            // })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'account already exists',
+                    variant: 'danger'
+                })
+            })
+            
+     
     }
-
+    console.log(petOwner.pet_owner, 'hello')
     return (
-        <PetOwnerForm
+        
+        <>
+        {petOwner == petOwner.id
+        // &&
+        // petOwner.first_name == 'str'
+        // petOwner.last_name !== '' &&
+        // petOwner.pet_type!=='' &&
+        // petOwner.pet_bio == '' &&
+        // petOwner.images 
+        ? 
+        <>
+        <h5>view pet owner account</h5>
+        <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petowners/` }
+            >View {} </Link>
+
+        </>:
+
+            
+            
+            // <h5 className='text-center'><i></i></h5>
+             <PetOwnerForm
             imageSelected={imageSelected}
             setImageSelected={setImageSelected}
             picture={picture}
@@ -94,15 +99,15 @@ const PetOwnerCreate = (props) => {
             petOwner={petOwner}
             handleChange={handleChange}
             handleSubmit={handleCreatePetOwner}
-            // handleSelect={handleSelect}
-            // handleCreatePetOwner={handleCreatePetOwner}
             triggerRefresh={() => setPicture(prev => !prev)}
             handleImageChange={handleImageChange}
             heading="Sign Up to be a Pet Owner"
-            
-        />
+            />
+        }
+        
+        </>
+
     )
 }
-
 
 export default PetOwnerCreate
