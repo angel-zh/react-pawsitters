@@ -31,11 +31,8 @@ const PetOwnerCreate = (props) => {
                 setExists(true)
             })
             .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Show Pet Sitter Failed' + error,
-                    variant: 'danger'
-                })
+              
+                navigate('/error')
             })
     }, [])
 
@@ -62,26 +59,17 @@ const PetOwnerCreate = (props) => {
 
     const handleCreatePetOwner = event => {
         event.preventDefault()
-        console.log(petOwner, user)
+        
         petOwnerCreate(petOwner, user)
             .then(res => { navigate(`/petowners/`) })
            
-            .then(() => {
-                msgAlert({
-                    heading: 'Success',
-                    message: 'Created Pet Owner Profile',
-                    variant: 'success'
-                })
-            })
             .then(() => {
                 setPicture('')
                 setImageSelected('')
             })
             .catch((error) => {
-                msgAlert({
-                    heading: 'account already exists',
-                    variant: 'danger'
-                })
+            
+                navigate('/error')
             })
     }
     
