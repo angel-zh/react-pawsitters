@@ -41,6 +41,7 @@ const PetSitterCreate = ({ user }) => {
             .catch(() => { navigate(`/error`) })
     }, [])
 
+    // options array for 'react-select' library form
     const dayOptions = [
         { value: 'monday', label: 'Monday' },
         { value: 'tuesday', label: 'Tuesday' },
@@ -63,11 +64,11 @@ const PetSitterCreate = ({ user }) => {
             return { ...prevPetSitter, ...updatedPetSitter }
         })
     }
-
+    // handleSelect function for 'react-select' select input
     const handleSelect = event => {
         setPetSitter(prevPetSitter => {
-            console.log(event)
             let updatedValue = ''
+            // formats the multi-selected input into a string separated by a space
             event.map((e, index) => {
                 if (index === 0) {
                     updatedValue += e.value
@@ -91,7 +92,6 @@ const PetSitterCreate = ({ user }) => {
     const handleCreatePetSitter = event => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
-            .then(res => console.log('Created Pet Sitter:', res.data))
             .then(() => { navigate(`/petsitters/${user.id}`) })
             .then(() => {
                 setPicture('')

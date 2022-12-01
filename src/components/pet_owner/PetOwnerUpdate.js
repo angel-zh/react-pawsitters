@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 const PetOwnerUpdate = (props) => {
     const {
-        user, show, handleClose,
-        msgAlert, triggerRefresh
+        user, show, handleClose, triggerRefresh
     } = props
 
     const [petOwner, setPetOwner] = useState(props.petOwner)
@@ -39,21 +38,7 @@ const PetOwnerUpdate = (props) => {
             }
         })
     } 
-    //select
-    const handleSelect = event => {
-        setPetOwner(prevPetOwner => {
-            console.log(event)
-            let updatedValue = ''
-            event.map((e, index) => {
-                if (index === 0) {
-                    updatedValue += e.value
-                } else {
-                    updatedValue += ` ${e.value}`
-                }
-            })
-            return { ...prevPetOwner, availability: updatedValue }
-        })
-    }
+    
     //submit
     const handleSubmit = event => {
         event.preventDefault()
@@ -82,7 +67,6 @@ const PetOwnerUpdate = (props) => {
                     petOwner={petOwner}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    handleSelect={handleSelect}
                     triggerRefresh={() => setPicture(prev => !prev)}
                     handleImageChange={handleImageChange}
                     heading="Update Your Pet Owner Profile"
