@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { faBone, faCalendarAlt, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { bookingIndex } from '../../api/booking'
 import { reviewIndex } from '../../api/review'
@@ -10,42 +10,30 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 
-const Dashboard = ({ user, msgAlert }) => {
+const Dashboard = ({ user }) => {
     const petSitterLink = `/petsitters/${user.id}`
+    const navigate = useNavigate()
     const [allReviews, setAllReviews] = useState([])
     const [allBookings, setAllBookings] = useState([])
 
     useEffect(() => {
         bookingIndex(user)
             .then(res => {
-                console.log('Dashboard bookings', res.data)
                 setAllBookings(res.data.bookings)
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Index Failure: ' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
         reviewIndex(user)
             .then(res => {
-                // console.log('Dashboard reviews', res.data)
                 setAllReviews(res.data.reviews)
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Index Failure: ' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }, [])
+
 
     const formatDate = date => { return moment(date).format("MMM Do YY") }
 
+    // filtering reviews to show only the ones the user made
     let ownerReviews = allReviews.filter(review => review.owner === user.id)
-
     const ownerReviewsJSX = ownerReviews.map(review => (
         <div className='recent-review'>
             <p><b>Pet Sitter: </b> {review.pet_sitter.first_name} {review.pet_sitter.last_name}<br />
@@ -61,9 +49,8 @@ const Dashboard = ({ user, msgAlert }) => {
         </div>
     ))
 
+    // filtering bookings to show only the bookings user made
     let ownerBookings = allBookings.filter(booking => booking.owner === user.id)
-    let recipientBookings = allBookings.filter(booking => booking.owner !== user.id)
-
     const ownerBookingsJSX = ownerBookings.map(booking => (
         <div className='recent-booking'>
             <p><b>For Pet Sitter: </b> {booking.pet_sitter}<br />
@@ -72,7 +59,9 @@ const Dashboard = ({ user, msgAlert }) => {
             </i></p>
         </div>
     ))
-
+    
+    // filtering bookings to show only the bookings the user received
+    let recipientBookings = allBookings.filter(booking => booking.owner !== user.id)
     const recipientBookingsJSX = recipientBookings.map(booking => (
         <div className='recent-booking'>
             <p><b>From Pet Owner: </b> {booking.pet_owner} <br />
@@ -82,8 +71,7 @@ const Dashboard = ({ user, msgAlert }) => {
         </div>
     ))
 
-
-
+    // Getting all the days between a booking's start day and end day accounting for formating accepted by 'react-calendar' 
     const getDatesInRange = (startDate, endDate) => {
         if (!startDate || !endDate) return []
 
@@ -97,7 +85,9 @@ const Dashboard = ({ user, msgAlert }) => {
         return dateArray
     }
 
-
+    // using 'react-calendar' tileClassName function to apply a className('highlight) to every matching day in a booking range
+    // it compares the range days with the days of the month
+    // this allows the calendar to highlight the booked days
     function tileClassName({ date, view }) {
         const allDates = []
         allBookings.forEach((booking) => {
@@ -140,7 +130,7 @@ const Dashboard = ({ user, msgAlert }) => {
                 <Calendar
                     tileClassName={tileClassName}
                 />
-                
+
 
             </div>
             <div className='row mx-5 mt-3'>

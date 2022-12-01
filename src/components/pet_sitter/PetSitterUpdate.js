@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { petSitterUpdate } from '../../api/petSitter'
 import PetSitterForm from '../shared/PetSitterForm'
+import { useNavigate } from 'react-router-dom'
 
 const PetSitterUpdate = (props) => {
     const {
-        user, show, handleClose,
-        msgAlert, triggerRefresh
+        user, show, handleClose, triggerRefresh
     } = props
 
     const dayOptions = [
@@ -19,10 +19,11 @@ const PetSitterUpdate = (props) => {
         { value: 'sunday', label: 'Sunday' }
     ]
 
-
+    const navigate = useNavigate()
     const [petSitter, setPetSitter] = useState(props.petSitter)
-    const [picture, setPicture] = useState(props.petSitter.image)
+    const [picture, setPicture] = useState(props.petSitter.image) 
     const [imageSelected, setImageSelected] = useState(props.imageSelected)
+
 
     const handleChange = event => {
         setPetSitter(prevPetSitter => {
@@ -36,10 +37,11 @@ const PetSitterUpdate = (props) => {
         })
     }
 
+    // handleSelect function for 'react-select' select input
     const handleSelect = event => {
         setPetSitter(prevPetSitter => {
-            console.log(event)
             let updatedValue = ''
+            // formats the multi-selected input into a string separated by a space
             event.map((e, index) => {
                 if (index === 0) {
                     updatedValue += e.value
@@ -63,30 +65,19 @@ const PetSitterUpdate = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-
         petSitterUpdate(petSitter, user, props.petSitter.owner)
             .then(() => handleClose())
-            .then(() => {
-                msgAlert({
-                    heading: 'Success',
-                    message: 'Updated Pet Sitter Profile',
-                    variant: 'success'
-                })
-            })
             .then(() => triggerRefresh())
-            .catch(error => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Failed to Update Pet Sitter Profile' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }
 
+    // returns an array of days to repopulate the select input form in manner specified by 'react-select' library
     function getDayOptions() {
+        // split string at space
         const splitAvailabilities = petSitter.availability.split(" ")
         let days = []
         dayOptions.forEach((e) => {
+            // compare with dayOptions and push matching element to array
             const found = splitAvailabilities.find(element => element === e.value)
             if (!!found) days.push(e)
         })

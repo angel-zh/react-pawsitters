@@ -1,11 +1,9 @@
-// import React, { Component, Fragment } from 'react'
+
 import React, { useState, Fragment } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
-// import AuthenticatedRoute from './components/shared/AuthenticatedRoute'
 import AutoDismissAlert from './components/shared/AutoDismissAlert/AutoDismissAlert'
-// import Header from './components/shared/Header'
 import RequireAuth from './components/shared/RequireAuth'
 import Home from './components/Home'
 import SignUp from './components/auth/SignUp'
@@ -17,12 +15,10 @@ import PetSitterShow from './components/pet_sitter/PetSitterShow'
 import PetOwnerCreate from './components/pet_owner/PetOwnerCreate'
 import PetOwnerShow from './components/pet_owner/PetOwnerShow'
 import PetSitterCreate from './components/pet_sitter/PetSitterCreate'
-import BookingCreate from './components/booking/BookingCreate'
 import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
 import Dashboard from './components/shared/Dashboard'
-// import ReviewCreate from './components/reviews/ReviewCreate'
 import ReviewShow from './components/reviews/ReviewShow'
 import Error from './components/shared/Error'
 
@@ -31,8 +27,6 @@ const App = () => {
 	const [user, setUser] = useState(null)
 	const [msgAlerts, setMsgAlerts] = useState([])
 
-	// console.log('user in app', user)
-	// console.log('message alerts', msgAlerts)
 	const clearUser = () => {
 		console.log('clear user ran')
 		setUser(null)
@@ -55,7 +49,6 @@ const App = () => {
 
 	return (
 		<Fragment>
-			{/* <Header user={user} /> */}
 			<SideNav className='d-flex' user={user} />
 			<Routes>
 				<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
@@ -84,97 +77,75 @@ const App = () => {
 					}
 				/>
 				<Route
-						path='/petsitters'
-						element={
-						
-							<PetSitterIndex msgAlert={msgAlert} user={user} />
-						}
-				/>
-				<Route
-						path='/petsitters/:id'
-						element={
-						<>
-							<PetSitterShow msgAlert={msgAlert} user={user} />
+					path='/petsitters'
+					element={
 
-							{/* <RequireAuth user={user}> */}
-								{/* <BookingCreate msgAlert={msgAlert} user={user} /> */}
-							{/* </RequireAuth> */}
-						</>
-						}
+						<PetSitterIndex msgAlert={msgAlert} user={user} />
+					}
 				/>
 				<Route
-						path='/petsitters/create'
-						element={
+					path='/petsitters/:id'
+					element={
+						<PetSitterShow msgAlert={msgAlert} user={user} />
+					}
+				/>
+				<Route
+					path='/petsitters/create'
+					element={
 						<RequireAuth user={user}>
 							<PetSitterCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
 				<Route
-						path='/petowners/'
-						element={
-						// <RequireAuth user={user}>
-							<PetOwnerShow msgAlert={msgAlert} user={user} />
-						}
+					path='/petowners/'
+					element={
+						<PetOwnerShow msgAlert={msgAlert} user={user} />
+					}
 				/>
-				{/* <Route
-						path='/petowners/:id'
-						element={
-						<RequireAuth user={user}>
-							<PetOwnerShow msgAlert={msgAlert} user={user} />
-						</RequireAuth>}
-				/> */}
 				<Route
-						path='/petowners/create'
-						element={
+					path='/petowners/create'
+					element={
 						<RequireAuth user={user}>
 							<PetOwnerCreate msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
 				/>
 				<Route
-						path='/bookings'
-						element={
+					path='/bookings'
+					element={
 						<RequireAuth user={user}>
 							<BookingIndex msgAlert={msgAlert} user={user} />
 						</RequireAuth>
-						}
+					}
 				/>
-				{/* <Route
-						path='/bookings/create'
-						element={
-						<RequireAuth user={user}>
-							<BookingCreate msgAlert={msgAlert} user={user} />
-						</RequireAuth>
-						}
-				/> */}
 				<Route
-						path='/reviews'
-						element={
+					path='/reviews'
+					element={
 						<RequireAuth user={user}>
 							<ReviewIndex msgAlert={msgAlert} user={user} />
 						</RequireAuth>
-						}
+					}
 				/>
-								<Route
-						path='/reviews/:id'
-						element={
+				<Route
+					path='/reviews/:id'
+					element={
 						<RequireAuth user={user}>
 							<ReviewShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>
-						}
+					}
 				/>
 				<Route
-						path='/dashboard'
-						element={
+					path='/dashboard'
+					element={
 						<RequireAuth user={user}>
 							<Dashboard msgAlert={msgAlert} user={user} />
 						</RequireAuth>
-						}
+					}
 				/>
 				<Route
-						path='/error'
-						element={
-							<Error msgAlert={msgAlert} user={user} />
-						}
+					path='/error'
+					element={
+						<Error msgAlert={msgAlert} user={user} />
+					}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

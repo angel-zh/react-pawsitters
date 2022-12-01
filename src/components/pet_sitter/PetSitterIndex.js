@@ -1,34 +1,29 @@
 
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Card, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { petSitterIndex } from '../../api/petSitter'
 import PetSitterFilter from './PetSitterFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm, faPaw } from '@fortawesome/free-solid-svg-icons'
+import { faFeatherPointed, faDog, faCat, faFish, faDove, faWorm } from '@fortawesome/free-solid-svg-icons'
 
 const linkStyle = {
     color: 'black',
     textDecoration: 'none'
 }
-const PetSitterIndex = ({ user, msgAlert }) => {
+const PetSitterIndex = ({ user }) => {
 
     const [allPetSitters, setAllPetSitters] = useState([])
     const [filterParam, setFilterParam] = useState('all')
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
                 setAllPetSitters(res.data.pet_sitters)
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Index Failure: ' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }, [])
 
     const petSitterCards = () => {
@@ -52,7 +47,7 @@ const PetSitterIndex = ({ user, msgAlert }) => {
                                         <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic border mt-2' />
                                 }
                             </div>
-                            {/* <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image> */}
+
                             <div className='col mt-3'>
                                 <h3 className=''> {petSitter.first_name} {petSitter.last_name}</h3>
                                 <div className='row'>
