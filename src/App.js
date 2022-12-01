@@ -125,14 +125,14 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route
+				{/* <Route
 					path='/reviews/:id'
 					element={
 						<RequireAuth user={user}>
 							<ReviewShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>
 					}
-				/>
+				/> */}
 				<Route
 					path='/dashboard'
 					element={

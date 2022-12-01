@@ -80,7 +80,7 @@ const ReviewCreate = (props) => {
                 setImageSelected('')
             })
             .then(() => triggerRefresh())
-            .then(() => navigate('/reviews/'))
+            // .then(() => navigate('/reviews/'))
             .catch(() => {
                 navigate('/error')
             })
