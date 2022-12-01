@@ -2,6 +2,7 @@ import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
 import { reviewCreate} from '../../api/review'
+import { useNavigate } from 'react-router-dom'
 
 
 const ReviewCreate = (props) => {
@@ -9,7 +10,7 @@ const ReviewCreate = (props) => {
         user, petSitter, msgAlert, triggerRefresh, 
     } = props
     
-    
+    const navigate = useNavigate()
     
     const [review, setReview] = useState({
         owner: '',
@@ -25,7 +26,7 @@ const ReviewCreate = (props) => {
     
     // These states are to clear the image data from the review form after a review submit
     // They are set here and then used as props in CloudinaryUploadWidget.js, ReviewForm.js, and ReviewEdit.js
-    // Shoutout to Timm and Aisha for helping with this tricky part
+    // Shoutout to Timm and Aisha for helping with this tricky part from the good avocado project
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
     
@@ -74,25 +75,15 @@ const ReviewCreate = (props) => {
         console.log('create a review', review)
 
         reviewCreate(user, petSitter.owner, user.id, updatedReview)
-            .then(() => {
-                msgAlert({
-                    heading: 'Thanks!',
-                    message: 'We appreciate you taking the time to review this pet sitter!',
-                    variant: 'success'
-                })
-            })
             // sets the image preview back to an empty string
             .then(() => {
                 setPicture('')
                 setImageSelected('')
             })
             .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Oh No!',
-                    message: 'Something went wrong! Please try again' + error,
-                    variant: 'danger'
-                })
+            .then(() => navigate('/reviews/'))
+            .catch(() => {
+                navigate('/error/')
             })
     }
 

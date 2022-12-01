@@ -16,6 +16,7 @@ const ReviewEdit = (props) => {
     const [updated, setUpdated] = useState(false)
     const [picture, setPicture] = useState(props.review.image)
     const [imageSelected, setImageSelected] = useState(props.imageSelected)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         console.log('this is the beginging of handlechange review', review)
