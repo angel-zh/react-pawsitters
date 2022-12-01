@@ -8,7 +8,7 @@ import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
+import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical, faPaw } from '@fortawesome/free-solid-svg-icons'
 import { reviewIndex } from '../../api/review'
 
 
@@ -110,9 +110,16 @@ const PetSitterShow = ({ user, msgAlert }) => {
                 <div className='pet-sitter-show container-md text-center d-flex'>
                     <div className='bio-container container-fluid'>
                         <div>
-                            <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                            {
+                                petSitter.image !== '' 
+                                ?
+                                <Image src={petSitter.image} alt='profile pic' className='profile-pic-show border mt-2' />
+                                :
+                                <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                            }
+                            
                             <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
-                            <p>Has been a Paw Sitter since <i>{moment(petSitter.createdAt).format("MMM Do YY")} ({moment(petSitter.createdAt).startOf('day').fromNow()})</i></p>
+                            <p>Has been a PawSitter since <i>{moment(petSitter.created_at).format("MMM Do YY")}</i></p>
                         </div>
 
                         <div>
@@ -179,7 +186,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                             {formatString(petSitter.availability)} <br />
                             <p><i>Time</i>: {formatDate(petSitter.from_time)} - {formatDate(petSitter.to_time)}</p>
                         </div>
-                        <div className='mb-4'>
+                        <div className='mb-4 border-bottom'>
                             <h5>Biography / Additional Info</h5>
                             {
                                 petSitter.medicine
@@ -241,15 +248,13 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         <Container>
                             <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
                             {
-                                reviews.length > 0
+                                reviewCards().length > 0
                                     ?
                                     <>
                                         {reviewCards()}
                                     </>
                                     :
-                                    <>
                                         <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
-                                    </>
                             }
 
 
