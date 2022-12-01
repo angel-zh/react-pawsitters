@@ -34,7 +34,7 @@ const ReviewShow = (props) => {
         <>
             <Card className="d-flex justify-content-between" style={{ backgroundColor: '#56596e' }}>
                 <Card.Header className='d-flex justify-content-between'>
-                    <p>{review.pet_owner} said:</p>
+                    <h5>{review.pet_owner} said:</h5>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
