@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Card, Button, Image } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
-import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
     const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner, deleted, setDeleted } = props
@@ -56,14 +55,14 @@ const BookingShow = (props) => {
             <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
                 <Card.Header>
                     <div className='booking-img'>
-                        {/* <img className='fluid rounded' style={{ width: 500 }} src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/> */}
                         {
-                        booking.petOwner.images !== '' 
+                        booking.pet_owner.images !== '' 
                         ?
-                        <Image src={booking.petOwner.images} alt='pet owner profile pic' className='fluid rounded' style={{ width: 500 }} />
+                        <img src={booking.pet_owner.images} alt='pet owner profile pic' className='fluid rounded' style={{ width: 500 }} />
                         :
-                        <Image src='/defaultProfilePic3.jpg' alt='pet owner profile pic' className='fluid rounded' style={{ width: 500 }} />
+                        <img src='/defaultProfilePic3.jpg' alt="a cozy puppy being cradled in a person's arms" className='fluid rounded' style={{ width: 500 }} />
                         }
+
                     </div>
                 </Card.Header>
                 <Card.Body>
