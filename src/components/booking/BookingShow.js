@@ -7,10 +7,9 @@ import BookingUpdate from './BookingUpdate'
 import PetImages from '../shared/PetImages'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner } = props
+    const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner, deleted, setDeleted } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
-    const [deleted, setDeleted] = useState(false)
     const navigate = useNavigate()
 
     const handleDeleteBooking = () => {
@@ -20,7 +19,8 @@ const BookingShow = (props) => {
                 // console.log('BookingShow.js booking', booking)
                 // console.log('BookingShow.js user', booking)
 
-                setDeleted(true)
+                // "like light switch" - John
+                setDeleted(!deleted)
                 msgAlert({
                     heading: 'Success: Booking Deleted',
                     message: "Booking Deleted",
@@ -46,8 +46,6 @@ const BookingShow = (props) => {
         )
     }
 
-    // navigating to '/bookings' was causing errors - fix later
-    if (deleted) navigate('/')
 
     // Formating Dates and times
     let date = moment(booking.created_at).format('MMMM Do YYYY, h:mm a')
@@ -68,9 +66,9 @@ const BookingShow = (props) => {
 
         <>
             <Card className='d-flex justify-content-between' style={{ backgroundColor: '#56596e' }}>
-                <Card.Header style={{ backgroundColor: '#56596e' }}>
-                    <div>
-                        <img className='container-md booking-img' src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/>
+                <Card.Header>
+                    <div className='booking-img'>
+                        <img className='fluid rounded' style={{ width: 500 }} src={booking.pet_owner.images} alt={booking.pet_owner.pet_name}/>
                     </div>
                 </Card.Header>
                 <Card.Body>

@@ -253,7 +253,7 @@ body {
   background-color: #56596e;
 }
 
-.booking-img {
-  margin: auto;
-  border: black;
+.booking-img, .review-img {
+  border: 2px solid #757d90;
+  border-radius: 10px;
 }

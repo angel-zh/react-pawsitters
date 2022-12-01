@@ -19,6 +19,7 @@ const cardContainerLayout = {
 const BookingIndex = ({ user, msgAlert, petOwner }) => {
 
     const [allBookings, setAllBookings] = useState([])
+    const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         bookingIndex(user)
@@ -34,7 +35,7 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
                     variant: 'danger'
                 })
             })
-    }, [])
+    }, [deleted])
     
 
     const allBookingsJSX = allBookings.map(booking => (
@@ -45,6 +46,8 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
                 booking={booking}
                 msgAlert={msgAlert}
                 petSitter={booking.pet_sitter}
+                deleted={deleted}
+                setDeleted={setDeleted}
                 
             />     
         </Card>
