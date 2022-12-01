@@ -44,7 +44,7 @@ const PetSitterShow = ({ user }) => {
             .then((res) => {
                 setReviews(res.data.reviews)
             })
-    }, [])
+    }, [updated])
 
 
     const reviewCards = () => {

@@ -45,7 +45,6 @@ const ReviewEdit = (props) => {
         reviewUpdate(user, petSitter.owner, review)
         .then(() => handleClose())
         .then(() => triggerRefresh())
-        .then(() => navigate( '/reviews/' ))
         .catch(() => {
             navigate('/error')
         })
@@ -53,8 +52,8 @@ const ReviewEdit = (props) => {
 
     return (
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton/>
-            <Modal.Body>
+            <Modal.Header closeButton className='head-modal' />
+            <Modal.Body className='body-modal'>
                 <ReviewForm 
                     imageSelected={imageSelected}
                     setImageSelected={setImageSelected}

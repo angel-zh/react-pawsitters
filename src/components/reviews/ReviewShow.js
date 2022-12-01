@@ -19,15 +19,14 @@ const ReviewShow = (props) => {
 
             .then(() => {
                 setDeleted(true)
-                
             })
             .then(() => triggerRefresh())
-            .then(() => navigate( '/reviews/'))
             .catch(() => {
                 navigate('/error')    
             })
     }
-    let date = moment(review.created_at).format('MMMM Do YYYY, h:mm a')
+    let date = moment(review.created_at).format('MMM Do YY, h:mm a')
+    let updatedAt = moment(review.updated_at).format('MMM Do YY, h:mm a')
 
     return (
 
@@ -75,7 +74,7 @@ const ReviewShow = (props) => {
                             :
                             <></>
                     }
-                    <div className='float-end'>{date}</div>
+                    <div className='float-end'>Posted on {date} <br />Updated on {updatedAt}</div>
                 </Card.Footer>
             </Card>
             <ReviewEdit
