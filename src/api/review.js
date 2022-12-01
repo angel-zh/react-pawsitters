@@ -24,9 +24,6 @@ export const reviewIndex = (user) => {
 	return axios({
 		url: apiUrl + `/reviews/`,
 		method: 'GET',
-        // headers: {
-		// 	Authorization: `Token ${user.token}`,
-		// },
 	})
 }
 

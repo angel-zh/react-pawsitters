@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ReviewCreate = (props) => {
     const {
-        user, petSitter, msgAlert, triggerRefresh, 
+        user, petSitter, triggerRefresh, 
     } = props
     
     const navigate = useNavigate()
@@ -41,6 +41,7 @@ const ReviewCreate = (props) => {
             }
         })
     }
+
     const handleImageChange = (image) => {
         setReview(prevReview => {
             const name = 'image'
@@ -50,7 +51,6 @@ const ReviewCreate = (props) => {
             }
         })
     } 
-    
     
     const handleSubmit = (e) => {
         console.log('this is petsitter', petSitter)
@@ -72,7 +72,6 @@ const ReviewCreate = (props) => {
             owner_email: '',
            
         })
-        console.log('create a review', review)
 
         reviewCreate(user, petSitter.owner, user.id, updatedReview)
             // sets the image preview back to an empty string
@@ -83,7 +82,7 @@ const ReviewCreate = (props) => {
             .then(() => triggerRefresh())
             .then(() => navigate('/reviews/'))
             .catch(() => {
-                navigate('/error/')
+                navigate('/error')
             })
     }
 
