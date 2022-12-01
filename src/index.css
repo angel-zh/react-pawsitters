@@ -245,7 +245,7 @@ body {
   text-orientation: upright;
 }
 
-.booking-index {
+.booking-index, .index-review {
   border: 2px solid #757d90;
   padding: 20px;
   border-radius: 5px;
