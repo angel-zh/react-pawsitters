@@ -9,13 +9,11 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert
+        msgAlert, updated, setUpdated
     } = props
 
-    // triggerRefresh was not working as a prop - not sure why --> returns error: not a function
-
     const [booking, setBooking] = useState(props.booking)
-    const [updated, setUpdated] = useState(false)
+    // const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -36,7 +34,7 @@ const BookingUpdate = (props) => {
         bookingUpdate(user, booking)
             .then(() => handleClose())
             .then(() => {
-                setUpdated(true)
+                setUpdated(!updated)
                 msgAlert({
                     heading: 'Success',
                     message: messages.updateBookingSuccess,
@@ -53,7 +51,7 @@ const BookingUpdate = (props) => {
             })
     }
 
-    if (updated) navigate('/')
+    // if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >
