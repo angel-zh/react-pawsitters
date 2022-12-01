@@ -13,7 +13,6 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         pet_name:'',
         pet_type:'',
         images:'',
-        pet_images:'',
          })
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
@@ -85,7 +84,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
 }
 
     if (deleted) navigate('/')
-    // if (!petOwner) navigate ('/petowners/create/')
+    
    
     return (
         <>
@@ -108,28 +107,10 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                     <h3>Pet Owner's Name: {petOwner.first_name} {petOwner.last_name} <br /> Type of Pet: {petOwner.pet_type} <br />  </h3>
                     <h3>Pet's Name: {petOwner.pet_name} </h3>
                     <h3>About {petOwner.pet_name} : <br/> {petOwner.pet_bio}</h3>
-                        {/* <div className='d-flex'>
-                            {petOwner.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
-                            {petOwner.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
-                            {petOwner.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
-                            {petOwner.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
-                            {petOwner.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
-                        </div> */}
                     
                 </Card.Text>
             </Card.Body>
             <Card.Body>
-                    {/* <small>Comments: </small>
-                    <p></p> */}
-                    <img
-                        style={{ width: 600 }}
-                        src={petOwner.images}
-                        alt={""}
-                    />
-                </Card.Body>
-                <Card.Body>
-                    {/* <small>Comments: </small>
-                    <p></p> */}
                     <img
                         style={{ width: 600 }}
                         src={petOwner.images}
@@ -157,7 +138,6 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                         </Button>
                         <Button onClick={() => handleDeletePetOwner()}
                             className='btn btn-outline-info mx-1'
-                            /* variant="danger" */
                         >
                             Delete Profile
                         </Button>
@@ -175,7 +155,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 handleClose={() => setEditModalShow(false)}
             />
     
-           
+
                 </div>
             </div>
          </div>
