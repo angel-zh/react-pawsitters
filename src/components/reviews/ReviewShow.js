@@ -21,7 +21,6 @@ const ReviewShow = (props) => {
                 setDeleted(true)
             })
             .then(() => triggerRefresh())
-            // .then(() => navigate( '/reviews/'))
             .catch(() => {
                 navigate('/error')    
             })
