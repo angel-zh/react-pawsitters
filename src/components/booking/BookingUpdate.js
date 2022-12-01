@@ -53,7 +53,7 @@ const BookingUpdate = (props) => {
             })
     }
 
-    if (updated) navigate('/dashboard')
+    if (updated) navigate('/')
 
     return (
         <Modal show={show} onHide={handleClose} >

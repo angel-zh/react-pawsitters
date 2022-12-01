@@ -33,42 +33,46 @@ const ReviewShow = (props) => {
                 })
             })
     }
-    let date = moment(review.createdAt).format('MMMM Do YYYY, h:mm a')
+    let date = moment(review.created_at).format('MMMM Do YYYY, h:mm a')
 
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#f2f6ec'  }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee'  }}>
-                    <p style= {{color: '#3f4257'}}>{review.owner_email} said:</p>
+            <Card className="d-flex justify-content-between" style={{ backgroundColor: '#56596e' }}>
+                <Card.Header className='d-flex justify-content-between'>
+                {/* style= {{color: '#3f4257'}} */}
+                    <p>{review.owner_email} said:</p>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
                     />
                 </Card.Header>
-                <Card.Body className = 'card-text' style= {{color: '#3f4257'}}>
-                    <small>Comments: </small>
-                    <p >{review.comment}</p>
-                    <img
-                        style={{ width: 200 }}
-                        src={review.image}
-                        alt={""}
-                    />
+                <Card.Body>
+                    <b>"{review.comment}"</b><br/>
+                    <div className='review-img fluid rounded'>
+                        <img
+                            style={{ width: 500 }}
+                            src={review.image}
+                            alt={""}
+                        />
+                    </div>
+                    
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className='mb-3'>
                     {
                         user && user.email === review.owner_email
                             ?
                             <>
                                 <Button
                                     className='m-2'
-                                    variant='success'
+                                    variant='info'
                                     onClick={() => setEditModalShow(true)}
                                 >
                                     Edit
                                 </Button>
                                 <Button
-                                    variant="danger"
+                                    className='m-2'
+                                    variant="outline-info"
                                     onClick={() => handleDeleteReview()}
                                 >
                                     Delete
@@ -77,7 +81,7 @@ const ReviewShow = (props) => {
                             :
                             <></>
                     }
-                    <div className='float-end' style= {{color: '#3f4257'}}>{date}</div>
+                    <div className='float-end'>{date}</div>
                 </Card.Footer>
             </Card>
             <ReviewEdit
