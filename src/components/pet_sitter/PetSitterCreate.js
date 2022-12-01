@@ -4,7 +4,7 @@ import { petSitterCreate, petSitterShow } from '../../api/petSitter'
 import PetSitterForm from '../shared/PetSitterForm'
 
 
-const PetSitterCreate = ({ user, msgAlert }) => {
+const PetSitterCreate = ({ user }) => {
     const navigate = useNavigate()
 
     const defaultPetSitter = {
@@ -38,13 +38,7 @@ const PetSitterCreate = ({ user, msgAlert }) => {
             .then(res => {
                 if (res.data.pet_sitter.owner !== null) setExists(true)
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Show Pet Sitter Failed' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }, [])
 
     const dayOptions = [
@@ -98,37 +92,24 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         event.preventDefault()
         petSitterCreate(petSitter, user)
             .then(res => console.log('Created Pet Sitter:', res.data))
-            .then(res => { navigate(`/dashboard`) })
-            .then(() => {
-                msgAlert({
-                    heading: 'Success',
-                    message: 'Created Pet Sitter Profile',
-                    variant: 'success'
-                })
-            })
+            .then(() => { navigate(`/petsitters/${user.id}`) })
             .then(() => {
                 setPicture('')
                 setImageSelected('')
             })
-            .catch(error => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Create Pet Sitter Profile Failure' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }
 
     return (
         <>
             {
                 exists
-                    ? 
+                    ?
                     <div className='container-fluid text-center mt-5'>
-                    <h5>You already have an existing PawSitter profile with us.</h5>
-                    <Link to={petSitterLink} className='btn btn-outline-info mx-1'>My PawSitter Profile</Link>
-                </div>
-                    : 
+                        <h5>You already have an existing PawSitter profile with us.</h5>
+                        <Link to={petSitterLink} className='btn btn-outline-info mx-1'>My PawSitter Profile</Link>
+                    </div>
+                    :
                     <PetSitterForm
                         imageSelected={imageSelected}
                         setImageSelected={setImageSelected}

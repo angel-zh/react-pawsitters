@@ -2,7 +2,7 @@ import React from "react"
 import Select from 'react-select'
 
 
-const PetSitterFilter = ({ msgAlert, filterParam, setFilterParam }) => {
+const PetSitterFilter = ({ filterParam, setFilterParam }) => {
     const filterOptions = [
         { value: 'all', label: 'All' },
         { value: 'dog_walking', label: 'Dog Walkers' },

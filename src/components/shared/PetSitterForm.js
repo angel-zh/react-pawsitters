@@ -5,7 +5,9 @@ import makeAnimated from 'react-select/animated'
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 const PetSitterForm = (props) => {
-    const { petSitter, handleChange, heading, handleSubmit, handleSelect, dayOptions, availability, handleImageChange, picture, setPicture, imageSelected, setImageSelected } = props
+    const { 
+        petSitter, handleChange, heading, handleSubmit, handleSelect, dayOptions, availability, handleImageChange, picture, setPicture, imageSelected, setImageSelected
+     } = props
 
     const animatedComponents = makeAnimated()
     return (

@@ -8,11 +8,11 @@ import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical, faPaw } from '@fortawesome/free-solid-svg-icons'
+import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
 import { reviewIndex } from '../../api/review'
 
 
-const PetSitterShow = ({ user, msgAlert }) => {
+const PetSitterShow = ({ user }) => {
     const [petSitter, setPetSitter] = useState(null)
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
@@ -20,56 +20,34 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const { id } = useParams()
     const navigate = useNavigate()
     const [reviews, setReviews] = useState([])
-    const [allReviews, setAllReviews] = useState([])
 
 
     useEffect(() => {
         petSitterShow(user, id)
             .then(res => {
-                console.log('Pet Show Page:', res.data)
                 setPetSitter(res.data.pet_sitter)
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Show Pet Sitter Failed' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }, [updated])
 
     const handleDeletePetSitter = () => {
         petSitterDelete(user, id)
             .then(() => {
                 setDeleted(true)
-                msgAlert({
-                    heading: 'Success',
-                    message: 'Deleting Pet Sitter Profile',
-                    variant: 'success'
-                })
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Deleting Pet Sitter Profile Fail: ' + error,
-                    variant: 'danger'
-                })
-            })
+            .catch(() => { navigate(`/error`) })
     }
 
 
     useEffect(() => {
         reviewIndex(user)
             .then((res) => {
-                console.log('this is res.data', res.data)
                 setReviews(res.data.reviews)
             })
     }, [])
 
-    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
+
     const reviewCards = () => {
-        // if (reviews.id) {
-        console.log('reviews', reviews)
         return reviews.filter(review => review.pet_sitter.owner === petSitter.owner).map(review => (
             <div>
                 <ReviewShow
@@ -77,19 +55,19 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     review={review}
                     petSitter={petSitter}
                     user={user}
-                    msgAlert={msgAlert}
                     triggerRefresh={() => setUpdated(prev => !prev)}
                 />
             </div>
         ))
     }
 
-
+    // formats string to include a comma to separate a string of list items
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
     }
 
-    const formatDate = string => {
+    // formats time string to remove last 3 elements (the seconds)
+    const formatTime = string => {
         return string.slice(0, -3)
     }
 
@@ -111,13 +89,13 @@ const PetSitterShow = ({ user, msgAlert }) => {
                     <div className='bio-container container-fluid'>
                         <div>
                             {
-                                petSitter.image !== '' 
-                                ?
-                                <Image src={petSitter.image} alt='profile pic' className='profile-pic-show border mt-2' />
-                                :
-                                <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                                petSitter.image !== ''
+                                    ?
+                                    <Image src={petSitter.image} alt='profile pic' className='profile-pic-show border mt-2' />
+                                    :
+                                    <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
                             }
-                            
+
                             <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
                             <p>Has been a PawSitter since <i>{moment(petSitter.created_at).format("MMM Do YY")}</i></p>
                         </div>
@@ -184,7 +162,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         <div>
                             <h5>Availability</h5>
                             {formatString(petSitter.availability)} <br />
-                            <p><i>Time</i>: {formatDate(petSitter.from_time)} - {formatDate(petSitter.to_time)}</p>
+                            <p><i>Time</i>: {formatTime(petSitter.from_time)} - {formatTime(petSitter.to_time)}</p>
                         </div>
                         <div className='mb-4 border-bottom'>
                             <h5>Biography / Additional Info</h5>
@@ -203,6 +181,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                 user && petSitter.owner === user.id
                                     ?
                                     <>
+                                        <Link to='/dashboard' className='btn btn-info'>My Dashboard</Link>
                                         <Button onClick={() => setEditModalShow(true)} className="m-2"
                                             variant="info"
                                         >
@@ -214,6 +193,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                         >
                                             Delete Profile
                                         </Button>
+
                                     </>
                                     :
                                     null
@@ -225,7 +205,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                             user={user}
                             petSitter={petSitter}
                             show={editModalShow}
-                            msgAlert={msgAlert}
                             triggerRefresh={() => setUpdated(prev => !prev)}
                             handleClose={() => setEditModalShow(false)}
                         />
@@ -235,7 +214,6 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                     <ReviewCreate
                                         user={user}
                                         petSitter={petSitter}
-                                        msgAlert={msgAlert}
                                         triggerRefresh={() => setUpdated(prev => !prev)}
                                     />
                                 </Container>
@@ -254,7 +232,7 @@ const PetSitterShow = ({ user, msgAlert }) => {
                                         {reviewCards()}
                                     </>
                                     :
-                                        <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
+                                    <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
                             }
 
 
@@ -265,12 +243,10 @@ const PetSitterShow = ({ user, msgAlert }) => {
                         user && user.id !== petSitter.owner
                             ?
                             <div className='booking-container'>
-                                {/* This is one way to show the Booking request */}
                                 <Container>
                                     <BookingCreate
                                         user={user}
                                         petSitter={petSitter}
-                                        msgAlert={msgAlert}
                                         triggerRefresh={() => setUpdated(prev => !prev)}
                                     />
                                 </Container>
