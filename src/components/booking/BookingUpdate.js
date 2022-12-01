@@ -37,7 +37,7 @@ const BookingUpdate = (props) => {
             .then(() => {
                 setUpdated(true)
             })
-            .then(() => navigate('/bookings'))
+            .then(() => navigate('/dashboard'))
             .catch(() => {
                 navigate('/error')
             })
