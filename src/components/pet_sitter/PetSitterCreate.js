@@ -85,10 +85,10 @@ const PetSitterCreate = ({ user, msgAlert }) => {
         })
     }
 
-    const handleImageChange = (images) => {
+    const handleImageChange = (image) => {
         setPetSitter(prevPetSitter => {
-            const name = 'images'
-            const updatedPetSitter = { [name]: images }
+            const name = 'image'
+            const updatedPetSitter = { [name]: image }
             return {
                 ...prevPetSitter, ...updatedPetSitter
             }

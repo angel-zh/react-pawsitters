@@ -9,13 +9,13 @@ const PetSitterForm = (props) => {
 
     const animatedComponents = makeAnimated()
     return (
-        
+
         <Container className="mt-3 d-flex justify-content-center">
-            
+
             <Form onSubmit={handleSubmit} className="pet-sitter-form">
                 <h3 className='mb-3'>{heading}</h3>
                 <Row>
-                    <Col xs='auto'>
+                    <Col>
                         <Form.Label>First Name:</Form.Label>
                         <Form.Control
                             placeholder="First Name"
@@ -25,7 +25,7 @@ const PetSitterForm = (props) => {
                             onChange={handleChange}
                         />
                     </Col>
-                    <Col xs='auto'>
+                    <Col>
                         <Form.Label>Last Name:</Form.Label>
                         <Form.Control
                             placeholder="Last Name"
@@ -35,7 +35,7 @@ const PetSitterForm = (props) => {
                             onChange={handleChange}
                         />
                     </Col>
-                    <Col xs='auto'>
+                    <Col>
                         <Form.Label>Age:</Form.Label>
                         <Form.Control
                             placeholder='Minimum age is 18'
@@ -47,16 +47,7 @@ const PetSitterForm = (props) => {
                             onChange={handleChange}
                         />
                     </Col>
-                    <>
-                    <Form.Label>Upload an Image:</Form.Label>
-                    <CloudinaryUploadWidget
-                        handleImageChange={handleImageChange}
-                        picture={picture}
-                        setPicture={setPicture}
-                        imageSelected={imageSelected}
-                        setImageSelected={setImageSelected}
-                    />
-                </>
+                    
                 </Row>
                 <Form.Label>Please check the services you would like to provide:</Form.Label>
                 <Row>
@@ -177,7 +168,8 @@ const PetSitterForm = (props) => {
                         />
                     </Col>
                 </Row>
-
+                <Row>
+                <Col>
                 <Form.Label>Biography / Additional Information:</Form.Label>
                 <Form.Control
                     placeholder="Let us know more about you!"
@@ -186,8 +178,21 @@ const PetSitterForm = (props) => {
                     value={petSitter.bio}
                     onChange={handleChange}
                     as="textarea"
-                    rows={3}
+                    rows={6}
                 />
+                </Col>
+                <Col>
+                <Form.Label>Upload a Profile Picture:</Form.Label>
+                        <CloudinaryUploadWidget
+                            handleImageChange={handleImageChange}
+                            picture={picture}
+                            setPicture={setPicture}
+                            imageSelected={imageSelected}
+                            setImageSelected={setImageSelected}
+                        />
+                
+                </Col>
+                </Row>
                 <Button variant='outline-info' className='mt-3' type="submit">Submit</Button>
             </Form>
         </Container>
