@@ -73,11 +73,11 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                         ?
                         <Image src={petOwner.images} alt='profile pic' className='profile-pic-show border mt-2' />
                         :
-                        <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                        <Image src='/defaultProfilePic2.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
                     }
                     
                     <h2 className='page-heading mt-2'>{petOwner.first_name} {petOwner.last_name}</h2>
-                    <p>Has been a working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
+                    <p>Has been working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
                 </div>
 
                 <div className='mb-4 border-bottom'>
