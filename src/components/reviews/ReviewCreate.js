@@ -53,7 +53,7 @@ const ReviewCreate = (props) => {
     } 
     
     const handleSubmit = (e) => {
-        console.log('this is petsitter', petSitter)
+
         e.preventDefault()
         let updatedReview = review
         updatedReview.owner_email = user.email

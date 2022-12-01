@@ -2,16 +2,20 @@ import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { petOwnerUpdate } from '../../api/petOwner'
 import PetOwnerForm from '../shared/PetOwnerForm'
+import { useNavigate } from 'react-router-dom'
 
 const PetOwnerUpdate = (props) => {
     const {
-        user, show, handleClose,
-        msgAlert, triggerRefresh
+        user, show, handleClose, triggerRefresh
     } = props
 
     const [petOwner, setPetOwner] = useState(props.petOwner)
+    //props for images for pet owner profile
     const [picture, setPicture] = useState(props.petOwner.images)
     const [imageSelected, setImageSelected] = useState(props.imageSelected)
+
+    const navigate = useNavigate()
+    //navigate for error page
 
     const handleChange = event => {
         setPetOwner(prevPetOwner => {
@@ -24,7 +28,7 @@ const PetOwnerUpdate = (props) => {
             return { ...prevPetOwner, ...updatedPetOwner }
         })
     }
-
+    //image change
     const handleImageChange = (images) => {
         setPetOwner(prevPetOwner => {
             const name = 'images'
@@ -34,44 +38,24 @@ const PetOwnerUpdate = (props) => {
             }
         })
     } 
-    const handleSelect = event => {
-        setPetOwner(prevPetOwner => {
-            console.log(event)
-            let updatedValue = ''
-            event.map((e, index) => {
-                if (index === 0) {
-                    updatedValue += e.value
-                } else {
-                    updatedValue += ` ${e.value}`
-                }
-            })
-            return { ...prevPetOwner, availability: updatedValue }
-        })
-    }
-
+    
+    //submit
     const handleSubmit = event => {
         event.preventDefault()
         console.log( user.id)
         petOwnerUpdate(petOwner, user, props.petOwner._id)
             .then(() => handleClose())
-            .then(() => {
-                msgAlert({
-                    heading: 'Success',
-                    message: 'Updated Pet Owner Profile',
-                    variant: 'success'
-                })
-            })
+          
             .then(() => triggerRefresh())
             .catch(error => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Failed to Update Pet Owner Profile' + error,
-                    variant: 'danger'
-                })
+                navigate('/error')
+                
             })
     }
 
     return (
+        //brings in pet owner form modal for updating profile
+
         <Modal size='lg' show={show} onHide={handleClose} >
             <Modal.Header closeButton className='head-modal' />
             <Modal.Body className='body-modal'>
@@ -83,7 +67,6 @@ const PetOwnerUpdate = (props) => {
                     petOwner={petOwner}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    handleSelect={handleSelect}
                     triggerRefresh={() => setPicture(prev => !prev)}
                     handleImageChange={handleImageChange}
                     heading="Update Your Pet Owner Profile"

@@ -13,15 +13,18 @@ const ReviewIndex = ({ user }) => {
 
     useEffect(() => {
         reviewIndex(user)
-            .then(res => {
-                setAllReviews(res.data.reviews)
-            })
-            .catch(() => {
-                navigate('/error')
-            })
+
+        .then(res => {
+            setAllReviews(res.data.reviews)
+        })
+        .catch(() => {
+            navigate('/error')
+        })
+
 
     }, [])
 
+    // Filter and map through the reviews by owner of the review to produce cards to display
     const userReviews = allReviews.filter(review => review.owner === user.id)
 
     const allReviewsJSX = userReviews.map(review => (
@@ -51,7 +54,7 @@ const ReviewIndex = ({ user }) => {
 
     return (
         <div className='container-md'>
-            <h1 className='text-center my-3 page-heading'> My Posted Reviews</h1>
+            <h2 className='text-center my-3 page-heading'> My Posted Reviews</h2>
 
             <div className='container-md mt-2 index-review d-flex justify-content-center'>
                 {allReviewsJSX}
