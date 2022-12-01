@@ -33,13 +33,12 @@ const ReviewIndex = ({ user, msgAlert, reviews }) => {
         console.log('reviewIndex console log for all reviews', allReviews) 
     }, [])
 
-    // const usersReviews = allReviews.filter(review => review.owner === user.id)
+    const userReviews = allReviews.filter(review => review.owner === user.id)
     // const reviewCards = usersReviews.map(review => (
-    const allReviewsJSX = allReviews.map(review => (
+    const allReviewsJSX = userReviews.map(review => (
 
         <Card key={ review.id } style={{ width: '25rem',  margin: 5, backgroundColor: '#f2f6ec' }}>      
-            <Card.Img variant="top" style={{height: '10rem'}}src={review.pet_sitter.image} />
-            {/* src="https://i.imgur.com/dujfkLL.jpg"  */}
+            <Card.Img variant="top" style={{height: '10rem'}} src="https://i.imgur.com/dujfkLL.jpg" />
             <Card.Header className='d-flex justify-content-between'>
                 <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petsitters/${review.pet_sitter.owner}` }
                 // link is not functioning fully
