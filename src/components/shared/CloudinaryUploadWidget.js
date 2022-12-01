@@ -33,7 +33,7 @@ const CloudinaryUploadWidget = ({ handleImageChange, picture, setPicture, setIma
 
             {/* displays a preview of the image */}
             <img
-                style={{ width: 200 }}
+                style={{ width: 160, borderRadius: '50%' }}
                 cloudName="dtszeeznm"
                 src={picture}
                 alt={""}
