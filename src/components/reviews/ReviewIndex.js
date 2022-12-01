@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { reviewIndex } from '../../api/review'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import ReviewShow from './ReviewShow'
 import StarRating from '../shared/StarRating'
 
 const cardContainerLayout = {
