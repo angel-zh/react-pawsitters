@@ -77,13 +77,16 @@ const PetOwnerCreate = (props) => {
         <>
             {
                 exists
-                     ? 
-                <>
-                     <h5>view pet owner account</h5>
-                    <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petowners/` }
-                    >View {} </Link>
+                    ?
+                    <div className='container-fluid text-center mt-5'>
+                        <h5>You already have an existing Pet Owner profile with us.</h5>
+                        <Link to={ `/petowners/` } className='btn btn-outline-info mx-1'>My Pet Owner Profile</Link>
 
-                </>
+                    </div> 
+                
+                    
+
+                
                 :
                 <PetOwnerForm
                     imageSelected={imageSelected}
