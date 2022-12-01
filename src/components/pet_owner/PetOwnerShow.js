@@ -13,6 +13,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         pet_name:'',
         pet_type:'',
         images:'',
+        pet_images:'',
          })
     const [deleted, setDeleted] = useState(false)
     const [updated, setUpdated] = useState(false)
@@ -118,6 +119,15 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                 </Card.Text>
             </Card.Body>
             <Card.Body>
+                    {/* <small>Comments: </small>
+                    <p></p> */}
+                    <img
+                        style={{ width: 600 }}
+                        src={petOwner.images}
+                        alt={""}
+                    />
+                </Card.Body>
+                <Card.Body>
                     {/* <small>Comments: </small>
                     <p></p> */}
                     <img
