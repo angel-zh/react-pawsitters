@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { petSitterShow, petSitterDelete } from '../../api/petSitter'
 import { Container, Button, Image } from 'react-bootstrap'
 import ReviewCreate from '../reviews/ReviewCreate'
 import PetSitterUpdate from './PetSitterUpdate'
-// import ReviewShow from '../reviews/ReviewShow'
+import ReviewShow from '../reviews/ReviewShow'
 import BookingCreate from '../booking/BookingCreate'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical } from '@fortawesome/free-solid-svg-icons'
+import { faDog, faCat, faFish, faWorm, faDove, faPrescriptionBottleMedical, faPaw } from '@fortawesome/free-solid-svg-icons'
+import { reviewIndex } from '../../api/review'
 
 
 const PetSitterShow = ({ user, msgAlert }) => {
@@ -18,10 +19,8 @@ const PetSitterShow = ({ user, msgAlert }) => {
     const [editModalShow, setEditModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
-    // scroll to top on page load
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    }, []);
+    const [reviews, setReviews] = useState([])
+    const [allReviews, setAllReviews] = useState([])
 
 
     useEffect(() => {
@@ -58,25 +57,33 @@ const PetSitterShow = ({ user, msgAlert }) => {
             })
     }
 
-    // let reviewCards
-    // if (petSitter) {
-    //     if (petSitter.reviews.length > 0) {
-    //         reviewCards = petSitter.reviews.map(review => (
-    //             <div>
-    //                 <ReviewShow
-    //                     key={review._id}
-    //                     review={review}
-    //                     petSitter={petSitter}
-    //                     user={user}
-    //                     msgAlert={msgAlert}
-    //                     triggerRefresh={() => setUpdated(prev => !prev)}
-    //                 />
-    //             </div>
-    //         ))
-    //     }
-    // }
 
-    // let dateCreatedAt = moment(petSitter.createdAt).format("MMM Do YY")
+    useEffect(() => {
+        reviewIndex(user)
+            .then((res) => {
+                console.log('this is res.data', res.data)
+                setReviews(res.data.reviews)
+            })
+    }, [])
+
+    // const userReviews = allReviews.filter(review => review.pet_sitter === petSitter.owner)
+    const reviewCards = () => {
+        // if (reviews.id) {
+        console.log('reviews', reviews)
+        return reviews.filter(review => review.pet_sitter.owner === petSitter.owner).map(review => (
+            <div>
+                <ReviewShow
+                    key={review.id}
+                    review={review}
+                    petSitter={petSitter}
+                    user={user}
+                    msgAlert={msgAlert}
+                    triggerRefresh={() => setUpdated(prev => !prev)}
+                />
+            </div>
+        ))
+    }
+
 
     const formatString = string => {
         return string.split(' ').map(l => l.charAt(0).toUpperCase() + l.substring(1)).join(' ').replace(/ /g, ', ')
@@ -88,166 +95,193 @@ const PetSitterShow = ({ user, msgAlert }) => {
 
     if (deleted) navigate('/petsitters')
 
-    if (!petSitter) {
-        return (
-            <>
-                Oh No! There is not yet a profile created for this Pet Sitter.
-            </>
-        )
-    }
+    if (petSitter) {
+        if (petSitter.owner === null) {
+            return (
+                <div className='container-fluid text-center mt-5'>
+                    <h5>Oh No! You don't have a PawSitter profile with us.</h5>
+                    <p>You can register to be a PawSitter anytime.</p>
 
-
-
-    return (
-        <div className='pet-sitter-show container-md text-center d-flex'>
-            <div className='bio-container container-fluid'>
-                <div>
-                    <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
-                    <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
-                    <p>Has been a Paw Sitter since <i>{moment(petSitter.createdAt).format("MMM Do YY")} ({moment(petSitter.createdAt).startOf('day').fromNow()})</i></p>
+                    <Link to='/petsitters/create' className='btn btn-outline-info mx-1'>Become a PawSitter</Link>
                 </div>
+            )
+        } else {
+            return (
+                <div className='pet-sitter-show container-md text-center d-flex'>
+                    <div className='bio-container container-fluid'>
+                        <div>
+                            {
+                                petSitter.image !== '' 
+                                ?
+                                <Image src={petSitter.image} alt='profile pic' className='profile-pic-show border mt-2' />
+                                :
+                                <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                            }
+                            
+                            <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
+                            <p>Has been a PawSitter since <i>{moment(petSitter.created_at).format("MMM Do YY")}</i></p>
+                        </div>
 
-                <div>
-                    {
-                        petSitter.dog_walking
-                            ?
-                            <h5>Dog walking </h5>
-                            :
-                            null
-                    }
-                    <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog</p>
-                </div>
+                        <div>
+                            {
+                                petSitter.dog_walking
+                                    ?
+                                    <h5>Dog walking </h5>
+                                    :
+                                    null
+                            }
+                            <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog</p>
+                        </div>
 
-                {
-                    petSitter.pet_sitting
-                        ?
-                        <h5>Pet Sitting</h5>
-                        :
-                        null
-                }
-                <div className='d-flex justify-content-around'>
-                    {
-                        petSitter.dog
-                            ?
-                            <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog </p>
-                            :
-                            null
-                    }
-                    {
-                        petSitter.cat
-                            ?
-                            <p><FontAwesomeIcon icon={faCat} size='md' className='icon' />Cat </p>
-                            :
-                            null
-                    }
-                    {
-                        petSitter.small_animal
-                            ?
-                            <p><FontAwesomeIcon icon={faFish} size='md' className='icon' />Small Animal </p>
-                            :
-                            null
-                    }
-                    {
-                        petSitter.small_animal
-                            ?
-                            <p><FontAwesomeIcon icon={faWorm} size='md' className='icon' />Reptile</p>
-                            :
-                            null
-                    }
-                    {
-                        petSitter.small_animal
-                            ?
-                            <p><FontAwesomeIcon icon={faDove} size='md' className='icon' />Bird </p>
-                            :
-                            null
-                    }
-                </div>
-                <div>
-                    <h5>Rate</h5>
-                    <p>$ {petSitter.rate} / hour</p>
-                </div>
-                <div>
-                    <h5>Availability</h5>
-                    {formatString(petSitter.availability)} <br />
-                    <p><i>Time</i>: {formatDate(petSitter.from_time)} - {formatDate(petSitter.to_time)}</p>
-                </div>
-                <div className='mb-4'>
-                    <h5>Biography / Additional Info</h5>
-                    {
-                        petSitter.medicine
-                            ?
-                            <p><FontAwesomeIcon icon={faPrescriptionBottleMedical} size='lg' className='icon' />I'm willing to give pet medicine if instructed by owner. </p>
-                            :
-                            null
-                    }
-                    <p>{petSitter.bio}</p>
-                </div>
+                        {
+                            petSitter.pet_sitting
+                                ?
+                                <h5>Pet Sitting</h5>
+                                :
+                                null
+                        }
+                        <div className='d-flex justify-content-around'>
+                            {
+                                petSitter.pet_sitting && petSitter.dog
+                                    ?
+                                    <p><FontAwesomeIcon icon={faDog} size='md' className='icon' />Dog </p>
+                                    :
+                                    null
+                            }
+                            {
+                                petSitter.pet_sitting && petSitter.cat
+                                    ?
+                                    <p><FontAwesomeIcon icon={faCat} size='md' className='icon' />Cat </p>
+                                    :
+                                    null
+                            }
+                            {
+                                petSitter.pet_sitting && petSitter.small_animal
+                                    ?
+                                    <p><FontAwesomeIcon icon={faFish} size='md' className='icon' />Small Animal </p>
+                                    :
+                                    null
+                            }
+                            {
+                                petSitter.pet_sitting && petSitter.reptile
+                                    ?
+                                    <p><FontAwesomeIcon icon={faWorm} size='md' className='icon' />Reptile</p>
+                                    :
+                                    null
+                            }
+                            {
+                                petSitter.pet_sitting && petSitter.bird
+                                    ?
+                                    <p><FontAwesomeIcon icon={faDove} size='md' className='icon' />Bird </p>
+                                    :
+                                    null
+                            }
+                        </div>
+                        <div>
+                            <h5>Rate</h5>
+                            <p>$ {petSitter.rate} / hour</p>
+                        </div>
+                        <div>
+                            <h5>Availability</h5>
+                            {formatString(petSitter.availability)} <br />
+                            <p><i>Time</i>: {formatDate(petSitter.from_time)} - {formatDate(petSitter.to_time)}</p>
+                        </div>
+                        <div className='mb-4 border-bottom'>
+                            <h5>Biography / Additional Info</h5>
+                            {
+                                petSitter.medicine
+                                    ?
+                                    <p><FontAwesomeIcon icon={faPrescriptionBottleMedical} size='lg' className='icon' />I'm willing to give pet medicine if instructed by owner. </p>
+                                    :
+                                    null
+                            }
+                            <p>{petSitter.bio}</p>
+                        </div>
 
-                <Container className='mb-3'>
-                    {
-                        user && petSitter.owner === user.id
-                            ?
-                            <>
-                                <Button onClick={() => setEditModalShow(true)} className="m-2"
-                                    variant="info"
-                                >
-                                    Edit Profile
-                                </Button>
-                                <Button onClick={() => handleDeletePetSitter()}
-                                    className="m-2"
-                                    variant="outline-info"
-                                >
-                                    Delete Profile
-                                </Button>
-                            </>
-                            :
-                            null
-                    }
-                </Container>
+                        <Container className='mb-3'>
+                            {
+                                user && petSitter.owner === user.id
+                                    ?
+                                    <>
+                                        <Button onClick={() => setEditModalShow(true)} className="m-2"
+                                            variant="info"
+                                        >
+                                            Edit Profile
+                                        </Button>
+                                        <Button onClick={() => handleDeletePetSitter()}
+                                            className="m-2"
+                                            variant="outline-info"
+                                        >
+                                            Delete Profile
+                                        </Button>
+                                    </>
+                                    :
+                                    null
+                            }
+                        </Container>
 
 
-
-                <PetSitterUpdate
-                    user={user}
-                    petSitter={petSitter}
-                    show={editModalShow}
-                    msgAlert={msgAlert}
-                    triggerRefresh={() => setUpdated(prev => !prev)}
-                    handleClose={() => setEditModalShow(false)}
-                />
-                {user ?
-                    <Container style={{ width: '40rem' }}>
-                        <ReviewCreate
+                        <PetSitterUpdate
                             user={user}
                             petSitter={petSitter}
+                            show={editModalShow}
                             msgAlert={msgAlert}
                             triggerRefresh={() => setUpdated(prev => !prev)}
+                            handleClose={() => setEditModalShow(false)}
                         />
-                    </Container>
-                    :
-                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
-                }
-            </div>
-
-            {
-                user
-                    ?
-                    <div className='booking-container'>
-                        {/* This is one way to show the Booking request */}
+                        {
+                            user && user.id !== petSitter.owner ?
+                                <Container style={{ width: '40rem' }}>
+                                    <ReviewCreate
+                                        user={user}
+                                        petSitter={petSitter}
+                                        msgAlert={msgAlert}
+                                        triggerRefresh={() => setUpdated(prev => !prev)}
+                                    />
+                                </Container>
+                                :
+                                user && user.id === petSitter.owner ?
+                                    null
+                                    :
+                                    <h5 className='text-center'><i>Please sign in if you would like to leave a review or booking request for this paw sitter.</i></h5>
+                        }
                         <Container>
-                            <BookingCreate
-                                user={user}
-                                petSitter={petSitter}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                            />
+                            <h3 className='my-5'>All of {petSitter.first_name} {petSitter.last_name}'s reviews:</h3>
+                            {
+                                reviewCards().length > 0
+                                    ?
+                                    <>
+                                        {reviewCards()}
+                                    </>
+                                    :
+                                        <h5 className='text-center'>This pet sitter does not have any reviews yet. Be the first to review!</h5>
+                            }
+
+
                         </Container>
                     </div>
-                    :
-                    null
-            }
-        </div>
-    )
+
+                    {
+                        user && user.id !== petSitter.owner
+                            ?
+                            <div className='booking-container'>
+                                {/* This is one way to show the Booking request */}
+                                <Container>
+                                    <BookingCreate
+                                        user={user}
+                                        petSitter={petSitter}
+                                        msgAlert={msgAlert}
+                                        triggerRefresh={() => setUpdated(prev => !prev)}
+                                    />
+                                </Container>
+                            </div>
+                            :
+                            null
+                    }
+                </div>
+            )
+        }
+    }
 }
 
 

@@ -4,6 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 import { bookingIndex } from '../../api/booking'
 import BookingShow from './BookingShow'
 
+
 const cardContainerLayout = {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -15,9 +16,10 @@ const cardContainerLayout = {
 //     textDecoration: 'none'
 // }
 
-const BookingIndex = ({ user, msgAlert }) => {
+const BookingIndex = ({ user, msgAlert, petOwner }) => {
 
     const [allBookings, setAllBookings] = useState([])
+    const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         bookingIndex(user)
@@ -33,28 +35,29 @@ const BookingIndex = ({ user, msgAlert }) => {
                     variant: 'danger'
                 })
             })
-    }, [])
+    }, [deleted])
     
 
     const allBookingsJSX = allBookings.map(booking => (
         
-        <Card key={ booking.id } style={{ margin: 5, backgroundColor: '#56596e' }}> 
+        <Card key={ booking.id } style={{ width: 'auto', margin: 10, backgroundColor: '#56596e' }}> 
             <BookingShow 
                 user={user}
                 booking={booking}
                 msgAlert={msgAlert}
                 petSitter={booking.pet_sitter}
+                deleted={deleted}
+                setDeleted={setDeleted}
                 
             />     
         </Card>
     ))    
 
     return (
-        <div className='text-center mt-3'>
-            <h2>All My Bookings</h2>
-            <i>~currently under construction~</i>
+        <div className='container-md'>
+            <h2 className='text-center my-3 page-heading'>All My Bookings</h2>
 
-            <div className='container-md text-center' style={ cardContainerLayout }>
+            <div className='container-md mt-2 booking-index' style={ cardContainerLayout }>
                 { allBookingsJSX }
             </div>
         </div>

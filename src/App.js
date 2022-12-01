@@ -23,6 +23,8 @@ import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
 import Dashboard from './components/shared/Dashboard'
 // import ReviewCreate from './components/reviews/ReviewCreate'
+import ReviewShow from './components/reviews/ReviewShow'
+import Error from './components/shared/Error'
 
 const App = () => {
 
@@ -114,13 +116,13 @@ const App = () => {
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						}
 				/>
-				<Route
+				{/* <Route
 						path='/petowners/:id'
 						element={
 						<RequireAuth user={user}>
 							<PetOwnerShow msgAlert={msgAlert} user={user} />
 						</RequireAuth>}
-				/>
+				/> */}
 				<Route
 						path='/petowners/create'
 						element={
@@ -152,12 +154,26 @@ const App = () => {
 						</RequireAuth>
 						}
 				/>
+								<Route
+						path='/reviews/:id'
+						element={
+						<RequireAuth user={user}>
+							<ReviewShow msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+						}
+				/>
 				<Route
 						path='/dashboard'
 						element={
 						<RequireAuth user={user}>
 							<Dashboard msgAlert={msgAlert} user={user} />
 						</RequireAuth>
+						}
+				/>
+				<Route
+						path='/error'
+						element={
+							<Error msgAlert={msgAlert} user={user} />
 						}
 				/>
 			</Routes>

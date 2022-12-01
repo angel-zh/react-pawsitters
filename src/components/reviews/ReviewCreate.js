@@ -2,14 +2,15 @@ import React, { useState }from 'react'
 import Accordion from 'react-bootstrap/Accordion';
 import ReviewForm from '../shared/ReviewForm'
 import { reviewCreate} from '../../api/review'
+import { useNavigate } from 'react-router-dom'
 
 
 const ReviewCreate = (props) => {
     const {
-        user, petSitter, msgAlert, triggerRefresh
+        user, petSitter, triggerRefresh, 
     } = props
     
-    
+    const navigate = useNavigate()
     
     const [review, setReview] = useState({
         owner: '',
@@ -25,7 +26,7 @@ const ReviewCreate = (props) => {
     
     // These states are to clear the image data from the review form after a review submit
     // They are set here and then used as props in CloudinaryUploadWidget.js, ReviewForm.js, and ReviewEdit.js
-    // Shoutout to Timm and Aisha for helping with this tricky part
+    // Shoutout to Timm and Aisha for helping with this tricky part from the good avocado project
     const [picture, setPicture] = useState('')
     const [imageSelected, setImageSelected] = useState('')
     
@@ -40,6 +41,7 @@ const ReviewCreate = (props) => {
             }
         })
     }
+
     const handleImageChange = (image) => {
         setReview(prevReview => {
             const name = 'image'
@@ -50,7 +52,6 @@ const ReviewCreate = (props) => {
         })
     } 
     
-    
     const handleSubmit = (e) => {
         console.log('this is petsitter', petSitter)
         e.preventDefault()
@@ -59,6 +60,7 @@ const ReviewCreate = (props) => {
         updatedReview.pet_sitter = petSitter.owner
         updatedReview.pet_owner = user.id
         updatedReview.owner = user.id
+    
         
         setReview({
             owner: '',
@@ -70,37 +72,26 @@ const ReviewCreate = (props) => {
             owner_email: '',
            
         })
-        console.log('create a review', review)
 
-        reviewCreate(user, petSitter.owner, updatedReview)
-            .then(() => {
-                msgAlert({
-                    heading: 'Thanks!',
-                    message: 'We appreciate you taking the time to review this pet sitter!',
-                    variant: 'success'
-                })
-            })
+        reviewCreate(user, petSitter.owner, user.id, updatedReview)
             // sets the image preview back to an empty string
             .then(() => {
                 setPicture('')
                 setImageSelected('')
             })
             .then(() => triggerRefresh())
+            .then(() => navigate('/reviews/'))
             .catch(() => {
-                msgAlert({
-                    heading: 'Oh No!',
-                    message: 'Something went wrong! Please try again',
-                    variant: 'danger'
-                })
+                navigate('/error')
             })
     }
 
     return (
 
         <Accordion>
-            <Accordion.Item style={{ backgroundColor: '#f2f6ec' }} eventKey="0">
+            <Accordion.Item style={{ backgroundColor: '56596e' }} eventKey="0">
                 <Accordion.Header>Add a Review</Accordion.Header>
-                <Accordion.Body style={{ backgroundColor: '#f2f6ec' }}>
+                <Accordion.Body style={{ backgroundColor: '#56596e', color: 'white' }}>
                     <ReviewForm
                         imageSelected={imageSelected}
                         setImageSelected={setImageSelected}

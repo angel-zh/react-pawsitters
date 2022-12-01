@@ -10,7 +10,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-    /* background-color: #31344b; */
+  /* background-color: #31344b; */
 }
 
 body {
@@ -46,21 +46,26 @@ body {
 }
 
 .body-modal {
- background-color: #31344b;
+  background-color: #31344b;
 }
 
 .head-modal {
   background-color: #56596e;
 }
 
-.pet-sitter-form, .pet-sitter-index {
+.pet-sitter-form,
+.pet-sitter-index {
   border: 2px solid #757d90;
   padding: 20px;
   border-radius: 5px;
   overflow-y: auto;
-  height: 90vh;
+  height: 83vh;
   width: 78%;
   background-color: #56596e;
+}
+
+.pet-sitter-form {
+  height: 95vh;
 }
 
 .pet-sitter-show {
@@ -94,19 +99,19 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: #8baafa;
-  border-radius: 2px; 
+  border-radius: 2px;
 }
 
 .link {
   text-decoration: none;
   color: #8baafa;
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 
 .link:hover {
-  color: #c0cff8;
+  color: #9ab5fa;
   text-shadow: 1px 1px 3px black;
+  text-decoration: underline;
 }
 
 .page-heading {
@@ -115,7 +120,7 @@ body {
 
 .homepage {
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 3%;
   width: 60vw;
 }
 
@@ -131,21 +136,31 @@ body {
   margin-right: 5px;
 }
 
-.db-div-1, .db-div-2 {
-  color: black;
-  border: 1px solid pink;
-  height: 250px;
-  margin: 40px 20px 20px 20px;
+.db-div-0,
+.db-div-1,
+.db-div-2 {
+  height: 280px;
+  width: auto;
+  margin: 15px;
   overflow-y: auto;
   border: 2px solid #757d90;
   border-radius: 10px;
-  background-color: #afc2f2;
-  box-shadow: 1px 1px 1px 2px #333335;
+  background-color: #56596e;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
+
+
+
+.db-div-0 {
+  background-color: #3f4257;
+  border: none;
+  height: 270px;
+  box-shadow: none;
+}
+
 
 .db-div-2 {
   height: 300px;
-  margin: 20px;
 }
 
 .booking-form {
@@ -155,7 +170,90 @@ body {
   padding-top: 35%;
   display: flex;
   flex-flow: wrap;
-  border-bottom-left-radius: 13px ;
-  border-bottom-right-radius: 13px ;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
 }
 
+.dashboard {
+  height: 90vh;
+  overflow-y: auto;
+}
+
+.recent-booking,
+.recent-review {
+  background-color: #4a4d60;
+  padding: 10px 10px 0px 10px;
+  border-radius: 5px;
+  border-top: 1px solid #c0cff8;
+}
+
+.react-calendar {
+  width: 420px;
+  max-width: 100%;
+  background-color: #56596e;
+  color: #8baafa;
+  border-radius: 10px;
+  border: 2px solid #9d91d8;
+  box-shadow: 0 12px 24px #00000033;
+  margin-right: 30px;
+}
+
+.react-calendar__navigation button {
+  color: #8baafa;
+  min-width: 44px;
+  font-size: 20px;
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.react-calendar__tile--now {
+  background: #434a6e;
+
+  color: #8baafa;
+ }
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus,
+ .react-calendar__tile--active {
+  background: #4a4d60;
+  color: #8baafa;
+  font-weight: bold;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #4a4d60;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #cdccf1;
+}
+
+
+.highlight {
+  font-weight: bold;
+  color: white;
+  background-color: #58b2b2;
+  text-shadow: 1px 1px black;
+  
+}
+
+.booking-calendar {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.booking-index {
+  border: 2px solid #757d90;
+  padding: 20px;
+  border-radius: 5px;
+  overflow-y: auto;
+  height: 83vh;
+  width: 100%;
+  background-color: #56596e;
+}
+
+/* .booking-img, .review-img {
+  border: 2px solid #757d90;
+  border-radius: 10px;
+} */

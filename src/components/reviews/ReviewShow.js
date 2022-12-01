@@ -4,70 +4,69 @@ import { reviewDelete } from '../../api/review'
 import ReviewEdit from '../reviews/ReviewEdit'
 import moment from 'moment'
 import StarRating from '../shared/StarRating'
+import { useNavigate } from 'react-router-dom'
 
 const ReviewShow = (props) => {
 
-    const { review, petSitter, user, msgAlert, triggerRefresh } = props
+    const { review, petSitter, user, triggerRefresh } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
-
+    const [deleted, setDeleted] = useState(false)
+    const navigate = useNavigate()
 
     const handleDeleteReview = () => {
-        // removed the _ from _.id
         reviewDelete(user, petSitter.owner, review.id)
-// check if review id needs an underscore
+
             .then(() => {
-                msgAlert({
-                    heading: 'Success: Review Deleted',
-                    message: "We'll never speak of it again",
-                    variant: 'success'
-                })
+                setDeleted(true)
+                
             })
             .then(() => triggerRefresh())
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Oops',
-                    message: 'Delete Review Fail: ' + error,
-                    variant: 'danger'
-                })
+            .then(() => navigate( '/reviews/'))
+            .catch(() => {
+                navigate('/error')    
             })
     }
-    let date = moment(review.createdAt).format('MMMM Do YYYY, h:mm a')
+    let date = moment(review.created_at).format('MMMM Do YYYY, h:mm a')
 
     return (
 
         <>
-            <Card className="m-2" style={{ backgroundColor: '#f2f6ec'  }}>
-                <Card.Header className='d-flex justify-content-between' style={{ backgroundColor: '#f9ffee'  }}>
-                    <p>{review.username} said:</p>
+            <Card className="d-flex justify-content-between" style={{ backgroundColor: '#56596e' }}>
+                <Card.Header className='d-flex justify-content-between'>
+                    <p>{review.pet_owner} said:</p>
                     <StarRating
                         value={review.rating}
                         style={{ fontSize: 15 }}
                     />
                 </Card.Header>
-                <Card.Body className = 'card-text' style= {{color: '#3f4257'}}>
-                    <small>Comments: </small>
-                    <p >{review.comment}</p>
-                    <img
-                        style={{ width: 200 }}
-                        src={review.image}
-                        alt={""}
-                    />
+                <Card.Body>
+                    <b>"{review.comment}"</b><br/>
+                    <div className='review-img fluid rounded'>
+                        <img
+                            // styling inline so that the border only appears when the image does
+                            style={{ width: 500, borderRadius: '10px', border: '2px solid #757d90' }}
+                            src={review.image}
+                            alt={""}
+                        />
+                    </div>
+                    
                 </Card.Body>
-                <Card.Footer>
+                <Card.Footer className='mb-3'>
                     {
-                        user && user.email === review.ownerEmail
+                        user && user.email === review.owner_email
                             ?
                             <>
                                 <Button
                                     className='m-2'
-                                    variant='success'
+                                    variant='info'
                                     onClick={() => setEditModalShow(true)}
                                 >
                                     Edit
                                 </Button>
                                 <Button
-                                    variant="danger"
+                                    className='m-2'
+                                    variant="outline-info"
                                     onClick={() => handleDeleteReview()}
                                 >
                                     Delete
@@ -83,7 +82,6 @@ const ReviewShow = (props) => {
                 user={user}
                 petSitter={petSitter}
                 review={review}
-                msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}

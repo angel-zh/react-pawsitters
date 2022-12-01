@@ -1,22 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { petOwnerCreate } from '../../api/petOwner'
+import { petOwnerCreate, petOwnerShow } from '../../api/petOwner'
 import PetOwnerForm from '../shared/PetOwnerForm'
+import { Link } from 'react-router-dom'
 
-const PetOwnerCreate = ({ user, msgAlert }) => {
+const PetOwnerCreate = (props) => {
+    const {user, msgAlert, triggerRefresh,  } = props
+
     const navigate = useNavigate()
-
+    
     const defaultPetOwner = {
         first_name: '',
         last_name: '',
         pet_type: '',
         pet_name: '',
         owner: '',
+        pet_bio: '',
         images: '',
     }
 
     const [petOwner, setPetOwner] = useState(defaultPetOwner)
+    const [picture, setPicture] = useState('')
+    const [imageSelected, setImageSelected] = useState('')
+    const [exists, setExists] = useState(false)
 
+    useEffect(() => {
+        petOwnerShow(user, user.id)
+            .then(res => {
+                if (res.data.pet_owner.owner !== null)
+                setExists(true)
+            })
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Show Pet Sitter Failed' + error,
+                    variant: 'danger'
+                })
+            })
+    }, [])
 
     const handleChange = event => {
         setPetOwner(prevPetOwner => {
@@ -29,27 +50,21 @@ const PetOwnerCreate = ({ user, msgAlert }) => {
             return { ...prevPetOwner, ...updatedPetOwner }
         })
     }
-
-
-    const handleSelect = event => {
+    const handleImageChange = (images) => {
         setPetOwner(prevPetOwner => {
-            console.log(event)
-            let updatedValue = ''
-            event.map((e, index) => {
-                if (index === 0) {
-                    updatedValue += e.value
-                } else {
-                    updatedValue += ` ${e.value}`
-                }
-            })
-            return { ...prevPetOwner, availability: updatedValue }
+            const name = 'images'
+            const updatedPetOwner = {[name]: images}
+            return {
+                ...prevPetOwner, ...updatedPetOwner
+            }
         })
-    }
+    } 
 
     const handleCreatePetOwner = event => {
         event.preventDefault()
+        console.log(petOwner, user)
         petOwnerCreate(petOwner, user)
-            .then(res => { navigate(`/`) })
+            .then(res => { navigate(`/petowners/`) })
            
             .then(() => {
                 msgAlert({
@@ -58,24 +73,46 @@ const PetOwnerCreate = ({ user, msgAlert }) => {
                     variant: 'success'
                 })
             })
-            .catch(error => {
+            .then(() => {
+                setPicture('')
+                setImageSelected('')
+            })
+            .catch((error) => {
                 msgAlert({
-                    heading: 'Failure',
-                    message: 'Create Pet Owner Profile Failure' + error,
+                    heading: 'account already exists',
                     variant: 'danger'
                 })
             })
     }
-
+    
     return (
-        <PetOwnerForm
-            petOwner={petOwner}
-            handleChange={handleChange}
-            heading="Sign Up to be a Pet Owner"
-            handleSubmit={handleCreatePetOwner}
-        />
+        <>
+            {
+                exists
+                     ? 
+                <>
+                     <h5>view pet owner account</h5>
+                    <Link style={{color: '#ba7a5f', textDecoration: 'none', fontWeight: 'bold' }} to={ `/petowners/` }
+                    >View {} </Link>
+
+                </>
+                :
+                <PetOwnerForm
+                    imageSelected={imageSelected}
+                    setImageSelected={setImageSelected}
+                    picture={picture}
+                    setPicture={setPicture}
+                    petOwner={petOwner}
+                    handleChange={handleChange}
+                    handleSubmit={handleCreatePetOwner}
+                    triggerRefresh={() => setPicture(prev => !prev)}
+                    handleImageChange={handleImageChange}
+                    heading="Sign Up to be a Pet Owner"
+                />
+            }
+        </>
+
     )
 }
-
 
 export default PetOwnerCreate

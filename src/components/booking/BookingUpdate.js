@@ -9,8 +9,10 @@ import messages from '../shared/AutoDismissAlert/messages'
 const BookingUpdate = (props) => {
     const { 
         user, show, handleClose, 
-        msgAlert, triggerRefresh
+        msgAlert
     } = props
+
+    // triggerRefresh was not working as a prop - not sure why --> returns error: not a function
 
     const [booking, setBooking] = useState(props.booking)
     const [updated, setUpdated] = useState(false)

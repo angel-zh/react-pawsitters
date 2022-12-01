@@ -15,17 +15,12 @@ const PetSitterIndex = ({ user, msgAlert }) => {
 
     const [allPetSitters, setAllPetSitters] = useState([])
     const [filterParam, setFilterParam] = useState('all')
-    // const [profileExists, setProfileExists] = useState(false)
 
 
     useEffect(() => {
         petSitterIndex(user)
             .then(res => {
-                console.log(res.data)
                 setAllPetSitters(res.data.pet_sitters)
-                // if (user) {
-                //    setProfileExists(res.data.pet_sitters.includes(res.data.pet_sitters.owner === user.id)) 
-                // }   
             })
             .catch((error) => {
                 msgAlert({
@@ -47,7 +42,16 @@ const PetSitterIndex = ({ user, msgAlert }) => {
             <Link to={`/petsitters/${petSitter.owner}`} style={linkStyle}>
                 <Card key={petSitter.Owner} style={{ width: 'auto', margin: 10, backgroundColor: '#afc2f2' }}>
                     <Card.Body>
-                        <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image>
+                        <div>
+                            {
+                                petSitter.image !== ''
+                                    ?
+                                    <Image src={petSitter.image} alt='profile pic' className='profile-pic floatborder mt-2' />
+                                    :
+                                    <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic border mt-2' />
+                            }
+                        </div>
+                        {/* <Image src='/defaultProfilePic.jpg' alt='profile pic' className='profile-pic float-start border'></Image> */}
                         <Card.Text>
                             <h3 className='mb-2'>{petSitter.first_name} {petSitter.last_name}</h3>
                             <div className='row'>
@@ -78,14 +82,10 @@ const PetSitterIndex = ({ user, msgAlert }) => {
         <div className='container-md'>
             <h3 className='text-center my-3 page-heading'>Find the Perfect Sitter for Your Pet</h3>
             <div className='d-flex justify-content-around'>
-                {/* {
-                    user && { profileExists } ?
-                        null
-                        : */}
                 <Link className='link' to='create'>
-                    <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Become a Pet Sitter
+                    <FontAwesomeIcon icon={faFeatherPointed} size='lg' className='icon' /> Become a PawSitter
                 </Link>
-                {/* } */}
+
                 <div style={{ width: '300px' }}>
                     <PetSitterFilter
                         filterParam={filterParam}
