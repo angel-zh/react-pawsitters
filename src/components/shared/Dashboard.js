@@ -53,7 +53,7 @@ const Dashboard = ({ user }) => {
     let ownerBookings = allBookings.filter(booking => booking.owner === user.id)
     const ownerBookingsJSX = ownerBookings.map(booking => (
         <div className='recent-booking'>
-            <p><b>For Pet Sitter: </b> {booking.pet_sitter}<br />
+            <p><b>For Pet Sitter: </b> {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}<br />
                 <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}</p>
             <p className='d-flex justify-content-end'><i>Requested on {formatDate(booking.created_at)} by me
             </i></p>
@@ -64,9 +64,9 @@ const Dashboard = ({ user }) => {
     let recipientBookings = allBookings.filter(booking => booking.owner !== user.id)
     const recipientBookingsJSX = recipientBookings.map(booking => (
         <div className='recent-booking'>
-            <p><b>From Pet Owner: </b> {booking.pet_owner} <br />
+            <p><b>From Pet Owner: </b> {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}<br />
                 <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}<br /><b>Note: </b> {booking.note}</p>
-            <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)} by {booking.pet_owner}
+            <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)} by {booking.pet_owner.first_name} {booking.pet_owner.last}
             </i></p>
         </div>
     ))
