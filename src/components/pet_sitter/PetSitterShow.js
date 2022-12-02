@@ -97,6 +97,7 @@ const PetSitterShow = ({ user }) => {
                             }
 
                             <h2 className='page-heading mt-2'>{petSitter.first_name} {petSitter.last_name}</h2>
+                            (PawSitter)
                             <p>Has been a PawSitter since <i>{moment(petSitter.created_at).format("MMM Do YY")}</i></p>
                         </div>
 

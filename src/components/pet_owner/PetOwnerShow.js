@@ -75,6 +75,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                             }
 
                             <h2 className='page-heading mt-2'>{petOwner.first_name} {petOwner.last_name}</h2>
+                            (Pet Owner)
                             <p>Has been working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
                         </div>
 
@@ -117,7 +118,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                             }
 
                             <h6>{petOwner.pet_name} the {petOwner.pet_type} </h6>
-                            <h5>Biography</h5>
+                            <h5>About Your Pet</h5>
                             <p>{petOwner.pet_bio}</p>
                         </div>
 

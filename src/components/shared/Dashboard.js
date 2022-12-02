@@ -64,7 +64,7 @@ const Dashboard = ({ user }) => {
     let recipientBookings = allBookings.filter(booking => booking.owner !== user.id)
     const recipientBookingsJSX = recipientBookings.map(booking => (
         <div className='recent-booking'>
-            <p><b>From Pet Owner: </b> {booking.pet_sitter.first_name} {booking.pet_sitter.last_name}<br />
+            <p><b>From Pet Owner: </b> {booking.pet_owner.first_name} {booking.pet_owner.last_name}<br />
                 <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}<br /><b>Note: </b> {booking.note}</p>
             <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)} by {booking.pet_owner.first_name} {booking.pet_owner.last}
             </i></p>
