@@ -3,16 +3,13 @@ import { Modal } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import BookingForm from '../shared/BookingForm'
 import { bookingUpdate } from '../../api/booking'
-import messages from '../shared/AutoDismissAlert/messages'
-
 
 const BookingUpdate = (props) => {
     const { 
-        user, show, handleClose
+        user, show, handleClose, triggerRefresh, updated, setUpdated
     } = props
 
     const [booking, setBooking] = useState(props.booking)
-    const [updated, setUpdated] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -27,21 +24,24 @@ const BookingUpdate = (props) => {
             }
         })
     }
-
+    console.log('updated', updated)
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         bookingUpdate(user, booking)
-            .then(() => handleClose())
-            .then(() => {
-                setUpdated(true)
-            })
-            .then(() => navigate('/dashboard'))
-            .catch(() => {
-                navigate('/error')
-            })
+        .then(() => handleClose())
+        .then(() => triggerRefresh())
+        // .then(() => navigate('/bookings'))
+        .catch(() => {
+            navigate('/error')
+        })
     }
+    
+    console.log('updated', updated)
 
-    if (updated) navigate('/')
+    // if(updated) {
+    //     navigate('/dashboard')
+    // }
 
     return (
         <Modal show={show} onHide={handleClose} >
@@ -51,6 +51,7 @@ const BookingUpdate = (props) => {
                     booking={booking}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    triggerRefresh={triggerRefresh}
                     heading="Edit booking"
                 />
             </Modal.Body>
