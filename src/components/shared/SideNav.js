@@ -17,16 +17,16 @@ const SideNav = ({ user }) => {
     const authenticatedOptions = (
         <>
             <SubMenu icon={<FontAwesomeIcon icon={faUser} size='xl' className='icon' />} label="My Account">
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='dashboard' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='dashboard' />}>
                     <FontAwesomeIcon icon={faTableColumns} size='lg' className='icon' />My Dashboard
                 </MenuItem>
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='bookings' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='bookings' />}>
                     <FontAwesomeIcon icon={faCalendarAlt} size='lg' className='icon' /> My Bookings
                 </MenuItem>
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='reviews' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='reviews' />}>
                     <FontAwesomeIcon icon={faStar} size='lg' className='icon' /> My Reviews
                 </MenuItem>
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='change-password' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='change-password' />}>
                     <FontAwesomeIcon icon={faLock} size='lg' className='icon' />Change Password
                 </MenuItem>
             </SubMenu>
@@ -56,10 +56,10 @@ const SideNav = ({ user }) => {
                 <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> Find PawSitters
             </MenuItem>
             <SubMenu icon={<FontAwesomeIcon icon={faPlay} size='xl' className='icon' />} label="Getting Started">
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='petsitters/create' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='petsitters/create' />}>
                     <FontAwesomeIcon icon={faPaw} size='lg' className='icon' /> Become a PawSitter
                 </MenuItem>
-                <MenuItem style={{ backgroundColor: '#979ab7' }} routerLink={<Link to='petowners/create' />}>
+                <MenuItem style={{ backgroundColor: '#6c6e83' }} routerLink={<Link to='petowners/create' />}>
                     <FontAwesomeIcon icon={faBone} size='lg' className='icon' /> Register Pet Owner
                 </MenuItem>
             </SubMenu>
