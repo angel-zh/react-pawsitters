@@ -53,7 +53,8 @@ const PetOwnerShow = ({ user, msgAlert }) => {
     return (
         //pet owner ternary operator to render different pages based on account status
         <>
-            {petOwner.first_name === '' ?
+            {petOwner.first_name === ''
+                ?
                 <div className='container-fluid text-center mt-5'>
                     <h5>Oh No! You don't have a Pet Owner profile with us.</h5>
                     <p>You can complete a Pet Owner profile anytime.</p>
@@ -155,8 +156,6 @@ const PetOwnerShow = ({ user, msgAlert }) => {
                                 triggerRefresh={() => setUpdated(prev => !prev)}
                                 handleClose={() => setEditModalShow(false)}
                             />
-
-
                         </div>
                     </div>
                 </div>

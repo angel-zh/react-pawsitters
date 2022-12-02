@@ -19,7 +19,6 @@ import BookingIndex from './components/booking/BookingIndex'
 import ReviewIndex from './components/reviews/ReviewIndex'
 import SideNav from './components/shared/SideNav'
 import Dashboard from './components/shared/Dashboard'
-import ReviewShow from './components/reviews/ReviewShow'
 import Error from './components/shared/Error'
 
 const App = () => {
@@ -125,14 +124,6 @@ const App = () => {
 						</RequireAuth>
 					}
 				/>
-				{/* <Route
-					path='/reviews/:id'
-					element={
-						<RequireAuth user={user}>
-							<ReviewShow msgAlert={msgAlert} user={user} />
-						</RequireAuth>
-					}
-				/> */}
 				<Route
 					path='/dashboard'
 					element={

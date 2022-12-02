@@ -5,7 +5,7 @@ import PetOwnerForm from '../shared/PetOwnerForm'
 import { Link } from 'react-router-dom'
 
 const PetOwnerCreate = (props) => {
-    const {user, triggerRefresh,  } = props
+    const { user, triggerRefresh, } = props
 
     const navigate = useNavigate()
     //navigate to other pages after creating a profile
@@ -31,10 +31,9 @@ const PetOwnerCreate = (props) => {
         petOwnerShow(user, user.id)
             .then(res => {
                 if (res.data.pet_owner.owner !== null)
-                setExists(true)
+                    setExists(true)
             })
             .catch((error) => {
-              
                 navigate('/error')
             })
     }, [])
@@ -55,29 +54,26 @@ const PetOwnerCreate = (props) => {
     const handleImageChange = (images) => {
         setPetOwner(prevPetOwner => {
             const name = 'images'
-            const updatedPetOwner = {[name]: images}
+            const updatedPetOwner = { [name]: images }
             return {
                 ...prevPetOwner, ...updatedPetOwner
             }
         })
-    } 
+    }
     //create pet owner
     const handleCreatePetOwner = event => {
         event.preventDefault()
-        
         petOwnerCreate(petOwner, user)
-            .then(res => { navigate(`/petowners/`) })
-           
+            .then(() => { navigate(`/petowners/`) })
             .then(() => {
                 setPicture('')
                 setImageSelected('')
             })
-            .catch((error) => {
-            
+            .catch(() => {
                 navigate('/error')
             })
     }
-    
+
     return (
         //ternary operator to display form or link to profile page if user has created a profile
         <>
@@ -86,24 +82,23 @@ const PetOwnerCreate = (props) => {
                     ?
                     <div className='container-fluid text-center mt-5'>
                         <h5>You already have an existing Pet Owner profile with us.</h5>
-                        <Link to={ `/petowners/` } className='btn btn-outline-info mx-1'>My Pet Owner Profile</Link>
+                        <Link to={`/petowners/`} className='btn btn-outline-info mx-1'>My Pet Owner Profile</Link>
+                    </div>
 
-                    </div> 
-
-                :
-                //brings in pet owner form if user needs to create owner profile
-                <PetOwnerForm
-                    imageSelected={imageSelected}
-                    setImageSelected={setImageSelected}
-                    picture={picture}
-                    setPicture={setPicture}
-                    petOwner={petOwner}
-                    handleChange={handleChange}
-                    handleSubmit={handleCreatePetOwner}
-                    triggerRefresh={() => setPicture(prev => !prev)}
-                    handleImageChange={handleImageChange}
-                    heading="Sign Up to be a Pet Owner"
-                />
+                    :
+                    //brings in pet owner form if user needs to create owner profile
+                    <PetOwnerForm
+                        imageSelected={imageSelected}
+                        setImageSelected={setImageSelected}
+                        picture={picture}
+                        setPicture={setPicture}
+                        petOwner={petOwner}
+                        handleChange={handleChange}
+                        handleSubmit={handleCreatePetOwner}
+                        triggerRefresh={() => setPicture(prev => !prev)}
+                        handleImageChange={handleImageChange}
+                        heading="Sign Up to be a Pet Owner"
+                    />
             }
         </>
 
