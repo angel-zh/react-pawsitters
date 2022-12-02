@@ -64,8 +64,8 @@ const PetSitterIndex = ({ user }) => {
                                             {petSitter.dog ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
                                             {petSitter.cat ? <FontAwesomeIcon icon={faCat} size='xl' className='icon' /> : null}
                                             {petSitter.small_animal ? <FontAwesomeIcon icon={faFish} size='xl' className='icon' /> : null}
-                                            {petSitter.reptile ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
-                                            {petSitter.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                                            {petSitter.reptile ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
+                                            {petSitter.bird ? <FontAwesomeIcon icon={faDove} size='xl' className='icon' /> : null}
                                         </div>
 
                                     </div>

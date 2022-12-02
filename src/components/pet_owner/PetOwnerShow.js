@@ -53,113 +53,114 @@ const PetOwnerShow = ({ user, msgAlert }) => {
     return (
         //pet owner ternary operator to render different pages based on account status
         <>
-            {petOwner.first_name === ''
-                ?
-                <div className='container-fluid text-center mt-5'>
-                    <h5>Oh No! You don't have a Pet Owner profile with us.</h5>
-                    <p>You can complete a Pet Owner profile anytime.</p>
+            {
+                petOwner.first_name === null
+                    ?
+                    <div className='container-fluid text-center mt-5'>
+                        <h5>Oh No! You don't have a Pet Owner profile with us.</h5>
+                        <p>You can complete a Pet Owner profile anytime.</p>
 
-                    <Link to='/petowners/create' className='btn btn-outline-info mx-1'>Fill Out a Pet Owner Profile</Link>
-                </div>
-                :
+                        <Link to='/petowners/create' className='btn btn-outline-info mx-1'>Fill Out a Pet Owner Profile</Link>
+                    </div>
+                    :
 
-                <div className='pet-owner-show container-md text-center d-flex'>
-                    <div className='bio-container container-fluid'>
-                        <div>
-                            {
-                                petOwner.images !== ''
-                                    ?
-                                    <Image src={petOwner.images} alt='profile pic' className='profile-pic-show border mt-2' />
-                                    :
-                                    <Image src='/defaultProfilePic2.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
-                            }
-
-                            <h2 className='page-heading mt-2'>{petOwner.first_name} {petOwner.last_name}</h2>
-                            (Pet Owner)
-                            <p>Has been working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
-                        </div>
-
-                        <div className='mb-4 border-bottom'>
-                            <h5>The Pet Info</h5>
-                            {
-                                petOwner.pet_type === 'Dog'
-                                    ?
-                                    <FontAwesomeIcon icon={faDog} size='md' className='icon' />
-                                    :
-                                    null
-                            }
-                            {
-                                petOwner.pet_type === 'Cat'
-                                    ?
-                                    <FontAwesomeIcon icon={faCat} size='md' className='icon' />
-                                    :
-                                    null
-                            }
-                            {
-                                petOwner.pet_type === 'Small_Animal'
-                                    ?
-                                    <FontAwesomeIcon icon={faFish} size='md' className='icon' />
-                                    :
-                                    null
-                            }
-                            {
-                                petOwner.pet_type === 'Reptile'
-                                    ?
-                                    <FontAwesomeIcon icon={faWorm} size='md' className='icon' />
-                                    :
-                                    null
-                            }
-                            {
-                                petOwner.pet_type === 'Bird'
-                                    ?
-                                    <FontAwesomeIcon icon={faDove} size='md' className='icon' />
-                                    :
-                                    null
-                            }
-
-                            <h6>{petOwner.pet_name} the {petOwner.pet_type} </h6>
-                            <h5>About Your Pet</h5>
-                            <p>{petOwner.pet_bio}</p>
-                        </div>
-
-                        <div className='container-md text-center'>
-                            <br />
-                            <Container className='mb-3'>
+                    <div className='pet-owner-show container-md text-center d-flex'>
+                        <div className='bio-container container-fluid'>
+                            <div>
                                 {
-                                    user && petOwner.owner === user.id
+                                    petOwner.images !== ''
                                         ?
-                                        //display edit and delete buttons
-                                        <>
-                                            <Button
-                                                onClick={() => setEditModalShow(true)} className='m-2'
-                                                variant="info"
-                                            >
-                                                Edit Profile
-                                            </Button>
-                                            <Button
-                                                onClick={() => handleDeletePetOwner()}
-                                                className='m-2'
-                                                variant="outline-info"
-                                            >
-                                                Delete Profile
-                                            </Button>
-                                        </>
+                                        <Image src={petOwner.images} alt='profile pic' className='profile-pic-show border mt-2' />
+                                        :
+                                        <Image src='/defaultProfilePic2.jpg' alt='profile pic' className='profile-pic-show border mt-2' />
+                                }
+
+                                <h2 className='page-heading mt-2'>{petOwner.first_name} {petOwner.last_name}</h2>
+                                (Pet Owner)
+                                <p>Has been working with PawSitters since <i>{moment(petOwner.created_at).format("MMM Do YY")}</i></p>
+                            </div>
+
+                            <div className='mb-4 border-bottom'>
+                                <h5>The Pet Info</h5>
+                                {
+                                    petOwner.pet_type === 'Dog'
+                                        ?
+                                        <FontAwesomeIcon icon={faDog} size='md' className='icon' />
                                         :
                                         null
                                 }
-                            </Container>
+                                {
+                                    petOwner.pet_type === 'Cat'
+                                        ?
+                                        <FontAwesomeIcon icon={faCat} size='md' className='icon' />
+                                        :
+                                        null
+                                }
+                                {
+                                    petOwner.pet_type === 'Small_Animal'
+                                        ?
+                                        <FontAwesomeIcon icon={faFish} size='md' className='icon' />
+                                        :
+                                        null
+                                }
+                                {
+                                    petOwner.pet_type === 'Reptile'
+                                        ?
+                                        <FontAwesomeIcon icon={faWorm} size='md' className='icon' />
+                                        :
+                                        null
+                                }
+                                {
+                                    petOwner.pet_type === 'Bird'
+                                        ?
+                                        <FontAwesomeIcon icon={faDove} size='md' className='icon' />
+                                        :
+                                        null
+                                }
 
-                            <PetOwnerUpdate
-                                user={user}
-                                petOwner={petOwner}
-                                show={editModalShow}
-                                msgAlert={msgAlert}
-                                triggerRefresh={() => setUpdated(prev => !prev)}
-                                handleClose={() => setEditModalShow(false)}
-                            />
+                                <h6>{petOwner.pet_name} the {petOwner.pet_type} </h6>
+                                <h5>About Your Pet</h5>
+                                <p>{petOwner.pet_bio}</p>
+                            </div>
+
+                            <div className='container-md text-center'>
+                                <br />
+                                <Container className='mb-3'>
+                                    {
+                                        user && petOwner.owner === user.id
+                                            ?
+                                            //display edit and delete buttons
+                                            <>
+                                                <Button
+                                                    onClick={() => setEditModalShow(true)} className='m-2'
+                                                    variant="info"
+                                                >
+                                                    Edit Profile
+                                                </Button>
+                                                <Button
+                                                    onClick={() => handleDeletePetOwner()}
+                                                    className='m-2'
+                                                    variant="outline-info"
+                                                >
+                                                    Delete Profile
+                                                </Button>
+                                            </>
+                                            :
+                                            null
+                                    }
+                                </Container>
+
+                                <PetOwnerUpdate
+                                    user={user}
+                                    petOwner={petOwner}
+                                    show={editModalShow}
+                                    msgAlert={msgAlert}
+                                    triggerRefresh={() => setUpdated(prev => !prev)}
+                                    handleClose={() => setEditModalShow(false)}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
             }
         </>
     )
