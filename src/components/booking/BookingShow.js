@@ -6,7 +6,7 @@ import { bookingDelete } from '../../api/booking'
 import BookingUpdate from './BookingUpdate'
 
 const BookingShow = (props) => {
-    const { booking, user, msgAlert, triggerRefresh, petSitter, petOwner, deleted, setDeleted } = props
+    const { booking, user, triggerRefresh, petSitter, petOwner, deleted, setDeleted, setUpdated, updated } = props
 
     const [editModalShow, setEditModalShow] = useState(false)
     const navigate = useNavigate()
@@ -17,19 +17,10 @@ const BookingShow = (props) => {
             .then(() => {
                 // "like light switch" - John
                 setDeleted(!deleted)
-                msgAlert({
-                    heading: 'Success: Booking Deleted',
-                    message: "Booking Deleted",
-                    variant: 'success'
-                })
             })
             // on success redirect/make new index
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Oops',
-                    message: 'Delete Booking Fail: ' + error,
-                    variant: 'danger'
-                })
+            .catch(() => {
+                navigate('/error')
             })
     }
 
@@ -48,6 +39,8 @@ const BookingShow = (props) => {
             </>
         )
     }
+
+    console.log('booking', booking)
 
     return (
 
@@ -96,12 +89,14 @@ const BookingShow = (props) => {
             <BookingUpdate
                 user={user}
                 booking={booking}
-                msgAlert={msgAlert}
                 triggerRefresh={triggerRefresh}
                 show={editModalShow}
                 handleClose={() => setEditModalShow(false)}
                 petSitter={petSitter}
                 petOwner={petOwner}
+                updated={updated}
+                setUpdated={setUpdated}
+                
             />
         </>
 

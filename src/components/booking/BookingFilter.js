@@ -3,7 +3,7 @@ import Select from 'react-select'
 
 // THIS IS FOR VERSION TWO - it will filter by date
 
-const BookingFilter = ({ msgAlert, filterParam, setFilterParam }) => {
+const BookingFilter = ({ filterParam, setFilterParam }) => {
     const filterOptions = [
         { value: 'all', label: 'All' },
         
