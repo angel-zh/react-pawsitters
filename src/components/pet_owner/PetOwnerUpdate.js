@@ -45,11 +45,9 @@ const PetOwnerUpdate = (props) => {
         console.log( user.id)
         petOwnerUpdate(petOwner, user, props.petOwner._id)
             .then(() => handleClose())
-          
             .then(() => triggerRefresh())
-            .catch(error => {
+            .catch(() => {
                 navigate('/error')
-                
             })
     }
 
