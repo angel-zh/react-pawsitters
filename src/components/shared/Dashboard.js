@@ -66,7 +66,7 @@ const Dashboard = ({ user }) => {
         <div className='recent-booking'>
             <p><b>From Pet Owner: </b> {booking.pet_owner.first_name} {booking.pet_owner.last_name}<br />
                 <b>Date: </b> {formatDate(booking.start_day)} to {formatDate(booking.end_day)}<br /><b>Note: </b> {booking.note}</p>
-            <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)} by {booking.pet_owner.first_name} {booking.pet_owner.last}
+            <p className='d-flex justify-content-end'><i>Received on {formatDate(booking.created_at)}
             </i></p>
         </div>
     ))
