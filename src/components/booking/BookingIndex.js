@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react' 
 import { Card, Button } from 'react-bootstrap'
+import { Navigate } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 import { bookingIndex } from '../../api/booking'
 import BookingShow from './BookingShow'
@@ -16,10 +17,11 @@ const cardContainerLayout = {
 //     textDecoration: 'none'
 // }
 
-const BookingIndex = ({ user, msgAlert, petOwner }) => {
+const BookingIndex = ({ user, petOwner, triggerRefresh }) => {
 
     const [allBookings, setAllBookings] = useState([])
     const [deleted, setDeleted] = useState(false)
+    const [updated, setUpdated] = useState(false)
 
     useEffect(() => {
         bookingIndex(user)
@@ -27,14 +29,10 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
                 setAllBookings(res.data.bookings)
 
             })
-            .catch((error) => {
-                msgAlert({
-                    heading: 'Failure',
-                    message: 'Index Failure: ' + error,
-                    variant: 'danger'
-                })
+            .catch(() => {
+                Navigate('/error')
             })
-    }, [deleted])
+    }, [deleted, updated])
     
 
     const allBookingsJSX = allBookings.map(booking => (
@@ -43,10 +41,12 @@ const BookingIndex = ({ user, msgAlert, petOwner }) => {
             <BookingShow 
                 user={user}
                 booking={booking}
-                msgAlert={msgAlert}
                 petSitter={booking.pet_sitter}
                 deleted={deleted}
                 setDeleted={setDeleted}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+                updated={updated}
+                setUpdated={setUpdated}
                 
             />     
         </Card>
