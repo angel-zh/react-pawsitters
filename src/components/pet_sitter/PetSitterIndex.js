@@ -68,9 +68,6 @@ const PetSitterIndex = ({ user }) => {
                                             {petSitter.bird ? <FontAwesomeIcon icon={faWorm} size='xl' className='icon' /> : null}
                                         </div>
 
-                                        <div className='mt-3'>
-                                            {petSitter.dog_walking ? <FontAwesomeIcon icon={faDog} size='xl' className='icon' /> : null}
-                                        </div>
                                     </div>
 
                                 </div>
