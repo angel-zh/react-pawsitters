@@ -71,7 +71,7 @@ const Dashboard = ({ user }) => {
         </div>
     ))
 
-    // Getting all the days between a booking's start day and end day accounting for formating accepted by 'react-calendar' 
+    // Getting all the days between a booking's start day and end day accounting for format accepted by 'react-calendar' 
     const getDatesInRange = (startDate, endDate) => {
         if (!startDate || !endDate) return []
 
