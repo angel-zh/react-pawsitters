@@ -4,14 +4,11 @@
 Our application is designed to allow pet pawrents to easily and conveniently find pet sitting and dog walking services for their beloved furry (or scaly) friends. 
 Additionally, users can also sign up to be a pet sitter or dog walker on our app, set their own schedule, rates, and preferences to make their experience as smooth and delightful as possible. Users are able to leave reviews for the sitters they hire on our platform to help other users find their perfect sitter!
 
-## Landing Page
-![pawSitters](https://i.imgur.com/XhDxiYe.png)
-
-### API Repo
-https://github.com/angel-zh/django-pawsitters
-
-### Link
+### Deployed Link
 -Coming Soon- 
+
+### Backend Repo
+https://github.com/angel-zh/django-pawsitters
 
 ### Brought to you by The Flossing Avocados Team
 * Alina Ishizaki - https://github.com/amishizaki
@@ -25,13 +22,20 @@ https://github.com/angel-zh/django-pawsitters
 - Django
 - Python
 - PostgreSQL
-- CSS
+- CSS3
 - JavaScript
 - HTML5
 - Bootstrap
 
-## USER STORIES
 
+## SCREENSHOTS 
+![homepage](/public/screenshot/screenshot-1.png)
+![dashboard](/public/screenshot/screenshot-2.png)
+![petsitter](/public/screenshot/screenshot-3.png)
+![petowner](/public/screenshot/screenshot-4.png)
+![index](/public/screenshot/screenshot-5.png)
+
+## USER STORIES
 ```
 As a user, I want the ability to... 
 - sign up, sign in, change password, and sign out
@@ -46,12 +50,6 @@ As a user, I want the ability to...
 - edit and delete my review
 - upload a photo in my review
 ```
-## WIREFRAMES 
-![homepage](https://i.imgur.com/SFBejoG.png)
-![create](https://i.imgur.com/3J4847M.png)
-![index](https://i.imgur.com/XypllTs.png)
-![show](https://i.imgur.com/YmI2ScJ.png)
-
 
 ## ENTITY RELATIONSHIP DIAGRAMS
 ![ERD](https://i.imgur.com/A8yNtxh.png)
