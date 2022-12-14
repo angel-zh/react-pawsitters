@@ -70,7 +70,6 @@ body {
 
 .pet-sitter-show,
 .pet-owner-show {
-  border: 1px solid #8baafa;
   height: 100vh;
   overflow-y: auto;
 }
