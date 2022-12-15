@@ -5,7 +5,7 @@ import PetOwnerForm from '../shared/PetOwnerForm'
 import { Link } from 'react-router-dom'
 
 const PetOwnerCreate = (props) => {
-    const { user, triggerRefresh, } = props
+    const { user } = props
 
     const navigate = useNavigate()
     //navigate to other pages after creating a profile
