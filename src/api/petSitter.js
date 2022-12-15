@@ -16,7 +16,7 @@ export const petSitterCreate = (data, user) => {
 }
 
 // INDEX all petSitters - no token require
-export const petSitterIndex = (user) => {
+export const petSitterIndex = () => {
 	return axios({
 		method: 'GET',
 		url: apiUrl + '/petsitters/',
