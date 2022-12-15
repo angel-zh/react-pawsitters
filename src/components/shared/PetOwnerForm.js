@@ -13,7 +13,6 @@ const PetOwnerForm = (props) => {
                 <Form.Label>Pet Owner's First Name:</Form.Label>
                 <Form.Control
                     placeholder="Owner's First Name"
-                    required={true}
                     name="first_name"
                     id="first_name"
                     value={petOwner.first_name}
@@ -24,7 +23,6 @@ const PetOwnerForm = (props) => {
                         <Form.Label className='mt-2'>Pet Owner's Last Name:</Form.Label>
                         <Form.Control
                             placeholder="Owner's Last Name"
-                            required={true}
                             name="last_name"
                             id="last_name"
                             value={petOwner.last_name}
@@ -33,16 +31,15 @@ const PetOwnerForm = (props) => {
                     </Form.Group>
 
                     <Form.Label className='mt-2'>Pet Type:</Form.Label>
-                    <Col sm={4}>
+                    <Col sm={6}>
                         <Form.Select
                             aria-label="Type of Pet"
-                            required={true}
                             name="pet_type"
                             id="pet_type"
                             value={petOwner.pet_type}
                             onChange={handleChange}
                         >
-                            <option>Select an option</option>
+                            <option>Select a type</option>
                             <option value="dog">Dog</option>
                             <option value="cat">Cat</option>
                             <option value="small_animal">Small Animal</option>
@@ -56,7 +53,6 @@ const PetOwnerForm = (props) => {
                     <Form.Label className='mt-2'>Pet's Name:</Form.Label>
                     <Form.Control
                         placeholder="What is your Pet's Name?"
-                        required={true}
                         name="pet_name"
                         id="pet_name"
                         value={petOwner.pet_name}
@@ -67,7 +63,6 @@ const PetOwnerForm = (props) => {
                     <Form.Label className='mt-2'>About Your Pet:</Form.Label>
                     <Form.Control
                         placeholder="Tell us about your Pet"
-                        required={true}
                         name="pet_bio"
                         id="pet_bio"
                         value={petOwner.pet_bio}

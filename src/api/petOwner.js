@@ -16,7 +16,7 @@ export const petOwnerCreate = (data, user ) => {
 }
 
 // INDEX all pet owners - no token require
-export const petOwnerIndex = (user) => {
+export const petOwnerIndex = () => {
 	return axios({
 		method: 'GET',
 		url: apiUrl + '/petowners/'
@@ -28,7 +28,7 @@ export const petOwnerShow = (user, id) => {
 	
 	return axios({
 		method: 'GET',
-		url: apiUrl + '/petowners/' + user.id + "/",
+		url: apiUrl + '/petowners/' + id + "/",
 		headers: {
 			Authorization: `Token ${user.token}`,
 		},
@@ -39,7 +39,7 @@ export const petOwnerShow = (user, id) => {
 export const petOwnerUpdate = (data, user, id) => {
 	return axios({
 		method: 'PATCH',
-		url: apiUrl + '/petowners/' + user.id + "/",
+		url: apiUrl + '/petowners/' + id + "/",
 		data: {
 			pet_owner: data,
 		},
@@ -53,7 +53,7 @@ export const petOwnerUpdate = (data, user, id) => {
 export const petOwnerDelete = (user, id) => {
 	return axios({
 		method: 'DELETE',
-		url: apiUrl + '/petowners/' + user.id + "/",
+		url: apiUrl + '/petowners/' + id + "/",
 		headers: {
 			Authorization: `Token ${user.token}`,
 		},
