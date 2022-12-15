@@ -7,8 +7,9 @@ const PetOwnerForm = (props) => {
 
     return (
         <Container className="d-flex justify-content-center" >
-            <h3 className='mt-3'>{heading}</h3>
+            
             <Form onSubmit={handleSubmit} className="pet-owner-form">
+                <h3 className='mt-3'>{heading}</h3>
                 <Form.Label>Pet Owner's First Name:</Form.Label>
                 <Form.Control
                     placeholder="Owner's First Name"
