@@ -42,8 +42,7 @@ const PetOwnerUpdate = (props) => {
     //submit
     const handleSubmit = event => {
         event.preventDefault()
-        console.log( user.id)
-        petOwnerUpdate(petOwner, user, props.petOwner._id)
+        petOwnerUpdate(petOwner, user, props.petOwner.owner)
             .then(() => handleClose())
             .then(() => triggerRefresh())
             .catch(() => {
