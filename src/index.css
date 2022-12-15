@@ -54,7 +54,8 @@ body {
 }
 
 .pet-sitter-form,
-.pet-sitter-index {
+.pet-sitter-index, 
+.pet-owner-form {
   border: 2px solid #757d90;
   padding: 20px;
   border-radius: 5px;
