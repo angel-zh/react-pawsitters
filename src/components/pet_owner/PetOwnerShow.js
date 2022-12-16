@@ -54,7 +54,7 @@ const PetOwnerShow = ({ user, msgAlert }) => {
         //pet owner ternary operator to render different pages based on account status
         <>
             {
-                petOwner.first_name === null
+                petOwner.owner === null
                     ?
                     <div className='container-fluid text-center mt-5'>
                         <h5>Oh No! You don't have a Pet Owner profile with us.</h5>
