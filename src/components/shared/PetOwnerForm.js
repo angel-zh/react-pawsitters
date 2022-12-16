@@ -42,7 +42,7 @@ const PetOwnerForm = (props) => {
                             <option>Select a type</option>
                             <option value="Dog">Dog</option>
                             <option value="Cat">Cat</option>
-                            <option value="Small Animal">Small Animal</option>
+                            <option value="Small_Animal">Small Animal</option>
                             <option value="Reptile">Reptile</option>
                             <option value="Bird">Bird</option>
                         </Form.Select>
