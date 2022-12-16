@@ -2,7 +2,7 @@ import apiUrl from '../apiConfig'
 import axios from 'axios'
 
 // CREATE a pet owner - token require
-export const petOwnerCreate = (data, user ) => {
+export const petOwnerCreate = (data, user) => {
 	return axios({
 		method: 'POST',
 		url: apiUrl + '/petowners/',
@@ -16,12 +16,12 @@ export const petOwnerCreate = (data, user ) => {
 }
 
 // INDEX all pet owners - no token require
-export const petOwnerIndex = (user) => {
-	return axios({
-		method: 'GET',
-		url: apiUrl + '/petowners/'
-	})
-}
+// export const petOwnerIndex = (user) => {
+// 	return axios({
+// 		method: 'GET',
+// 		url: apiUrl + '/petowners/'
+// 	})
+// }
 
 // SHOW a pet owner - no token require
 export const petOwnerShow = (user, id) => {

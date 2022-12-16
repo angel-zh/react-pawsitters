@@ -40,11 +40,11 @@ const PetOwnerForm = (props) => {
                             onChange={handleChange}
                         >
                             <option>Select a type</option>
-                            <option value="dog">Dog</option>
-                            <option value="cat">Cat</option>
-                            <option value="small_animal">Small Animal</option>
-                            <option value="reptile">Reptile</option>
-                            <option value="bird">Bird</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Small Animal">Small Animal</option>
+                            <option value="Reptile">Reptile</option>
+                            <option value="Bird">Bird</option>
                         </Form.Select>
                     </Col>
                 </Row>
