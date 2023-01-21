@@ -1,6 +1,5 @@
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
-import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -90,7 +89,7 @@ const SideNav = ({ user }) => {
                 </Link>
             </div>
 
-            <Sidebar backgroundColor="#31344b" transitionDuration={800}>
+            <Sidebar defaultCollapsed backgroundColor="#31344b" transitionDuration={800}>
                 <button className='grip-lines mt-2 mx-3 btn mb-2' onClick={() => collapseSidebar()}>
                     <FontAwesomeIcon icon={faBars} size='xl' />
                 </button>
