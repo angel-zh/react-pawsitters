@@ -15,17 +15,8 @@ export const petOwnerCreate = (data, user) => {
 	})
 }
 
-// INDEX all pet owners - no token require
-// export const petOwnerIndex = (user) => {
-// 	return axios({
-// 		method: 'GET',
-// 		url: apiUrl + '/petowners/'
-// 	})
-// }
-
 // SHOW a pet owner - no token require
 export const petOwnerShow = (user, id) => {
-	
 	return axios({
 		method: 'GET',
 		url: apiUrl + '/petowners/' + user.id + "/",
